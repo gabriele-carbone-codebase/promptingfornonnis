@@ -101,37 +101,39 @@ export function usePromptBuilder() {
   const generatePrompt = useCallback((): string => {
     const parts: string[] = [];
 
-    if (promptData.goal) {
-      parts.push(`**Task:** ${promptData.goal}`);
+    // Always include the goal
+    parts.push(`I want to:\n${promptData.goal}`);
+
+    // Expected result (only if provided)
+    if (promptData.expectedResult.trim()) {
+      parts.push(`As a result I expect to receive:\n${promptData.expectedResult}`);
     }
 
-    if (promptData.expectedResult) {
-      parts.push(`**Expected Result:** ${promptData.expectedResult}`);
-    }
-
-    if (promptData.attachments.length > 0) {
-      const attachmentsList = promptData.attachments
-        .filter((att) => att.filename)
-        .map((att) => `- ${att.filename}${att.description ? `: ${att.description}` : ""}`)
+    // Attachments (only if any have filenames)
+    const validAttachments = promptData.attachments.filter((att) => att.filename.trim());
+    if (validAttachments.length > 0) {
+      const attachmentsList = validAttachments
+        .map((att) => `- ${att.filename}${att.description ? ` : ${att.description}` : ""}`)
         .join("\n");
-      if (attachmentsList) {
-        parts.push(`**Reference Attachments:**\n${attachmentsList}`);
-      }
+      parts.push(`To help with this task, you will find the following attachments:\n${attachmentsList}`);
     }
 
-    if (promptData.webLinks.length > 0) {
-      const linksList = promptData.webLinks
-        .filter((link) => link.url)
-        .map((link) => `- ${link.url}${link.description ? `: ${link.description}` : ""}`)
+    // Web links (only if any have URLs)
+    const validLinks = promptData.webLinks.filter((link) => link.url.trim());
+    if (validLinks.length > 0) {
+      const linksList = validLinks
+        .map((link) => `- ${link.url}${link.description ? ` : ${link.description}` : ""}`)
         .join("\n");
-      if (linksList) {
-        parts.push(`**Reference Links:**\n${linksList}`);
-      }
+      parts.push(`As additional resources you can also navigate these webpages:\n${linksList}`);
     }
 
-    if (promptData.extraNotes) {
-      parts.push(`**Additional Notes:** ${promptData.extraNotes}`);
+    // Extra notes (only if provided)
+    if (promptData.extraNotes.trim()) {
+      parts.push(`For added context, these are some additional information:\n${promptData.extraNotes}`);
     }
+
+    // Closing question
+    parts.push(`Can you help me? If so, how?\nDo you need any additional information?`);
 
     return parts.join("\n\n");
   }, [promptData]);

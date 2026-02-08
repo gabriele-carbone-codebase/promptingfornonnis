@@ -20,17 +20,22 @@ export function StepAttachments({
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="text-center space-y-2">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-foreground">
-          Do you want to add attachments?
-        </h2>
+        <div className="flex items-center justify-center gap-2">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-foreground">
+            Will you attach documents?
+          </h2>
+          <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-muted text-muted-foreground">
+            Optional
+          </span>
+        </div>
         <p className="text-muted-foreground">
-          Reference files the AI should know about (optional)
+          List files you'll upload separately to the AI chatbot
         </p>
       </div>
 
       <div className="bg-warning/20 rounded-lg p-4 text-sm text-warning-foreground">
         <p>
-          <strong>Note:</strong> These are references only, not actual files. Describe what each file contains so the AI understands the context.
+          <strong>Note:</strong> These are references only. You'll need to upload the actual files in your AI chatbot. Describe what each file contains so the AI understands the context.
         </p>
       </div>
 

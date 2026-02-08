@@ -20,11 +20,16 @@ export function StepLinks({
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="text-center space-y-2">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-foreground">
-          Do you want to add web links?
-        </h2>
+        <div className="flex items-center justify-center gap-2">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-foreground">
+            Do you want to add web links?
+          </h2>
+          <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-muted text-muted-foreground">
+            Optional
+          </span>
+        </div>
         <p className="text-muted-foreground">
-          Add URLs for reference (optional)
+          Add URLs for reference
         </p>
       </div>
 
