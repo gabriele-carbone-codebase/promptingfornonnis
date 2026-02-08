@@ -1,117 +1,118 @@
 
 
-# PromptCoach - Implementation Plan
+# Update Prompt Builder Output Format & Step Wording
 
-## Overview
-A beginner-friendly web app that helps anyone create effective AI chatbot prompts through a guided wizard and interactive training lessons.
-
----
-
-## Phase 1: Core Prompt Builder
-
-### Landing Page
-- Clean hero with tagline: *"Create perfect AI prompts in 5 easy steps"*
-- Prominent "Start Building" button
-- Link to free training section
-- Soft pastel accents on white background
-
-### 5-Step Wizard
-A friendly, one-question-per-page flow with progress bar:
-
-1. **What should the chatbot do?** – Dropdown examples + text input
-2. **Describe your ideal result** – Tone, length, detail level guidance
-3. **Add attachments** – Optional filename + description fields (reference only)
-4. **Add web links** – Optional URL + description with disclaimer
-5. **Any extra notes?** – Open text area
-
-### Generated Prompt Output
-- Clean card displaying the assembled prompt
-- One-click **Copy** button
-- Helpful note: *"Paste this into ChatGPT, Claude, or any AI chatbot!"*
-- Link to training: *"Learn how to write even better prompts"*
+## Summary
+This update will change the generated prompt format to be more conversational and friendly, update step titles to better clarify intent, and add visual "optional" badges to steps 2-5.
 
 ---
 
-## Phase 2: User Accounts & Prompt Library
+## Changes Overview
 
-### Authentication
-- Simple email/password signup and login
-- Friendly error messages, no jargon
+### 1. New Prompt Output Format
 
-### Personal Prompt Library
-- Save generated prompts with custom titles
-- View, edit, copy, or delete saved prompts
-- Toggle prompts as public or private
+The generated prompt will now follow this structure:
 
-### User Profile
-- Display name and saved prompts
-- Simple settings
+```
+I want to:
+[goal from step 1]
 
----
+As a result I expect to receive:
+[expected result from step 2, if provided]
 
-## Phase 3: Community Features
+To help with this task, you will find the following attachments:
+- [name] : [description]
+[only shown if attachments were added]
 
-### Public Prompt Feed
-- Browse prompts shared by other users
-- Search by keyword or category
-- Like and copy buttons on each prompt
+As additional resources you can also navigate these webpages:
+- [link] : [description]
+[only shown if links were added]
 
-### Prompt Sharing
-- Share button generates a link
-- Public prompts appear in community feed
+For added context, these are some additional information:
+[notes from step 5, if provided]
 
----
+Can you help me? If so, how?
+Do you need any additional information?
+```
 
-## Phase 4: Interactive Training
-
-### Training Hub
-Accessible from main navigation: *"Free Training: Master Prompts in 5 Minutes"*
-
-### 5 Interactive Lessons
-Each lesson follows: **Explanation → Quiz → Feedback**
-
-| Lesson | Concept | Quiz Type |
-|--------|---------|-----------|
-| 1 | "More text is better" | Compare two prompts, pick the detailed one |
-| 2 | "Ask what info is needed" | Identify prompt that asks AI for clarification |
-| 3 | "Use examples" | Compare with/without examples |
-| 4 | "Use quotes for text" | Pick correctly quoted version |
-| 5 | "Assign roles" | Identify prompt with role assignment |
-
-### Gamification
-- Progress bar showing lesson completion
-- "Next Lesson" button after each quiz
-- Completion badge when all 5 lessons finished
-- Prompts increase in complexity as lessons progress
+**File:** `src/hooks/usePromptBuilder.ts`
+- Rewrite the `generatePrompt()` function to produce this exact format
+- Only include sections when the user has actually filled them in
 
 ---
 
-## Design System
+### 2. Step Title Updates
 
-### Visual Style
-- **Background**: Clean white with soft pastel accent colors
-- **Typography**: Friendly, readable fonts (Inter or similar)
-- **Buttons**: Rounded corners, pastel hover states
-- **Cards**: Subtle shadows, generous padding
-- **Progress bars**: Smooth animations
+| Step | Current Title | New Title |
+|------|--------------|-----------|
+| 3 | "Do you want to add attachments?" | "Will you attach documents?" |
 
-### UX Principles
-- Mobile-first, responsive design
-- Maximum 2-3 actions per screen
-- Clear progress indicators everywhere
-- Friendly, encouraging microcopy
+**File:** `src/components/wizard/StepAttachments.tsx`
+- Update the heading text
+- Update the helper text to emphasize these are references to files you'll upload separately
 
 ---
 
-## Technical Approach
+### 3. Add "Optional" Badges to Steps 2-5
 
-### Frontend
-- React with Vite (fast builds)
-- Tailwind CSS for styling
-- React Router for navigation
+Add a visual badge next to each title to make it crystal clear these steps can be skipped.
 
-### Backend (Lovable Cloud)
-- User authentication (email/password)
-- Database for prompts, users, likes
-- Secure prompt sharing
+**Files to update:**
+- `src/components/wizard/StepResult.tsx` - Add optional badge
+- `src/components/wizard/StepAttachments.tsx` - Add optional badge
+- `src/components/wizard/StepLinks.tsx` - Add optional badge
+- `src/components/wizard/StepNotes.tsx` - Add optional badge
+
+Each step will show a small pill/badge next to the title saying "Optional" in a subtle style.
+
+---
+
+## Technical Details
+
+### `generatePrompt()` function changes
+
+```text
+Current format:
+**Task:** [goal]
+**Expected Result:** [result]
+**Reference Attachments:**
+- filename: description
+**Reference Links:**
+- url: description
+**Additional Notes:** [notes]
+
+New format:
+I want to:
+[goal]
+
+As a result I expect to receive:
+[result]
+
+To help with this task, you will find the following attachments:
+- [name] : [description]
+
+As additional resources you can also navigate these webpages:
+- [link] : [description]
+
+For added context, these are some additional information:
+[notes]
+
+Can you help me? If so, how?
+Do you need any additional information?
+```
+
+### Optional Badge Styling
+- Small pill badge in muted/secondary color
+- Positioned inline with the title or as a subtitle
+- Text: "Optional" or "Skip if not needed"
+
+---
+
+## Files to Modify
+
+1. `src/hooks/usePromptBuilder.ts` - New prompt format
+2. `src/components/wizard/StepResult.tsx` - Add optional indicator
+3. `src/components/wizard/StepAttachments.tsx` - New title + optional indicator
+4. `src/components/wizard/StepLinks.tsx` - Add optional indicator
+5. `src/components/wizard/StepNotes.tsx` - Add optional indicator
 
