@@ -1,11 +1,13 @@
 import { cn } from "@/lib/utils";
-import { Check, Lock } from "lucide-react";
+import { Check, Lock, Trophy } from "lucide-react";
 
 interface TrainingProgressProps {
   currentLesson: number;
   completedLessons: number[];
   totalLessons: number;
   onLessonClick: (lesson: number) => void;
+  allLessonsComplete: boolean;
+  onStartFinalQuiz: () => void;
 }
 
 const lessonTitles = [
@@ -21,6 +23,8 @@ export function TrainingProgress({
   completedLessons,
   totalLessons,
   onLessonClick,
+  allLessonsComplete,
+  onStartFinalQuiz,
 }: TrainingProgressProps) {
   const progressPercentage = (completedLessons.length / totalLessons) * 100;
 
@@ -109,6 +113,51 @@ export function TrainingProgress({
             </button>
           );
         })}
+
+        {/* Final Quiz Card */}
+        <button
+          onClick={onStartFinalQuiz}
+          disabled={!allLessonsComplete}
+          className={cn(
+            "flex items-center gap-4 p-4 rounded-lg border text-left transition-all duration-200 mt-2",
+            allLessonsComplete
+              ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/15 hover:to-primary/10 shadow-soft"
+              : "opacity-50 cursor-not-allowed border-border"
+          )}
+        >
+          {/* Status icon */}
+          <div
+            className={cn(
+              "w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0",
+              allLessonsComplete
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground"
+            )}
+          >
+            {allLessonsComplete ? (
+              <Trophy className="w-5 h-5" />
+            ) : (
+              <Lock className="w-4 h-4" />
+            )}
+          </div>
+
+          {/* Quiz info */}
+          <div className="flex-1 min-w-0">
+            <h3
+              className={cn(
+                "font-medium",
+                allLessonsComplete ? "text-primary" : "text-foreground"
+              )}
+            >
+              🏆 Final Quiz
+            </h3>
+            <p className="text-sm text-muted-foreground truncate">
+              {allLessonsComplete
+                ? "20 questions • Earn your certificate!"
+                : "Complete all lessons to unlock"}
+            </p>
+          </div>
+        </button>
       </div>
     </div>
   );

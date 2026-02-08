@@ -1,71 +1,44 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, Sparkles, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Trophy, ArrowRight, Sparkles } from "lucide-react";
 
-export function TrainingComplete() {
+interface TrainingCompleteProps {
+  onStartFinalQuiz: () => void;
+}
+
+export function TrainingComplete({ onStartFinalQuiz }: TrainingCompleteProps) {
   return (
-    <div className="w-full max-w-2xl mx-auto text-center space-y-8 py-12 animate-fade-in">
-      <div className="relative inline-block">
-        <div className="w-24 h-24 rounded-full gradient-primary flex items-center justify-center mx-auto">
-          <Trophy className="w-12 h-12 text-primary-foreground" />
-        </div>
-        <div className="absolute -top-2 -right-2 w-8 h-8 bg-warning rounded-full flex items-center justify-center animate-pulse-soft">
-          <Sparkles className="w-5 h-5 text-warning-foreground" />
-        </div>
+    <div className="w-full max-w-2xl mx-auto space-y-8 animate-fade-in text-center">
+      <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-success/10">
+        <Trophy className="w-12 h-12 text-success" />
       </div>
 
-      <div className="space-y-2">
-        <h2 className="text-3xl font-bold text-foreground">
-          🎉 Congratulations!
-        </h2>
-        <p className="text-xl text-muted-foreground">
-          You've mastered the 5 essentials of prompt writing!
+      <div className="space-y-4">
+        <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
+          🎉 All Lessons Complete!
+        </h1>
+        <p className="text-lg text-muted-foreground max-w-md mx-auto">
+          You've mastered the 5 essential prompt engineering techniques. Now it's time for the final challenge!
         </p>
       </div>
 
-      <Card className="shadow-soft border-2 border-success/20">
+      <Card className="shadow-card">
         <CardContent className="p-6 space-y-4">
-          <h3 className="font-semibold text-lg text-foreground">
-            What you learned:
-          </h3>
-          <ul className="text-left space-y-2 text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <span className="text-success">✓</span>
-              More details = better results
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-success">✓</span>
-              Ask AI what info it needs
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-success">✓</span>
-              Use examples to show what you want
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-success">✓</span>
-              Put text in quotes for clarity
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-success">✓</span>
-              Assign roles for better responses
-            </li>
-          </ul>
+          <div className="flex items-center justify-center gap-2 text-primary">
+            <Sparkles className="w-5 h-5" />
+            <h3 className="font-semibold">Final Quiz Unlocked</h3>
+            <Sparkles className="w-5 h-5" />
+          </div>
+          <p className="text-muted-foreground">
+            Take the 20-question final quiz to test your knowledge and earn a shareable certificate!
+          </p>
         </CardContent>
       </Card>
 
-      <div className="space-y-4">
-        <p className="text-muted-foreground">
-          Ready to put your new skills to work?
-        </p>
-        <Button size="lg" asChild className="gap-2">
-          <Link to="/">
-            <Sparkles className="w-5 h-5" />
-            Build Your First Prompt
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </Button>
-      </div>
+      <Button size="lg" onClick={onStartFinalQuiz} className="gap-2">
+        Start Final Quiz
+        <ArrowRight className="w-4 h-4" />
+      </Button>
     </div>
   );
 }
