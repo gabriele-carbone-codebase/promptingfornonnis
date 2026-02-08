@@ -2,38 +2,50 @@ import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { TrainingProgress } from "@/components/training/TrainingProgress";
 import { LessonCard } from "@/components/training/LessonCard";
-import { TrainingComplete } from "@/components/training/TrainingComplete";
+import { FinalQuiz } from "@/components/training/FinalQuiz";
+import { Certificate } from "@/components/training/Certificate";
 import { lessons } from "@/data/lessons";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
+type TrainingState = 
+  | "lessons_hub"
+  | "lesson_active"
+  | "final_quiz_active"
+  | "certificate";
+
 const Training = () => {
+  const [trainingState, setTrainingState] = useState<TrainingState>("lessons_hub");
   const [currentLesson, setCurrentLesson] = useState(1);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
-  const [showLesson, setShowLesson] = useState(false);
+  const [finalQuizScore, setFinalQuizScore] = useState({ score: 0, total: 0 });
 
   const totalLessons = lessons.length;
-  const isComplete = completedLessons.length === totalLessons;
+  const allLessonsComplete = completedLessons.length === totalLessons;
 
   const handleLessonComplete = () => {
     if (!completedLessons.includes(currentLesson)) {
       setCompletedLessons((prev) => [...prev, currentLesson]);
     }
-
-    if (currentLesson < totalLessons) {
-      setCurrentLesson(currentLesson + 1);
-    } else {
-      setShowLesson(false);
-    }
+    setTrainingState("lessons_hub");
   };
 
   const handleLessonClick = (lessonNumber: number) => {
     setCurrentLesson(lessonNumber);
-    setShowLesson(true);
+    setTrainingState("lesson_active");
   };
 
   const handleBack = () => {
-    setShowLesson(false);
+    setTrainingState("lessons_hub");
+  };
+
+  const handleStartFinalQuiz = () => {
+    setTrainingState("final_quiz_active");
+  };
+
+  const handleFinalQuizComplete = (score: number, total: number) => {
+    setFinalQuizScore({ score, total });
+    setTrainingState("certificate");
   };
 
   const currentLessonData = lessons.find((l) => l.id === currentLesson);
@@ -43,9 +55,18 @@ const Training = () => {
       <Header />
 
       <main className="container py-8">
-        {isComplete && !showLesson ? (
-          <TrainingComplete />
-        ) : showLesson && currentLessonData ? (
+        {trainingState === "certificate" ? (
+          <Certificate
+            score={finalQuizScore.score}
+            total={finalQuizScore.total}
+            completionDate={new Date()}
+          />
+        ) : trainingState === "final_quiz_active" ? (
+          <FinalQuiz
+            onComplete={handleFinalQuizComplete}
+            onBack={handleBack}
+          />
+        ) : trainingState === "lesson_active" && currentLessonData ? (
           <div>
             <Button
               variant="ghost"
@@ -79,6 +100,8 @@ const Training = () => {
               completedLessons={completedLessons}
               totalLessons={totalLessons}
               onLessonClick={handleLessonClick}
+              allLessonsComplete={allLessonsComplete}
+              onStartFinalQuiz={handleStartFinalQuiz}
             />
           </div>
         )}

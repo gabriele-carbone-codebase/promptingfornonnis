@@ -1,24 +1,26 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Check, X, ArrowRight, Lightbulb } from "lucide-react";
-import type { Lesson } from "@/data/lessons";
+import { Check, X, ArrowRight } from "lucide-react";
+import type { FinalQuizQuestion } from "@/data/finalQuizQuestions";
 
-interface LessonCardProps {
-  lesson: Lesson;
-  onComplete: () => void;
+interface FinalQuizQuestionProps {
+  question: FinalQuizQuestion;
+  questionNumber: number;
+  totalQuestions: number;
+  onAnswer: (isCorrect: boolean) => void;
+  isLastQuestion: boolean;
 }
 
-export function LessonCard({ lesson, onComplete }: LessonCardProps) {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+export function FinalQuizQuestionCard({
+  question,
+  questionNumber,
+  totalQuestions,
+  onAnswer,
+  isLastQuestion,
+}: FinalQuizQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [showQuiz, setShowQuiz] = useState(false);
-
-  const currentQuestion = lesson.quiz[currentQuestionIndex];
-  const totalQuestions = lesson.quiz.length;
-  const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
 
   const handleAnswerSelect = (optionId: string) => {
     if (showResult) return;
@@ -30,94 +32,42 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
   };
 
   const handleNext = () => {
-    if (isLastQuestion) {
-      onComplete();
-    } else {
-      setCurrentQuestionIndex((prev) => prev + 1);
-      setSelectedAnswer(null);
-      setShowResult(false);
-    }
-  };
-
-  const handleStartQuiz = () => {
-    setShowQuiz(true);
+    const isCorrect = question.options.find((o) => o.id === selectedAnswer)?.isCorrect ?? false;
+    onAnswer(isCorrect);
   };
 
   const isCorrect =
     selectedAnswer &&
-    currentQuestion.options.find((o) => o.id === selectedAnswer)?.isCorrect;
-
-  if (!showQuiz) {
-    return (
-      <div className="w-full max-w-2xl mx-auto space-y-8 animate-fade-in">
-        {/* Lesson header */}
-        <div className="text-center space-y-2">
-          <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-            Lesson {lesson.id}
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
-            {lesson.title}
-          </h2>
-        </div>
-
-        {/* Explanation */}
-        <Card className="shadow-card">
-          <CardContent className="p-6 space-y-4">
-            <p className="text-foreground leading-relaxed">{lesson.description}</p>
-            
-            <div className="flex gap-3 p-4 rounded-lg bg-accent/50">
-              <Lightbulb className="w-5 h-5 text-accent-foreground flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-accent-foreground">{lesson.tip}</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Start Quiz Button */}
-        <div className="flex justify-center">
-          <Button size="lg" onClick={handleStartQuiz} className="gap-2">
-            Start Quiz ({totalQuestions} questions)
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </div>
-      </div>
-    );
-  }
+    question.options.find((o) => o.id === selectedAnswer)?.isCorrect;
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-8 animate-fade-in">
-      {/* Lesson header with progress */}
+    <div className="w-full max-w-2xl mx-auto space-y-6 animate-fade-in">
+      {/* Question header */}
       <div className="text-center space-y-2">
         <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-          Lesson {lesson.id} - Question {currentQuestionIndex + 1} of {totalQuestions}
+          Question {questionNumber} of {totalQuestions}
         </span>
-        <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
-          {lesson.title}
-        </h2>
+        <p className="text-xs text-muted-foreground">
+          Concept: {question.concept}
+        </p>
       </div>
 
-      {/* Progress dots */}
-      <div className="flex justify-center gap-2">
-        {lesson.quiz.map((_, idx) => (
-          <div
-            key={idx}
-            className={cn(
-              "w-2.5 h-2.5 rounded-full transition-colors",
-              idx < currentQuestionIndex && "bg-success",
-              idx === currentQuestionIndex && "bg-primary",
-              idx > currentQuestionIndex && "bg-muted"
-            )}
-          />
-        ))}
+      {/* Progress bar */}
+      <div className="h-2 bg-muted rounded-full overflow-hidden">
+        <div
+          className="h-full bg-primary transition-all duration-300"
+          style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
+        />
       </div>
 
-      {/* Quiz */}
+      {/* Question */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-foreground">
-          {currentQuestion.question}
+          {question.question}
         </h3>
 
         <div className="space-y-3">
-          {currentQuestion.options.map((option) => {
+          {question.options.map((option) => {
             const isSelected = selectedAnswer === option.id;
             const showCorrectness = showResult;
 
@@ -156,7 +106,7 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
                       option.id.toUpperCase()
                     )}
                   </div>
-                  <p className="text-foreground whitespace-pre-wrap">{option.text}</p>
+                  <p className="text-foreground">{option.text}</p>
                 </div>
               </button>
             );
@@ -173,9 +123,9 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
           )}
         >
           <p className="font-medium mb-2">
-            {isCorrect ? "🎉 Correct!" : "💡 Not quite, but that's okay!"}
+            {isCorrect ? "🎉 Correct!" : "💡 Not quite, but keep learning!"}
           </p>
-          <p className="text-sm text-muted-foreground">{currentQuestion.explanation}</p>
+          <p className="text-sm text-muted-foreground">{question.explanation}</p>
         </div>
       )}
 
@@ -191,7 +141,7 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
           </Button>
         ) : (
           <Button size="lg" onClick={handleNext} className="gap-2">
-            {isLastQuestion ? "Complete Lesson" : "Next Question"}
+            {isLastQuestion ? "See Results" : "Next Question"}
             <ArrowRight className="w-4 h-4" />
           </Button>
         )}
