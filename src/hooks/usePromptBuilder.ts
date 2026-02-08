@@ -88,7 +88,7 @@ export function usePromptBuilder() {
   }, [step]);
 
   const goToStep = useCallback((targetStep: number) => {
-    if (targetStep >= 1 && targetStep <= totalSteps) {
+    if (targetStep >= 1 && targetStep <= totalSteps + 1) {
       setStep(targetStep);
     }
   }, []);
