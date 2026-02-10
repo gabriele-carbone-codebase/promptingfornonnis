@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Heart, GraduationCap, UsersRound, LogIn, LogOut, User } from "lucide-react";
+import { Heart, GraduationCap, UsersRound, Lightbulb, LogIn, LogOut, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
@@ -19,6 +19,7 @@ export function Header() {
 
   const navItems = [
     { href: "/", label: "Build", icon: Heart },
+    { href: "/use-cases", label: "Use Cases", icon: Lightbulb },
     { href: "/training", label: "Training", icon: GraduationCap },
     { href: "/community", label: "Community", icon: UsersRound },
   ];
