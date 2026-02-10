@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sparkles, BookOpen, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 interface HeroSectionProps {
   onStartBuilding: () => void;
@@ -32,7 +31,7 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
             and other AI chatbots.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex justify-center">
             <Button 
               size="lg" 
               onClick={onStartBuilding}
@@ -41,17 +40,6 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
               <Sparkles className="w-5 h-5" />
               Start Building
               <ArrowRight className="w-5 h-5" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              asChild
-              className="text-lg px-8 gap-2"
-            >
-              <Link to="/training">
-                <BookOpen className="w-5 h-5" />
-                Free Training
-              </Link>
             </Button>
           </div>
 
