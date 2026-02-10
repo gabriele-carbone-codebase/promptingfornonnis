@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Award, Sparkles, ArrowRight } from "lucide-react";
+import { Trophy, Heart, ArrowRight } from "lucide-react";
 import { ShareButtons } from "./ShareButtons";
 import { useNavigate } from "react-router-dom";
 
@@ -38,7 +38,7 @@ export function Certificate({ userName, score, total, completionDate }: Certific
     <div className="w-full max-w-2xl mx-auto space-y-8 animate-fade-in">
       <div className="text-center space-y-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-success/10 text-success text-sm font-medium">
-          <Sparkles className="w-4 h-4" />
+          <Heart className="w-4 h-4" />
           Quiz Complete!
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
@@ -63,7 +63,7 @@ export function Certificate({ userName, score, total, completionDate }: Certific
         <div className="p-8 sm:p-12 text-center space-y-6 bg-gradient-to-b from-background to-muted/20">
           {/* Badge */}
           <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/30">
-            <Award className="w-12 h-12 text-primary" />
+            <Trophy className="w-12 h-12 text-primary" />
           </div>
 
           {/* Title */}
@@ -79,7 +79,7 @@ export function Certificate({ userName, score, total, completionDate }: Certific
           {/* Divider */}
           <div className="flex items-center gap-4">
             <div className="flex-1 h-px bg-border" />
-            <Sparkles className="w-4 h-4 text-primary" />
+            <Heart className="w-4 h-4 text-primary" />
             <div className="flex-1 h-px bg-border" />
           </div>
 

@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Sparkles, BookOpen, Users, LogIn, LogOut, User } from "lucide-react";
+import { Heart, GraduationCap, UsersRound, LogIn, LogOut, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
@@ -18,9 +18,9 @@ export function Header() {
   const { user, signOut, isAuthenticated } = useAuth();
 
   const navItems = [
-    { href: "/", label: "Build", icon: Sparkles },
-    { href: "/training", label: "Training", icon: BookOpen },
-    { href: "/community", label: "Community", icon: Users },
+    { href: "/", label: "Build", icon: Heart },
+    { href: "/training", label: "Training", icon: GraduationCap },
+    { href: "/community", label: "Community", icon: UsersRound },
   ];
 
   const handleSignOut = async () => {
@@ -39,10 +39,10 @@ export function Header() {
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
+              <Heart className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-semibold text-lg text-foreground">
-              PromptCoach
+              Prompting for Nonnis
             </span>
           </Link>
 

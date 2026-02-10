@@ -1,4 +1,4 @@
-import { HelpCircle, ThumbsDown, Lightbulb } from "lucide-react";
+import { HelpCircle, Frown, Eye } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const personas = [
@@ -9,13 +9,13 @@ const personas = [
       "You know AI exists but it feels overwhelming. We'll show you exactly how to start — no tech skills needed.",
   },
   {
-    icon: ThumbsDown,
+    icon: Frown,
     title: "I've tried AI but my results were disappointing",
     description:
       "The secret isn't the AI — it's how you ask. Our wizard turns vague ideas into powerful prompts automatically.",
   },
   {
-    icon: Lightbulb,
+    icon: Eye,
     title: "I don't even know what to ask AI",
     description:
       "That's the most common starting point! Browse our 20 real-world examples and discover what AI can do for you.",
@@ -29,7 +29,7 @@ export function WhoIsThisFor() {
         <div className="max-w-5xl mx-auto space-y-10">
           <div className="text-center space-y-3">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
-              Is this for me?
+              Is this for me? Absolutely!
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
               If any of these sound like you, you're in the right place.

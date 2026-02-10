@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Smile, Heart, ArrowRight } from "lucide-react";
 
 interface HeroSectionProps {
   onStartBuilding: () => void;
@@ -16,8 +16,8 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-            <Sparkles className="w-4 h-4" />
-            No AI experience needed
+            <Smile className="w-4 h-4" />
+            So easy, even nonni can do it
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight">
@@ -26,9 +26,9 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
           </h1>
 
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Stop guessing. Our friendly wizard guides you through building 
-            powerful prompts that get amazing results from ChatGPT, Claude, 
-            and other AI chatbots.
+            Even your nonna can do it! Our friendly guide walks you through 
+            building powerful prompts that get amazing results from ChatGPT, 
+            Claude, and other AI chatbots.
           </p>
 
           <div className="flex justify-center">
@@ -37,14 +37,14 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
               onClick={onStartBuilding}
               className="text-lg px-8 gap-2"
             >
-              <Sparkles className="w-5 h-5" />
+              <Heart className="w-5 h-5" />
               Start Building
               <ArrowRight className="w-5 h-5" />
             </Button>
           </div>
 
           <p className="text-sm text-muted-foreground">
-            ✓ 100% free &nbsp;•&nbsp; ✓ No signup required &nbsp;•&nbsp; ✓ Works with any AI
+            ✓ 100% free &nbsp;•&nbsp; ✓ No tech skills needed &nbsp;•&nbsp; ✓ Works with any AI
           </p>
         </div>
       </div>
