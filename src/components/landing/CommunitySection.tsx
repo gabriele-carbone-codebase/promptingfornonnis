@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Users, Heart, Share2 } from "lucide-react";
+import { UsersRound, Heart, Share2 } from "lucide-react";
 
 const features = [
-  { icon: Users, text: "Browse prompts shared by others" },
+  { icon: UsersRound, text: "Browse prompts shared by others" },
   { icon: Heart, text: "Like your favourites" },
   { icon: Share2, text: "Share your own creations" },
 ];
@@ -36,7 +36,7 @@ export function CommunitySection() {
           <div className="text-center">
             <Button size="lg" variant="outline" asChild className="gap-2">
               <Link to="/community">
-                <Users className="w-5 h-5" />
+                <UsersRound className="w-5 h-5" />
                 Explore Community
               </Link>
             </Button>

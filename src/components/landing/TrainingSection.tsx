@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Award, HelpCircle } from "lucide-react";
+import { GraduationCap, MessageCircleQuestion, Award } from "lucide-react";
 
 const stats = [
-  { icon: BookOpen, label: "5 lessons", sub: "Bite-sized concepts" },
-  { icon: HelpCircle, label: "25 practice questions", sub: "Instant feedback" },
+  { icon: GraduationCap, label: "5 lessons", sub: "Bite-sized concepts" },
+  { icon: MessageCircleQuestion, label: "25 practice questions", sub: "Instant feedback" },
   { icon: Award, label: "Certificate", sub: "Shareable on social" },
 ];
 
@@ -38,7 +38,7 @@ export function TrainingSection() {
           <div className="text-center">
             <Button size="lg" asChild className="gap-2">
               <Link to="/training">
-                <BookOpen className="w-5 h-5" />
+                <GraduationCap className="w-5 h-5" />
                 Start Free Training
               </Link>
             </Button>

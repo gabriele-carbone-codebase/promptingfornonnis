@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
-import { Loader2, Mail, Lock, Sparkles } from "lucide-react";
+import { Loader2, Mail, Lock, Heart } from "lucide-react";
 import { z } from "zod";
 
 const emailSchema = z.string().trim().email({ message: "Please enter a valid email address" }).max(255);
@@ -109,9 +109,9 @@ const Auth = () => {
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-primary mb-4">
-              <Sparkles className="w-8 h-8 text-primary-foreground" />
+              <Heart className="w-8 h-8 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-bold text-foreground">Welcome to PromptCoach</h1>
+            <h1 className="text-2xl font-bold text-foreground">Welcome to Prompting for Nonnis</h1>
             <p className="text-muted-foreground mt-2">
               Sign in to save your prompts and join the community
             </p>
