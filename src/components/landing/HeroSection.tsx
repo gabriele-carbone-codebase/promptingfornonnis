@@ -1,13 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Smile, Heart, ArrowRight } from "lucide-react";
-
 interface HeroSectionProps {
   onStartBuilding: () => void;
 }
-
-export function HeroSection({ onStartBuilding }: HeroSectionProps) {
-  return (
-    <section className="relative overflow-hidden py-16 sm:py-24">
+export function HeroSection({
+  onStartBuilding
+}: HeroSectionProps) {
+  return <section className="relative overflow-hidden py-16 sm:py-24">
       {/* Background decoration */}
       <div className="absolute inset-0 gradient-warm opacity-50" />
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
@@ -17,7 +16,7 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
         <div className="max-w-3xl mx-auto text-center space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
             <Smile className="w-4 h-4" />
-            So easy, even nonni can do it
+            So easy, even your nonno can do it
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight">
@@ -32,11 +31,7 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
           </p>
 
           <div className="flex justify-center">
-            <Button 
-              size="lg" 
-              onClick={onStartBuilding}
-              className="text-lg px-8 gap-2"
-            >
+            <Button size="lg" onClick={onStartBuilding} className="text-lg px-8 gap-2">
               <Heart className="w-5 h-5" />
               Start Building
               <ArrowRight className="w-5 h-5" />
@@ -48,6 +43,5 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
           </p>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
