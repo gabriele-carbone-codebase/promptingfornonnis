@@ -25,9 +25,8 @@ export function HeroSection({
           </h1>
 
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Even your nonna can do it! Our friendly guide walks you through 
-            building powerful prompts that get amazing results from ChatGPT, 
-            Claude, and other AI chatbots.
+            Our friendly guide walks you through building powerful prompts 
+            that get amazing results from ChatGPT, Claude, and other AI chatbots.
           </p>
 
           <div className="flex justify-center">
