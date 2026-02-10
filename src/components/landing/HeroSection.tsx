@@ -20,8 +20,8 @@ export function HeroSection({
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight">
-            Create perfect AI prompts{" "}
-            <span className="text-primary">in 5 easy steps</span>
+            Let's talk to AI{" "}
+            <span className="text-primary">together, step by step</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
