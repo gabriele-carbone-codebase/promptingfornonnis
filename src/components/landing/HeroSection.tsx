@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Smile, Heart, ArrowRight } from "lucide-react";
+import { Smile, Heart, ArrowRight, HelpCircle } from "lucide-react";
 import heroImage from "@/assets/hero-elderly.jpg";
 interface HeroSectionProps {
   onStartBuilding: () => void;
+  onDiscover: () => void;
 }
 export function HeroSection({
-  onStartBuilding
+  onStartBuilding,
+  onDiscover,
 }: HeroSectionProps) {
   return <section className="relative overflow-hidden py-24 sm:py-32 min-h-[500px]">
       {/* Background image */}
@@ -35,11 +37,20 @@ export function HeroSection({
           </p>
 
 
-          <div className="flex justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button size="lg" onClick={onStartBuilding} className="text-lg px-8 gap-2">
               <Heart className="w-5 h-5" />
               Start Building
               <ArrowRight className="w-5 h-5" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={onDiscover}
+              className="text-lg px-6 gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white"
+            >
+              <HelpCircle className="w-5 h-5" />
+              I don't know what AI can do for me
             </Button>
           </div>
 
