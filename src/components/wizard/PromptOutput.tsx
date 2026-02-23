@@ -84,7 +84,7 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
           🎉 Your prompt is ready!
         </h2>
         <p className="text-muted-foreground">
-          Copy and paste this into ChatGPT, Claude, or any AI chatbot
+          Choose an AI chatbot below, or copy the prompt to use anywhere
         </p>
       </div>
 
@@ -95,6 +95,36 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
           </pre>
         </CardContent>
       </Card>
+
+      {/* Open in Chatbot buttons */}
+      <div className="space-y-3">
+        <p className="text-center text-sm font-medium text-muted-foreground">
+          Or open it directly in your favourite AI
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button
+            size="lg"
+            className="bg-[hsl(145,60%,40%)] hover:bg-[hsl(145,60%,35%)] text-white"
+            onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+          >
+            ChatGPT
+          </Button>
+          <Button
+            size="lg"
+            className="bg-[hsl(24,80%,55%)] hover:bg-[hsl(24,80%,48%)] text-white"
+            onClick={() => window.open(`https://claude.ai/new?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+          >
+            Claude
+          </Button>
+          <Button
+            size="lg"
+            className="bg-[hsl(217,70%,50%)] hover:bg-[hsl(217,70%,43%)] text-white"
+            onClick={() => window.open(`https://gemini.google.com/app?text=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+          >
+            Gemini
+          </Button>
+        </div>
+      </div>
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Button
