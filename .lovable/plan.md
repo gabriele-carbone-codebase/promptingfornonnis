@@ -1,48 +1,48 @@
 
 
-# "Open in Chatbot" Buttons
+# Add Photos of Elderly People to the Landing Page
 
 ## Summary
-Add a new section to the prompt output screen with buttons for the major AI chatbots (ChatGPT, Claude, Gemini). Clicking a button opens the chatbot in a new tab with the generated prompt pre-filled, so the user can start chatting immediately without copy-pasting.
+Add warm, relatable photos of older adults using phones and technology to three key sections of the landing page. We will use free stock photos from Unsplash, referenced directly by URL -- no backend or API key needed.
 
 ---
 
-## How It Works
+## Where the Images Will Go
 
-Each chatbot supports a URL parameter to pre-fill a prompt:
+### 1. Hero Section
+Add a large, rounded hero image below the headline showing an elderly person happily using a smartphone or tablet. This immediately sets the tone: "this is for you."
 
-- **ChatGPT**: `https://chat.openai.com/?q=ENCODED_PROMPT`
-- **Claude**: `https://claude.ai/new?q=ENCODED_PROMPT`
-- **Google Gemini**: `https://gemini.google.com/app?text=ENCODED_PROMPT`
+### 2. "Who Is This For" Cards
+Replace the abstract icons on each of the three persona cards with a circular photo of an older adult in a relatable situation (e.g., looking curious at a phone, puzzled at a screen, browsing casually).
 
-The prompt text is URL-encoded and appended as a query parameter. Clicking the button opens a new browser tab -- the user lands directly in the chatbot with the prompt already typed in.
+### 3. Community Section
+Add a wide photo strip or single image showing a group of older adults together with devices, reinforcing the "community" feel.
 
 ---
 
-## Changes
-
-### Modify `src/components/wizard/PromptOutput.tsx`
-
-- Add a new section between the prompt card and the existing action buttons
-- Section heading: "Or open it directly in your favourite AI"
-- Three styled buttons in a row, each with the chatbot's name and a distinct color/icon:
-  - **ChatGPT** (green-ish) -- opens `chat.openai.com`
-  - **Claude** (orange-ish) -- opens `claude.ai`
-  - **Gemini** (blue-ish) -- opens `gemini.google.com`
-- Each button calls `window.open(url, '_blank')` with the encoded prompt
-- Update subtitle text from "Copy and paste this into ChatGPT, Claude, or any AI chatbot" to something like "Choose an AI chatbot below, or copy the prompt to use anywhere"
-
-### No other files need to change
-
-This is a self-contained UI addition to the existing PromptOutput component.
+## Image Source
+We will use **Unsplash** stock photos, which are free to use and can be loaded directly via URL (`https://images.unsplash.com/...`). Each image URL includes size parameters to keep load times fast.
 
 ---
 
 ## Technical Details
 
-- The prompt is encoded with `encodeURIComponent(generatedPrompt)` for safe URL usage
-- Buttons use `window.open()` to open in a new tab
-- Each button has a subtle brand-inspired background color using Tailwind classes
-- Fully responsive: buttons stack vertically on mobile, sit side-by-side on desktop
-- The existing "Copy Prompt" button remains as a fallback for users who prefer other chatbots
+### Files to modify
+
+**`src/components/landing/HeroSection.tsx`**
+- Add an `<img>` tag after the subtitle text and before the CTA button
+- The image will be rounded, have a subtle shadow, and be responsive
+- Use `loading="lazy"` for performance
+
+**`src/components/landing/WhoIsThisFor.tsx`**
+- Replace the icon circles at the top of each card with circular `<img>` elements
+- Each persona gets a distinct photo
+- Images are sized at roughly 80x80px with `object-cover` and `rounded-full`
+
+**`src/components/landing/CommunitySection.tsx`**
+- Add a single wide image above the feature list, showing older people together with technology
+- Rounded corners, constrained max-width, centered
+
+### No new dependencies or backend changes needed
+All images are loaded from external URLs. No storage buckets, no edge functions, no new packages.
 
