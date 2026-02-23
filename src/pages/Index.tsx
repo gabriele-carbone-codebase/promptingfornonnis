@@ -6,21 +6,31 @@ import { UseCasesSection } from "@/components/landing/UseCasesSection";
 import { TrainingSection } from "@/components/landing/TrainingSection";
 import { CommunitySection } from "@/components/landing/CommunitySection";
 import { PromptWizard } from "@/components/wizard/PromptWizard";
+import { DiscoveryWizard } from "@/components/discovery/DiscoveryWizard";
+
+type View = "landing" | "wizard" | "discovery";
 
 const Index = () => {
-  const [showWizard, setShowWizard] = useState(false);
+  const [view, setView] = useState<View>("landing");
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
-      {showWizard ? (
+      {view === "wizard" ? (
         <main className="container py-8">
           <PromptWizard />
         </main>
+      ) : view === "discovery" ? (
+        <main>
+          <DiscoveryWizard />
+        </main>
       ) : (
         <>
-          <HeroSection onStartBuilding={() => setShowWizard(true)} />
+          <HeroSection
+            onStartBuilding={() => setView("wizard")}
+            onDiscover={() => setView("discovery")}
+          />
           <WhoIsThisFor />
           <UseCasesSection />
           <TrainingSection />
