@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { UsersRound, Heart, Share2 } from "lucide-react";
+import communityImage from "@/assets/community-elderly.jpg";
 
 const features = [
   { icon: UsersRound, text: "Browse prompts shared by others" },
@@ -20,6 +21,15 @@ export function CommunitySection() {
             <p className="text-muted-foreground max-w-xl mx-auto">
               Discover prompts created by other users, get inspired, and share your own with the world.
             </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <img
+              src={communityImage}
+              alt="Group of elderly people laughing together while using phones and tablets"
+              className="w-full rounded-2xl shadow-lg"
+              loading="lazy"
+            />
           </div>
 
           <div className="flex flex-wrap justify-center gap-8">

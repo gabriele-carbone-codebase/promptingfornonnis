@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Smile, Heart, ArrowRight } from "lucide-react";
+import heroImage from "@/assets/hero-elderly.jpg";
 interface HeroSectionProps {
   onStartBuilding: () => void;
 }
@@ -28,6 +29,15 @@ export function HeroSection({
             Our friendly guide walks you through building powerful prompts 
             that get amazing results from ChatGPT, Claude, and other AI chatbots.
           </p>
+
+          <div className="max-w-lg mx-auto">
+            <img
+              src={heroImage}
+              alt="Elderly woman smiling while using a smartphone"
+              className="w-full rounded-2xl shadow-lg"
+              loading="lazy"
+            />
+          </div>
 
           <div className="flex justify-center">
             <Button size="lg" onClick={onStartBuilding} className="text-lg px-8 gap-2">
