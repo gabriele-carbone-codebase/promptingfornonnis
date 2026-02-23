@@ -163,7 +163,11 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
           <Button
             size="lg"
             className="bg-gradient-to-r from-[hsl(207,65%,55%)] via-[hsl(252,40%,60%)] to-[hsl(10,60%,55%)] hover:opacity-90 text-white"
-            onClick={() => window.open(`https://copilot.microsoft.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+            onClick={async () => {
+              await navigator.clipboard.writeText(generatedPrompt);
+              toast.success("Prompt copied! Paste it in Copilot.");
+              window.open('https://copilot.microsoft.com/', '_blank');
+            }}
           >
             <img src={copilotLogo} alt="Copilot" className="w-5 h-5" />
             Copilot
@@ -171,7 +175,11 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
           <Button
             size="lg"
             className="bg-[hsl(217,70%,50%)] hover:bg-[hsl(217,70%,43%)] text-white"
-            onClick={() => window.open(`https://gemini.google.com/app?text=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+            onClick={async () => {
+              await navigator.clipboard.writeText(generatedPrompt);
+              toast.success("Prompt copied! Paste it in Gemini.");
+              window.open('https://gemini.google.com/app', '_blank');
+            }}
           >
             <img src={geminiIcon} alt="Gemini" className="w-5 h-5" />
             Gemini
