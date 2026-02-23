@@ -1,82 +1,48 @@
 
 
-# Rebrand to "Prompting for Nonnis"
+# "Open in Chatbot" Buttons
 
 ## Summary
-Rename the app from "PromptCoach" to "Prompting for Nonnis," update the color palette to feel warmer and more welcoming (think cozy, grandparent-friendly tones), and swap icons throughout to reinforce the friendly, accessible-to-everyone message.
+Add a new section to the prompt output screen with buttons for the major AI chatbots (ChatGPT, Claude, Gemini). Clicking a button opens the chatbot in a new tab with the generated prompt pre-filled, so the user can start chatting immediately without copy-pasting.
 
 ---
 
-## 1. Naming Changes
+## How It Works
 
-Update all references from "PromptCoach" to "Prompting for Nonnis":
+Each chatbot supports a URL parameter to pre-fill a prompt:
 
-| File | What changes |
-|------|-------------|
-| `index.html` | Title, og:title, description, og:description meta tags |
-| `src/components/layout/Header.tsx` | Logo text: "Prompting for Nonnis" |
-| `src/pages/Auth.tsx` | Welcome heading |
-| `src/index.css` | Design system comment |
-| `src/components/training/Certificate.tsx` | Certificate title reference |
+- **ChatGPT**: `https://chat.openai.com/?q=ENCODED_PROMPT`
+- **Claude**: `https://claude.ai/new?q=ENCODED_PROMPT`
+- **Google Gemini**: `https://gemini.google.com/app?text=ENCODED_PROMPT`
+
+The prompt text is URL-encoded and appended as a query parameter. Clicking the button opens a new browser tab -- the user lands directly in the chatbot with the prompt already typed in.
 
 ---
 
-## 2. Color Palette Update
+## Changes
 
-Shift from the current lavender/mint palette to a warmer, cozier palette that feels approachable and friendly -- like a warm kitchen:
+### Modify `src/components/wizard/PromptOutput.tsx`
 
-| Token | Current (lavender) | New (warm & cozy) |
-|-------|--------------------|--------------------|
-| Primary | `258 58% 62%` (purple) | `24 80% 58%` (warm orange) |
-| Accent | `158 55% 88%` (mint) | `38 90% 90%` (soft golden) |
-| Secondary | `45 50% 96%` (cream) | `30 60% 96%` (warm cream) |
-| Success | `158 60% 52%` (green) | `142 50% 50%` (softer green) |
-| Gradients | Purple-based | Orange-to-peach warm gradients |
+- Add a new section between the prompt card and the existing action buttons
+- Section heading: "Or open it directly in your favourite AI"
+- Three styled buttons in a row, each with the chatbot's name and a distinct color/icon:
+  - **ChatGPT** (green-ish) -- opens `chat.openai.com`
+  - **Claude** (orange-ish) -- opens `claude.ai`
+  - **Gemini** (blue-ish) -- opens `gemini.google.com`
+- Each button calls `window.open(url, '_blank')` with the encoded prompt
+- Update subtitle text from "Copy and paste this into ChatGPT, Claude, or any AI chatbot" to something like "Choose an AI chatbot below, or copy the prompt to use anywhere"
 
-Dark mode tokens will be adjusted accordingly.
+### No other files need to change
 
-**Files:** `src/index.css` (CSS variables), `tailwind.config.ts` (no structural change needed, just the CSS vars)
-
----
-
-## 3. Icon Updates
-
-Replace techy/abstract icons with friendlier, more human ones throughout:
-
-| Location | Current Icon | New Icon | Reason |
-|----------|-------------|----------|--------|
-| Header logo | `Sparkles` | `Heart` or `HandHeart` | Warmth over tech |
-| Hero badge | `Sparkles` | `Smile` | Friendly face |
-| Hero CTA | `Sparkles` + `ArrowRight` | `HandHeart` + `ArrowRight` | Caring guidance |
-| "Who Is This For" cards | `HelpCircle`, `ThumbsDown`, `Lightbulb` | `HelpCircle`, `Frown`, `Eye` | More expressive |
-| Training section | `BookOpen`, `HelpCircle`, `Award` | `GraduationCap`, `MessageCircleQuestion`, `Award` | Learning-focused |
-| Community section | `Users`, `Heart`, `Share2` | `UsersRound`, `Heart`, `Share2` | Rounder, friendlier |
-| Certificate badge | `Award` | `Trophy` or `Medal` | Achievement feel |
-
-All icons are from `lucide-react` (already installed).
+This is a self-contained UI addition to the existing PromptOutput component.
 
 ---
 
-## 4. Copy Tone Adjustments
+## Technical Details
 
-Small wording tweaks to reinforce the "even your grandma can do it" message:
-
-- Hero subtitle: "Even your nonna can do it! Our friendly guide walks you through building powerful prompts step by step."
-- Hero badge: "So easy, even nonni can do it"
-- "Who Is This For" heading: "Is this for me? Absolutely!"
-- Tagline: "100% free -- No tech skills needed -- Works with any AI"
-
----
-
-## Files to Modify
-
-1. `index.html` -- title and meta tags
-2. `src/index.css` -- color palette CSS variables + gradients
-3. `src/components/layout/Header.tsx` -- logo icon + name
-4. `src/components/landing/HeroSection.tsx` -- icons + copy
-5. `src/components/landing/WhoIsThisFor.tsx` -- icons + copy tone
-6. `src/components/landing/TrainingSection.tsx` -- icons
-7. `src/components/landing/CommunitySection.tsx` -- icons
-8. `src/components/training/Certificate.tsx` -- branding
-9. `src/pages/Auth.tsx` -- welcome text
+- The prompt is encoded with `encodeURIComponent(generatedPrompt)` for safe URL usage
+- Buttons use `window.open()` to open in a new tab
+- Each button has a subtle brand-inspired background color using Tailwind classes
+- Fully responsive: buttons stack vertically on mobile, sit side-by-side on desktop
+- The existing "Copy Prompt" button remains as a fallback for users who prefer other chatbots
 
