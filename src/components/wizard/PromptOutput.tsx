@@ -6,6 +6,9 @@ import { Label } from "@/components/ui/label";
 import { Copy, Check, RotateCcw, BookOpen, Save, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import chatgptLogo from "@/assets/chatgpt-logo.svg";
+import copilotLogo from "@/assets/copilot-logo.svg";
+import geminiIcon from "@/assets/gemini-icon.svg";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import type { PromptData } from "@/types/prompt";
@@ -107,20 +110,23 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
             className="bg-[hsl(145,60%,40%)] hover:bg-[hsl(145,60%,35%)] text-white"
             onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
           >
+            <img src={chatgptLogo} alt="ChatGPT" className="w-5 h-5" />
             ChatGPT
           </Button>
           <Button
             size="lg"
-            className="bg-[hsl(24,80%,55%)] hover:bg-[hsl(24,80%,48%)] text-white"
-            onClick={() => window.open(`https://claude.ai/new?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+            className="bg-gradient-to-r from-[hsl(207,65%,55%)] via-[hsl(252,40%,60%)] to-[hsl(10,60%,55%)] hover:opacity-90 text-white"
+            onClick={() => window.open(`https://copilot.microsoft.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
           >
-            Claude
+            <img src={copilotLogo} alt="Copilot" className="w-5 h-5" />
+            Copilot
           </Button>
           <Button
             size="lg"
             className="bg-[hsl(217,70%,50%)] hover:bg-[hsl(217,70%,43%)] text-white"
             onClick={() => window.open(`https://gemini.google.com/app?text=${encodeURIComponent(generatedPrompt)}`, '_blank')}
           >
+            <img src={geminiIcon} alt="Gemini" className="w-5 h-5" />
             Gemini
           </Button>
         </div>

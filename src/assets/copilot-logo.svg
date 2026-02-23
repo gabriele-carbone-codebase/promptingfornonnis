@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="url(#copilot_grad)"/>
+  <path d="M8.5 9.5C8.5 8.12 9.62 7 11 7h2c1.38 0 2.5 1.12 2.5 2.5v1.25a.75.75 0 01-.75.75h-1.5v3.25a.75.75 0 01-.75.75h-1a.75.75 0 01-.75-.75V11.5h-1.5a.75.75 0 01-.75-.75V9.5z" fill="white"/>
+  <defs>
+    <linearGradient id="copilot_grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#439DDF"/>
+      <stop offset="0.5" stop-color="#4F87ED"/>
+      <stop offset="0.78" stop-color="#9476C5"/>
+      <stop offset="1" stop-color="#D6645D"/>
+    </linearGradient>
+  </defs>
+</svg>
