@@ -7,37 +7,33 @@ interface HeroSectionProps {
 export function HeroSection({
   onStartBuilding
 }: HeroSectionProps) {
-  return <section className="relative overflow-hidden py-16 sm:py-24">
-      {/* Background decoration */}
-      <div className="absolute inset-0 gradient-warm opacity-50" />
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-accent/30 rounded-full blur-3xl" />
+  return <section className="relative overflow-hidden py-24 sm:py-32 min-h-[500px]">
+      {/* Background image */}
+      <img
+        src={heroImage}
+        alt="Elderly woman smiling while using a smartphone"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60" />
 
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 text-white text-sm font-medium backdrop-blur-sm">
             <Smile className="w-4 h-4" />
             So easy, even your nonno can do it
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
             Let's talk to AI{" "}
             <span className="text-primary">together, step by step</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto">
             Our friendly guide walks you through building powerful prompts 
             that get amazing results from ChatGPT, Claude, and other AI chatbots.
           </p>
 
-          <div className="max-w-lg mx-auto">
-            <img
-              src={heroImage}
-              alt="Elderly woman smiling while using a smartphone"
-              className="w-full rounded-2xl shadow-lg"
-              loading="lazy"
-            />
-          </div>
 
           <div className="flex justify-center">
             <Button size="lg" onClick={onStartBuilding} className="text-lg px-8 gap-2">
@@ -47,7 +43,7 @@ export function HeroSection({
             </Button>
           </div>
 
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/60">
             ✓ 100% free &nbsp;•&nbsp; ✓ No tech skills needed &nbsp;•&nbsp; ✓ Works with any AI
           </p>
         </div>
