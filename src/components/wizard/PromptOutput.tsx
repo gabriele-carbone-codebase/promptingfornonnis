@@ -91,47 +91,6 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
         </p>
       </div>
 
-      <Card className="shadow-soft border-2 border-primary/20">
-        <CardContent className="p-6">
-          <pre className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-sans">
-            {generatedPrompt}
-          </pre>
-        </CardContent>
-      </Card>
-
-      {/* Open in Chatbot buttons */}
-      <div className="space-y-3">
-        <p className="text-center text-sm font-medium text-muted-foreground">
-          Or open it directly in your favourite AI
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button
-            size="lg"
-            className="bg-[hsl(145,60%,40%)] hover:bg-[hsl(145,60%,35%)] text-white"
-            onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
-          >
-            <img src={chatgptLogo} alt="ChatGPT" className="w-5 h-5" />
-            ChatGPT
-          </Button>
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-[hsl(207,65%,55%)] via-[hsl(252,40%,60%)] to-[hsl(10,60%,55%)] hover:opacity-90 text-white"
-            onClick={() => window.open(`https://copilot.microsoft.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
-          >
-            <img src={copilotLogo} alt="Copilot" className="w-5 h-5" />
-            Copilot
-          </Button>
-          <Button
-            size="lg"
-            className="bg-[hsl(217,70%,50%)] hover:bg-[hsl(217,70%,43%)] text-white"
-            onClick={() => window.open(`https://gemini.google.com/app?text=${encodeURIComponent(generatedPrompt)}`, '_blank')}
-          >
-            <img src={geminiIcon} alt="Gemini" className="w-5 h-5" />
-            Gemini
-          </Button>
-        </div>
-      </div>
-
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Button
           size="lg"
@@ -178,6 +137,47 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
           Create Another
         </Button>
       </div>
+
+      {/* Open in Chatbot buttons */}
+      <div className="space-y-3">
+        <p className="text-center text-sm font-medium text-muted-foreground">
+          Or open it directly in your favourite AI
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button
+            size="lg"
+            className="bg-[hsl(145,60%,40%)] hover:bg-[hsl(145,60%,35%)] text-white"
+            onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+          >
+            <img src={chatgptLogo} alt="ChatGPT" className="w-5 h-5" />
+            ChatGPT
+          </Button>
+          <Button
+            size="lg"
+            className="bg-gradient-to-r from-[hsl(207,65%,55%)] via-[hsl(252,40%,60%)] to-[hsl(10,60%,55%)] hover:opacity-90 text-white"
+            onClick={() => window.open(`https://copilot.microsoft.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+          >
+            <img src={copilotLogo} alt="Copilot" className="w-5 h-5" />
+            Copilot
+          </Button>
+          <Button
+            size="lg"
+            className="bg-[hsl(217,70%,50%)] hover:bg-[hsl(217,70%,43%)] text-white"
+            onClick={() => window.open(`https://gemini.google.com/app?text=${encodeURIComponent(generatedPrompt)}`, '_blank')}
+          >
+            <img src={geminiIcon} alt="Gemini" className="w-5 h-5" />
+            Gemini
+          </Button>
+        </div>
+      </div>
+
+      <Card className="shadow-soft border-2 border-primary/20">
+        <CardContent className="p-6">
+          <pre className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-sans">
+            {generatedPrompt}
+          </pre>
+        </CardContent>
+      </Card>
 
       <div className="bg-accent/50 rounded-lg p-6 text-center space-y-3">
         <p className="text-sm text-accent-foreground">
