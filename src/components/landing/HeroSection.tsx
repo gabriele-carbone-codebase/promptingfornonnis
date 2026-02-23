@@ -47,7 +47,7 @@ export function HeroSection({
               size="lg"
               variant="outline"
               onClick={onDiscover}
-              className="text-lg px-6 gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white"
+              className="text-lg px-6 gap-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
             >
               <HelpCircle className="w-5 h-5" />
               I don't know what AI can do for me
