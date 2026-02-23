@@ -138,6 +138,14 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
         </Button>
       </div>
 
+      <Card className="shadow-soft border-2 border-primary/20">
+        <CardContent className="p-6">
+          <pre className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-sans">
+            {generatedPrompt}
+          </pre>
+        </CardContent>
+      </Card>
+
       {/* Open in Chatbot buttons */}
       <div className="space-y-3">
         <p className="text-center text-sm font-medium text-muted-foreground">
@@ -170,14 +178,6 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
           </Button>
         </div>
       </div>
-
-      <Card className="shadow-soft border-2 border-primary/20">
-        <CardContent className="p-6">
-          <pre className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-sans">
-            {generatedPrompt}
-          </pre>
-        </CardContent>
-      </Card>
 
       <div className="bg-accent/50 rounded-lg p-6 text-center space-y-3">
         <p className="text-sm text-accent-foreground">
