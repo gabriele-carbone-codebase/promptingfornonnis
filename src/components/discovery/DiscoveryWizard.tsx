@@ -220,7 +220,7 @@ export function DiscoveryWizard() {
                         {item.description}
                       </p>
                     )}
-                    <p className="text-sm text-muted-foreground whitespace-pre-line line-clamp-4 bg-muted/50 rounded-md p-3 italic">
+                    <p className="text-sm text-muted-foreground whitespace-pre-line bg-muted/50 rounded-md p-3 italic">
                       {item.prompt}
                     </p>
                   </div>
