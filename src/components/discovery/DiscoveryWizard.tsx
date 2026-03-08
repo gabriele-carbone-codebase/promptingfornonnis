@@ -12,16 +12,20 @@ import {
   AgeBucket,
   activitiesByAge,
 } from "@/data/discoveryActivities";
+import { activitiesByAgeIt } from "@/data/discoveryActivities.it";
 import { useTranslation } from "@/i18n/useTranslation";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export function DiscoveryWizard() {
   const t = useTranslation();
+  const { lang } = useLanguage();
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [selectedAge, setSelectedAge] = useState<AgeBucket | null>(null);
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const activities = selectedAge ? activitiesByAge[selectedAge] : [];
+  const allActivities = lang === "it" ? activitiesByAgeIt : activitiesByAge;
+  const activities = selectedAge ? allActivities[selectedAge] : [];
 
   const results = useMemo(() => {
     if (!selectedAge) return [];
