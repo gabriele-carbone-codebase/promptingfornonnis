@@ -23,7 +23,7 @@ const Index = () => {
   }, [location.key]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       
       {view === "wizard" ? (
