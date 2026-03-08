@@ -55,6 +55,7 @@ const Index = () => {
       {lang === "en" && view === "landing" && <NonniPopup />}
       <Footer />
     </div>
+  );
 };
 
 export default Index;
