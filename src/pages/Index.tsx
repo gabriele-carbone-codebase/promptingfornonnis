@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { WhoIsThisFor } from "@/components/landing/WhoIsThisFor";
 import { UseCasesSection } from "@/components/landing/UseCasesSection";
