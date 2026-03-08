@@ -246,8 +246,7 @@ export function DiscoveryWizard() {
                     </Button>
                     <Button
                       variant="outline"
-                      size="sm"
-                      className="gap-1.5 bg-success/10 border-success/30 text-success hover:bg-success/20 flex-1 sm:flex-none"
+                      className="gap-1.5 bg-success/10 border-success/30 text-success hover:bg-success/20 flex-1 sm:flex-none min-h-[44px]"
                       onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(item.prompt)}`, '_blank')}
                       aria-label={`Open ${item.title} in ChatGPT`}
                     >
