@@ -44,7 +44,7 @@ export function LanguageSelector() {
       className="gap-1.5 text-sm px-2"
       aria-label={`Switch to ${other.label}`}
     >
-      <other.Flag className="w-5 h-auto rounded-sm" />
+      <other.Flag className="w-5 h-auto rounded-sm hidden sm:block" />
       <span className="font-semibold">{other.code}</span>
     </Button>
   );
