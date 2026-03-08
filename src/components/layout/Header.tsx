@@ -141,9 +141,29 @@ export function Header() {
               </Link>
             </Button>
           ))}
-          {!isAuthenticated && (
+          <hr className="border-border" />
+          {isAuthenticated ? (
             <>
-              <hr className="border-border" />
+              <Button variant="ghost" asChild className="w-full justify-start gap-2" onClick={() => setMobileMenuOpen(false)}>
+                <Link to="/my-prompts">
+                  <User className="w-4 h-4" />
+                  My Prompts
+                </Link>
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-2 text-destructive"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleSignOut();
+                }}
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            <>
               <Button variant="ghost" asChild className="w-full justify-start gap-2" onClick={() => setMobileMenuOpen(false)}>
                 <Link to="/auth">
                   <LogIn className="w-4 h-4" />

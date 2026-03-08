@@ -12,7 +12,6 @@ import {
   AgeBucket,
   ageBucketLabels,
   activitiesByAge,
-  UseCase,
 } from "@/data/discoveryActivities";
 
 export function DiscoveryWizard() {
@@ -23,17 +22,14 @@ export function DiscoveryWizard() {
 
   const activities = selectedAge ? activitiesByAge[selectedAge] : [];
 
-  // Collect unique use cases from selected activities
   const results = useMemo(() => {
     if (!selectedAge) return [];
     const chosen = activities.filter((a) => selectedActivities.includes(a.id));
 
-    // Deduplicate use cases by id, and also include the activity-level example prompts
     const items: { type: "activity" | "usecase"; id: string; title: string; description: string; prompt: string }[] = [];
     const seenIds = new Set<string>();
 
     for (const activity of chosen) {
-      // Add the activity's own example prompt
       items.push({
         type: "activity",
         id: `act-${activity.id}`,
@@ -42,7 +38,6 @@ export function DiscoveryWizard() {
         prompt: activity.examplePrompt,
       });
 
-      // Add use cases
       for (const uc of activity.useCases) {
         if (!seenIds.has(uc.id)) {
           seenIds.add(uc.id);
@@ -76,13 +71,14 @@ export function DiscoveryWizard() {
   return (
     <div className="container max-w-2xl py-12 space-y-8">
       {/* Progress indicator */}
-      <div className="flex items-center gap-2 justify-center">
+      <div className="flex items-center gap-2 justify-center" role="progressbar" aria-valuenow={step} aria-valuemin={1} aria-valuemax={3} aria-label={`Step ${step} of 3`}>
         {[1, 2, 3].map((s) => (
           <div
             key={s}
             className={`h-2 rounded-full transition-all ${
               s === step ? "w-10 bg-primary" : s < step ? "w-6 bg-primary/50" : "w-6 bg-muted"
             }`}
+            aria-hidden="true"
           />
         ))}
       </div>
@@ -209,52 +205,57 @@ export function DiscoveryWizard() {
           <div className="space-y-4">
             {results.map((item) => (
               <Card key={item.id}>
-                <CardContent className="p-5 space-y-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="font-semibold">{item.title}</h3>
-                      <Badge variant="secondary" className="mt-1">
-                        {item.type === "activity" ? "Activity prompt" : "Use case"}
-                      </Badge>
+                <CardContent className="p-4 sm:p-5 space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <h3 className="font-semibold">{item.title}</h3>
+                        <Badge variant="secondary" className="mt-1">
+                          {item.type === "activity" ? "Activity prompt" : "Use case"}
+                        </Badge>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => copyPrompt(item.id, item.prompt)}
-                        className="gap-1.5"
-                      >
-                        {copiedId === item.id ? (
-                          <>
-                            <Check className="w-3.5 h-3.5" />
-                            Copied
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3.5 h-3.5" />
-                            Copy
-                          </>
-                        )}
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="gap-1.5 bg-success/10 border-success/30 text-success hover:bg-success/20"
-                        onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(item.prompt)}`, '_blank')}
-                      >
-                        <img src={chatgptLogo} alt="ChatGPT" className="w-3.5 h-3.5" />
-                        ChatGPT
-                      </Button>
-                    </div>
-                  </div>
-                  {item.type === "usecase" && (
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
+                    {item.type === "usecase" && (
+                      <p className="text-sm text-muted-foreground">
+                        {item.description}
+                      </p>
+                    )}
+                    <p className="text-sm text-muted-foreground whitespace-pre-line line-clamp-4 bg-muted/50 rounded-md p-3 italic">
+                      {item.prompt}
                     </p>
-                  )}
-                  <p className="text-sm text-muted-foreground whitespace-pre-line line-clamp-4 bg-muted/50 rounded-md p-3 italic">
-                    {item.prompt}
-                  </p>
+                  </div>
+                  {/* Buttons stacked on mobile, inline on desktop */}
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => copyPrompt(item.id, item.prompt)}
+                      className="gap-1.5 flex-1 sm:flex-none"
+                      aria-label={`Copy ${item.title} prompt`}
+                    >
+                      {copiedId === item.id ? (
+                        <>
+                          <Check className="w-3.5 h-3.5" />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          Copy
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="gap-1.5 bg-success/10 border-success/30 text-success hover:bg-success/20 flex-1 sm:flex-none"
+                      onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(item.prompt)}`, '_blank')}
+                      aria-label={`Open ${item.title} in ChatGPT`}
+                    >
+                      <img src={chatgptLogo} alt="" className="w-3.5 h-3.5" />
+                      ChatGPT
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}

@@ -46,15 +46,20 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
 
   const handleSave = async () => {
     if (!user) return;
-    if (!title.trim()) {
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) {
       toast.error("Please enter a title");
+      return;
+    }
+    if (trimmedTitle.length > 100) {
+      toast.error("Title must be less than 100 characters");
       return;
     }
 
     setSaving(true);
     const insertData = {
       user_id: user.id,
-      title: title.trim(),
+      title: trimmedTitle,
       content: generatedPrompt,
       goal: promptData.goal || null,
       expected_result: promptData.expectedResult || null,
@@ -182,6 +187,7 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
                 placeholder="Give your prompt a name..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                maxLength={100}
               />
             </div>
             <div className="flex items-center justify-between">

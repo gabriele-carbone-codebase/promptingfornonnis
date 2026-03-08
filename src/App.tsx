@@ -9,6 +9,7 @@ import Community from "./pages/Community";
 import UseCases from "./pages/UseCases";
 
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import MyPrompts from "./pages/MyPrompts";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/use-cases" element={<UseCases />} />
           
           <Route path="/auth" element={<Auth />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/my-prompts" element={<MyPrompts />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

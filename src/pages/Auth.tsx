@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -56,6 +57,24 @@ const Auth = () => {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const handleForgotPassword = async () => {
+    const emailResult = emailSchema.safeParse(email);
+    if (!emailResult.success) {
+      setErrors({ email: "Enter your email first, then click Forgot password" });
+      return;
+    }
+    
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Check your email for a password reset link!", { duration: 6000 });
+    }
   };
 
   const handleSignIn = async (e: React.FormEvent) => {
@@ -127,17 +146,15 @@ const Auth = () => {
           </div>
 
           <Card className="shadow-soft">
-            <CardHeader className="pb-4">
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <CardHeader className="pb-4">
                 <TabsList className="grid w-full grid-cols-2">
                   <TabsTrigger value="signin">Sign In</TabsTrigger>
                   <TabsTrigger value="signup">Sign Up</TabsTrigger>
                 </TabsList>
-              </Tabs>
-            </CardHeader>
+              </CardHeader>
 
-            <CardContent>
-              <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <CardContent>
                 <TabsContent value="signin" className="mt-0">
                   <form onSubmit={handleSignIn} className="space-y-4">
                     <div className="space-y-2">
@@ -180,6 +197,17 @@ const Auth = () => {
                       {errors.password && (
                         <p className="text-sm text-destructive">{errors.password}</p>
                       )}
+                    </div>
+
+                    <div className="text-right">
+                      <Button
+                        type="button"
+                        variant="link"
+                        className="text-xs px-0 h-auto text-muted-foreground"
+                        onClick={handleForgotPassword}
+                      >
+                        Forgot password?
+                      </Button>
                     </div>
 
                     <Button type="submit" className="w-full" disabled={loading}>
@@ -277,8 +305,8 @@ const Auth = () => {
                     </p>
                   </form>
                 </TabsContent>
-              </Tabs>
-            </CardContent>
+              </CardContent>
+            </Tabs>
           </Card>
         </div>
       </main>
