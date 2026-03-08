@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Copy, Check, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
+import { Copy, Check, ChevronDown, ChevronUp, Sparkles, Compass } from "lucide-react";
 import { useCasePrompts, type UseCasePrompt } from "@/data/useCasePrompts";
+import { DiscoveryWizard } from "@/components/discovery/DiscoveryWizard";
 import { toast } from "sonner";
 
 const categories = ["All", "Business", "Education", "Creative", "Marketing", "Personal"] as const;
@@ -77,6 +78,7 @@ function PromptCard({ prompt }: { prompt: UseCasePrompt }) {
 
 const UseCases = () => {
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [showDiscovery, setShowDiscovery] = useState(false);
 
   const filtered =
     activeCategory === "All"
@@ -88,14 +90,44 @@ const UseCases = () => {
       <Header />
       <main className="container py-12">
         <div className="max-w-5xl mx-auto space-y-8">
-          <div className="text-center space-y-3">
-            <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
-              Prompt Examples
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Browse 20 ready-to-use prompts across different categories. Copy any prompt and paste it into your favourite AI chatbot.
-            </p>
-          </div>
+          {/* Discovery CTA */}
+          {!showDiscovery ? (
+            <Card className="border-primary/20 bg-primary/5 shadow-card">
+              <CardContent className="flex flex-col sm:flex-row items-center gap-4 py-6">
+                <Compass className="w-10 h-10 text-primary shrink-0" />
+                <div className="text-center sm:text-left flex-1">
+                  <h2 className="text-lg font-semibold text-foreground">Not sure how AI can help you?</h2>
+                  <p className="text-muted-foreground text-sm">
+                    Take our quick 2-step questionnaire to discover how chatbots can help with your everyday activities.
+                  </p>
+                </div>
+                <Button onClick={() => setShowDiscovery(true)} className="gap-2 shrink-0">
+                  <Compass className="w-4 h-4" />
+                  Discover Now
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="space-y-4">
+              <div className="flex justify-end">
+                <Button variant="ghost" size="sm" onClick={() => setShowDiscovery(false)}>
+                  ← Back to examples
+                </Button>
+              </div>
+              <DiscoveryWizard />
+            </div>
+          )}
+
+          {!showDiscovery && (
+            <>
+              <div className="text-center space-y-3">
+                <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
+                  Prompt Examples
+                </h1>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Browse 20 ready-to-use prompts across different categories. Copy any prompt and paste it into your favourite AI chatbot.
+                </p>
+              </div>
 
           <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
             <TabsList className="flex flex-wrap h-auto gap-1 bg-transparent p-0">
@@ -125,6 +157,8 @@ const UseCases = () => {
               </Link>
             </Button>
           </div>
+            </>
+          )}
         </div>
       </main>
     </div>
