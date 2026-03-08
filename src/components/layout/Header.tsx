@@ -71,7 +71,7 @@ export function Header() {
         </nav>
 
         {/* Right: auth + hamburger */}
-        <div className="flex-1 flex items-center justify-end gap-2">
+        <div className="flex items-center gap-2">
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
