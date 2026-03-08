@@ -104,7 +104,7 @@ export function DiscoveryWizard() {
                 <Label
                   key={value}
                   htmlFor={`age-${value}`}
-                  className={`cursor-pointer rounded-lg border-2 p-4 text-center transition-colors hover:border-primary/50 ${
+                  className={`cursor-pointer rounded-lg border-2 p-4 text-center transition-colors hover:border-primary/50 flex items-center justify-center ${
                     selectedAge === value
                       ? "border-primary bg-primary/5"
                       : "border-border"
