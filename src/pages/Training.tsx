@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { TrainingProgress } from "@/components/training/TrainingProgress";
 import { LessonCard } from "@/components/training/LessonCard";
 import { FinalQuiz } from "@/components/training/FinalQuiz";
