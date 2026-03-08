@@ -76,7 +76,7 @@ export function Header() {
                 <Button variant="ghost" size="sm" className="gap-2">
                   <User className="w-4 h-4" />
                   <span className="hidden sm:inline">
-                    {user?.email?.split("@")[0]}
+                    {user?.user_metadata?.display_name || user?.email?.split("@")[0]}
                   </span>
                 </Button>
               </DropdownMenuTrigger>
