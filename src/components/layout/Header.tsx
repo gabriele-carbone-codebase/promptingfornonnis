@@ -40,36 +40,38 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="Prompting for Nonnis" className="w-9 h-9" />
-            <span className="text-sm sm:text-lg font-bold text-[#d4621a] whitespace-nowrap" style={{ fontFamily: "'Quicksand', sans-serif" }}>
-              Prompting for Nonnis
-            </span>
-          </Link>
+        {/* Left: nav (desktop) / hamburger space (mobile) */}
+        <nav className="hidden md:flex items-center gap-1 flex-1">
+          {navItems.map((item) => (
+            <Button
+              key={item.href}
+              variant="ghost"
+              size="sm"
+              asChild
+              className={cn(
+                "gap-2",
+                location.pathname === item.href && "bg-accent text-accent-foreground"
+              )}
+            >
+              <Link to={item.href}>
+                <item.icon className="w-4 h-4" />
+                {item.label}
+              </Link>
+            </Button>
+          ))}
+        </nav>
+        {/* Spacer on mobile so logo stays centered */}
+        <div className="flex-1 md:hidden" />
 
-          <nav className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Button
-                key={item.href}
-                variant="ghost"
-                size="sm"
-                asChild
-                className={cn(
-                  "gap-2",
-                  location.pathname === item.href && "bg-accent text-accent-foreground"
-                )}
-              >
-                <Link to={item.href}>
-                  <item.icon className="w-4 h-4" />
-                  {item.label}
-                </Link>
-              </Button>
-            ))}
-          </nav>
-        </div>
+        {/* Center: Logo */}
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <img src={logo} alt="Prompting for Nonnis" className="w-9 h-9" />
+          <span className="text-sm sm:text-lg font-bold text-[#d4621a] whitespace-nowrap" style={{ fontFamily: "'Quicksand', sans-serif" }}>
+            Prompting for Nonnis
+          </span>
+        </Link>
 
-        <div className="flex items-center gap-2">
+        {/* Right: auth + hamburger */}
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
