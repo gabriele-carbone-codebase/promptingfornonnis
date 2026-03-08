@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import Training from "./pages/Training";
 import Community from "./pages/Community";
 import UseCases from "./pages/UseCases";
-import Discovery from "./pages/Discovery";
+
 import Auth from "./pages/Auth";
 import MyPrompts from "./pages/MyPrompts";
 import NotFound from "./pages/NotFound";
