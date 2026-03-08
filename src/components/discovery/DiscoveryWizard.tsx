@@ -165,14 +165,14 @@ export function DiscoveryWizard() {
             })}
           </div>
 
-          <div className="flex gap-3 justify-center">
+          <div className="flex flex-col items-center gap-3">
             <Button
               variant="outline"
               onClick={() => {
                 setStep(1);
                 setSelectedActivities([]);
               }}
-              className="gap-2"
+              className="gap-2 w-full max-w-sm"
             >
               <ArrowLeft className="w-4 h-4" />
               {t.discovery.back}
@@ -181,7 +181,7 @@ export function DiscoveryWizard() {
               size="lg"
               onClick={() => setStep(3)}
               disabled={selectedActivities.length === 0}
-              className="gap-2"
+              className="gap-2 w-full max-w-sm"
             >
               {t.discovery.showResults}
               <Sparkles className="w-4 h-4" />
