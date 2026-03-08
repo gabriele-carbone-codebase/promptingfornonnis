@@ -220,7 +220,7 @@ export function DiscoveryWizard() {
                         {item.description}
                       </p>
                     )}
-                    <p className="text-sm text-muted-foreground whitespace-pre-line line-clamp-4 bg-muted/50 rounded-md p-3 italic">
+                    <p className="text-sm text-muted-foreground whitespace-pre-line bg-muted/50 rounded-md p-3 italic">
                       {item.prompt}
                     </p>
                   </div>
@@ -228,9 +228,8 @@ export function DiscoveryWizard() {
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
                       variant="outline"
-                      size="sm"
                       onClick={() => copyPrompt(item.id, item.prompt)}
-                      className="gap-1.5 flex-1 sm:flex-none"
+                      className="gap-1.5 flex-1 sm:flex-none min-h-[44px]"
                       aria-label={`Copy ${item.title} prompt`}
                     >
                       {copiedId === item.id ? (
@@ -247,8 +246,7 @@ export function DiscoveryWizard() {
                     </Button>
                     <Button
                       variant="outline"
-                      size="sm"
-                      className="gap-1.5 bg-success/10 border-success/30 text-success hover:bg-success/20 flex-1 sm:flex-none"
+                      className="gap-1.5 bg-success/10 border-success/30 text-success hover:bg-success/20 flex-1 sm:flex-none min-h-[44px]"
                       onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(item.prompt)}`, '_blank')}
                       aria-label={`Open ${item.title} in ChatGPT`}
                     >
