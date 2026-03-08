@@ -9,10 +9,10 @@ export interface FakeCommunityPrompt {
 }
 
 const names = [
-  "Maria R.", "Giuseppe T.", "Anna B.", "Franco M.", "Lucia P.",
-  "Roberto C.", "Elena S.", "Marco D.", "Paola V.", "Giovanni L.",
-  "Sandra F.", "Antonio G.", "Carla N.", "Piero Z.", "Teresa A.",
-  "Silvio B.", "Rosa M.", "Bruno P.", "Franca D.", "Claudio R.",
+  "nonna_maria72", "giuseppe.tech", "anna_green", "franco_adventures", "lucia.cucina",
+  "rob_pensionato", "elena.storyteller", "marco_diy", "paola.fit65", "giovanni_books",
+  "sandra.garden", "antonio.nonno", "carla_creative", "piero.curiosone", "teresa.travel",
+  "silvio_maker", "rosa.memorie", "bruno.chef", "franca.digital", "claudio_foto",
 ];
 
 function randomDate(daysBack: number) {
