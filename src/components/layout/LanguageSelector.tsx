@@ -1,9 +1,9 @@
 import { useLanguage, type Language } from "@/i18n";
 import { Button } from "@/components/ui/button";
 
-const flags: Record<Language, { emoji: string; label: string }> = {
-  en: { emoji: "🇬🇧", label: "English" },
-  it: { emoji: "🇮🇹", label: "Italiano" },
+const flags: Record<Language, { emoji: string; code: string; label: string }> = {
+  en: { emoji: "🇬🇧", code: "EN", label: "English" },
+  it: { emoji: "🇮🇹", code: "IT", label: "Italiano" },
 };
 
 export function LanguageSelector() {
@@ -20,7 +20,7 @@ export function LanguageSelector() {
       aria-label={`Switch to ${other.label}`}
     >
       <span className="text-base leading-none">{other.emoji}</span>
-      <span className="hidden sm:inline">{other.label}</span>
+      <span className="font-semibold">{other.code}</span>
     </Button>
   );
 }
