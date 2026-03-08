@@ -9,6 +9,7 @@ import Community from "./pages/Community";
 import UseCases from "./pages/UseCases";
 
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import MyPrompts from "./pages/MyPrompts";
 import NotFound from "./pages/NotFound";
 
