@@ -165,9 +165,9 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
         <p className="text-sm text-accent-foreground">
           Want to write even better prompts?
         </p>
-        <Button variant="secondary" asChild>
+        <Button variant="secondary" asChild className="whitespace-normal h-auto py-2">
           <Link to="/training">
-            <BookOpen className="w-4 h-4 mr-2" />
+            <BookOpen className="w-4 h-4 mr-2 shrink-0" />
             Free Training: Master Prompts in 5 Minutes
           </Link>
         </Button>
