@@ -48,6 +48,7 @@ const Index = () => {
           <CommunitySection />
         </>
       )}
+      <Footer />
     </div>
   );
 };
