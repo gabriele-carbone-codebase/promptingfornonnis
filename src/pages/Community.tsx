@@ -258,7 +258,7 @@ const Community = () => {
                           onClick={() => handleOpenChatGPT(prompt.content)}
                           title="Open in ChatGPT"
                         >
-                          <ExternalLink className="w-4 h-4" />
+                          <img src={chatgptLogo} alt="ChatGPT" className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>
