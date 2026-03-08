@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { WhoIsThisFor } from "@/components/landing/WhoIsThisFor";
@@ -14,6 +15,12 @@ type View = "landing" | "wizard" | "discovery";
 
 const Index = () => {
   const [view, setView] = useState<View>("landing");
+  const location = useLocation();
+
+  // Reset to landing when navigating to "/" (e.g. clicking logo)
+  useEffect(() => {
+    setView("landing");
+  }, [location.key]);
 
   return (
     <div className="min-h-screen bg-background">
