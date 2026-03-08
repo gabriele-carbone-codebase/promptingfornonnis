@@ -115,7 +115,7 @@ export function DiscoveryWizard() {
                     id={`age-${value}`}
                     className="sr-only"
                   />
-                  <span className="text-lg font-medium">{label}</span>
+                  <span className="text-lg font-medium whitespace-nowrap">{label}</span>
                 </Label>
               )
             )}
