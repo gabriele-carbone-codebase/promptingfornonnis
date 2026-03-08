@@ -8,11 +8,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
-import { Loader2, Mail, Lock, Heart } from "lucide-react";
+import { Loader2, Mail, Lock, Heart, User } from "lucide-react";
 import { z } from "zod";
 
 const emailSchema = z.string().trim().email({ message: "Please enter a valid email address" }).max(255);
 const passwordSchema = z.string().min(6, { message: "Password must be at least 6 characters" }).max(72);
+const displayNameSchema = z.string().trim().min(2, { message: "Username must be at least 2 characters" }).max(30, { message: "Username must be less than 30 characters" }).regex(/^[a-zA-Z0-9_.\- ]+$/, { message: "Only letters, numbers, spaces, dots, hyphens and underscores" });
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
