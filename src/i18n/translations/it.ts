@@ -262,6 +262,7 @@ export const it = {
     createYourOwn: "Crea il tuo prompt",
   },
   discovery: {
+    ageBuckets: { "under-15": "Meno di 15", "15-25": "15 – 25", "25-40": "25 – 40", "40-60": "40 – 60", "60+": "Più di 60" },
     step1Title: "Quanti anni hai?",
     step1Subtitle: "Questo ci aiuta a mostrarti gli esempi più rilevanti.",
     next: "Avanti",

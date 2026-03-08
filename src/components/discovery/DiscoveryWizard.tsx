@@ -10,7 +10,6 @@ import chatgptLogo from "@/assets/chatgpt-logo.svg";
 import { toast } from "@/components/ui/sonner";
 import {
   AgeBucket,
-  ageBucketLabels,
   activitiesByAge,
 } from "@/data/discoveryActivities";
 import { useTranslation } from "@/i18n/useTranslation";
@@ -100,7 +99,7 @@ export function DiscoveryWizard() {
             onValueChange={(v) => setSelectedAge(v as AgeBucket)}
             className="grid grid-cols-2 sm:grid-cols-3 gap-3"
           >
-            {(Object.entries(ageBucketLabels) as [AgeBucket, string][]).map(
+            {(Object.entries(t.discovery.ageBuckets) as [AgeBucket, string][]).map(
               ([value, label]) => (
                 <Label
                   key={value}
