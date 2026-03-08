@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, Heart, Copy, Users, Loader2 } from "lucide-react";
+import { Search, Heart, Copy, Users, Loader2, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -95,6 +95,11 @@ const Community = () => {
     } catch (err) {
       toast.error("Failed to copy");
     }
+  };
+
+  const handleOpenChatGPT = (content: string) => {
+    const url = `https://chat.openai.com/?q=${encodeURIComponent(content)}`;
+    window.open(url, "_blank");
   };
 
   const handleLike = async (promptId: string) => {
@@ -245,6 +250,14 @@ const Community = () => {
                           onClick={() => handleCopy(prompt.content)}
                         >
                           <Copy className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleOpenChatGPT(prompt.content)}
+                          title="Open in ChatGPT"
+                        >
+                          <ExternalLink className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>
