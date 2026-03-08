@@ -21,6 +21,7 @@ export function Header() {
 
   const navItems = [
     { href: "/", label: "Build", icon: Heart },
+    { href: "/discovery", label: "Discovery", icon: Compass },
     { href: "/use-cases", label: "Use Cases", icon: Lightbulb },
     { href: "/training", label: "Training", icon: GraduationCap },
     { href: "/community", label: "Community", icon: UsersRound },
