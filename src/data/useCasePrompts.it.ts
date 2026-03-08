@@ -71,11 +71,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 7,
-    title: "Creare un piano di lezione",
+    title: "Preparare una lezione scolastica",
     category: "Education",
-    prompt: `Voglio creare un piano di lezione di 45 minuti per insegnare il ciclo dell'acqua a studenti di terza media.
+    prompt: `Voglio preparare una lezione di 45 minuti per insegnare il ciclo dell'acqua a studenti di terza media.
 
-Come risultato mi aspetto di ricevere un piano di lezione strutturato con obiettivi di apprendimento, un'attività di riscaldamento, l'istruzione principale con un esperimento pratico, una componente di discussione di gruppo e un quiz di verifica con 5 domande. Includi un elenco dei materiali necessari.
+Come risultato mi aspetto di ricevere una lezione strutturata con obiettivi di apprendimento, un'attività introduttiva, la spiegazione principale con un esperimento pratico, un momento di discussione di gruppo e una verifica con 5 domande. Includi un elenco dei materiali necessari.
 
 Per favore considera anche che la classe ha 25 studenti e attrezzature di laboratorio limitate.
 
@@ -83,11 +83,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 8,
-    title: "Scrivere una descrizione prodotto",
+    title: "Scrivere una scheda prodotto",
     category: "Marketing",
-    prompt: `Voglio scrivere una descrizione prodotto convincente per delle cuffie wireless con cancellazione del rumore vendute su un sito e-commerce.
+    prompt: `Voglio scrivere una scheda prodotto convincente per delle cuffie wireless con cancellazione del rumore vendute su un sito e-commerce.
 
-Come risultato mi aspetto di ricevere una descrizione prodotto con un titolo accattivante, 3 paragrafi focalizzati sui benefici, un elenco puntato delle caratteristiche e una frase di chiusura persuasiva. La descrizione dovrebbe essere ottimizzata per la SEO con posizionamento naturale delle parole chiave.
+Come risultato mi aspetto di ricevere una scheda prodotto con un titolo accattivante, 3 paragrafi focalizzati sui benefici, un elenco puntato delle caratteristiche e una frase di chiusura persuasiva. La descrizione dovrebbe essere ottimizzata per la SEO con posizionamento naturale delle parole chiave.
 
 Per favore considera anche che il pubblico target sono lavoratori in smart working tra i 25 e i 40 anni che apprezzano il comfort durante lunghe sessioni di lavoro.
 
@@ -119,11 +119,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 11,
-    title: "Creare flashcard per lo studio",
+    title: "Creare schede di ripasso per lo studio",
     category: "Education",
-    prompt: `Voglio creare 20 flashcard per aiutarmi a studiare per un esame di psicologia sui bias cognitivi.
+    prompt: `Voglio creare 20 schede di ripasso (domanda/risposta) per prepararmi a un esame di psicologia sui bias cognitivi.
 
-Come risultato mi aspetto di ricevere 20 coppie di flashcard con il nome del bias su un lato e una definizione chiara più un esempio reale memorabile sull'altro lato. Organizzale dai bias più comuni a quelli meno comuni.
+Come risultato mi aspetto di ricevere 20 coppie con il nome del bias su un lato e una definizione chiara più un esempio reale memorabile sull'altro. Organizzale dai bias più comuni a quelli meno comuni.
 
 Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulteriormente?`,
   },
@@ -173,11 +173,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 16,
-    title: "Creare una routine di allenamento",
+    title: "Creare una scheda di allenamento",
     category: "Personal",
     prompt: `Voglio creare un programma di allenamento per principianti di 4 settimane per chi vuole rimettersi in forma a casa senza attrezzatura.
 
-Come risultato mi aspetto di ricevere un programma progressivo con 3 giorni di allenamento a settimana, ogni sessione della durata di 20-30 minuti. Includi routine di riscaldamento e defaticamento, descrizioni degli esercizi con conteggio di ripetizioni/serie e linee guida per la progressione settimanale. Aggiungi raccomandazioni per i giorni di riposo.
+Come risultato mi aspetto di ricevere un programma progressivo con 3 giorni di allenamento a settimana, ogni sessione della durata di 20-30 minuti. Includi riscaldamento e defaticamento, descrizioni degli esercizi con ripetizioni e serie, e indicazioni per la progressione settimanale. Aggiungi consigli per i giorni di riposo.
 
 Per favore considera anche che la persona ha un lavoro sedentario d'ufficio e una lieve sensibilità alla zona lombare.
 
@@ -207,11 +207,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 19,
-    title: "Ricercare e confrontare prodotti",
+    title: "Confrontare strumenti e servizi",
     category: "Business",
     prompt: `Voglio confrontare tre popolari strumenti di gestione dei progetti (Trello, Asana e Monday.com) per un piccolo team di 10 persone.
 
-Come risultato mi aspetto di ricevere una tabella comparativa che copra prezzi, caratteristiche principali, facilità d'uso, integrazioni e scenari ideali di utilizzo. Includi una raccomandazione finale basata su un team che necessita di un semplice tracciamento delle attività con una curva di apprendimento minima e un budget inferiore a 100€/mese.
+Come risultato mi aspetto di ricevere una tabella comparativa che copra prezzi, funzionalità principali, facilità d'uso, integrazioni e scenari ideali di utilizzo. Includi una raccomandazione finale basata su un team che ha bisogno di un semplice sistema di gestione attività, con una curva di apprendimento minima e un budget inferiore a 100€/mese.
 
 Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulteriormente?`,
   },
