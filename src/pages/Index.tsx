@@ -52,9 +52,9 @@ const Index = () => {
           <CommunitySection />
         </>
       )}
+      {lang === "en" && view === "landing" && <NonniPopup />}
       <Footer />
     </div>
-  );
 };
 
 export default Index;
