@@ -207,11 +207,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 19,
-    title: "Ricercare e confrontare prodotti",
+    title: "Confrontare strumenti e servizi",
     category: "Business",
     prompt: `Voglio confrontare tre popolari strumenti di gestione dei progetti (Trello, Asana e Monday.com) per un piccolo team di 10 persone.
 
-Come risultato mi aspetto di ricevere una tabella comparativa che copra prezzi, caratteristiche principali, facilità d'uso, integrazioni e scenari ideali di utilizzo. Includi una raccomandazione finale basata su un team che necessita di un semplice tracciamento delle attività con una curva di apprendimento minima e un budget inferiore a 100€/mese.
+Come risultato mi aspetto di ricevere una tabella comparativa che copra prezzi, funzionalità principali, facilità d'uso, integrazioni e scenari ideali di utilizzo. Includi una raccomandazione finale basata su un team che ha bisogno di un semplice sistema di gestione attività, con una curva di apprendimento minima e un budget inferiore a 100€/mese.
 
 Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulteriormente?`,
   },
