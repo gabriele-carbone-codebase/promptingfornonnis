@@ -12,7 +12,9 @@ import {
   AgeBucket,
   activitiesByAge,
 } from "@/data/discoveryActivities";
+import { activitiesByAgeIt } from "@/data/discoveryActivities.it";
 import { useTranslation } from "@/i18n/useTranslation";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export function DiscoveryWizard() {
   const t = useTranslation();
