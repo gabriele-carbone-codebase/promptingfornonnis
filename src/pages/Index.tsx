@@ -20,6 +20,7 @@ const Index = () => {
   const [view, setView] = useState<View>("landing");
   const location = useLocation();
   const t = useTranslation();
+  const { lang } = useLanguage();
 
   useEffect(() => {
     setView("landing");
