@@ -18,6 +18,8 @@ const categoryColors: Record<string, string> = {
 
 export function UseCasesSection() {
   const t = useTranslation();
+  const { lang } = useLanguage();
+  const featured = (lang === "it" ? useCasePromptsIt : useCasePrompts).slice(0, 4);
 
   return (
     <section className="py-16 sm:py-20 bg-muted/40">
