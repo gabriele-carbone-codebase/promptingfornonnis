@@ -78,6 +78,7 @@ function PromptCard({ prompt }: { prompt: UseCasePrompt }) {
 
 const UseCases = () => {
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [showDiscovery, setShowDiscovery] = useState(false);
 
   const filtered =
     activeCategory === "All"
