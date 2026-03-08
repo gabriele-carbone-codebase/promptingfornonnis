@@ -97,6 +97,11 @@ const Community = () => {
     }
   };
 
+  const handleOpenChatGPT = (content: string) => {
+    const url = `https://chat.openai.com/?q=${encodeURIComponent(content)}`;
+    window.open(url, "_blank");
+  };
+
   const handleLike = async (promptId: string) => {
     if (!isAuthenticated) {
       toast.error("Sign in to like prompts");
