@@ -59,7 +59,7 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
     setSaving(true);
     const insertData = {
       user_id: user.id,
-      title: title.trim(),
+      title: trimmedTitle,
       content: generatedPrompt,
       goal: promptData.goal || null,
       expected_result: promptData.expectedResult || null,

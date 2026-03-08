@@ -305,8 +305,8 @@ const Auth = () => {
                     </p>
                   </form>
                 </TabsContent>
-              </Tabs>
-            </CardContent>
+              </CardContent>
+            </Tabs>
           </Card>
         </div>
       </main>
