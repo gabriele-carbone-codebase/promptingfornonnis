@@ -40,38 +40,35 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       {/* Desktop: nav centered below logo row / Mobile: logo centered */}
-      <div className="container flex h-16 items-center">
-        {/* Left spacer (mobile) / Left auth area placeholder (desktop) */}
-        <div className="flex-1 flex items-center">
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Button
-                key={item.href}
-                variant="ghost"
-                size="sm"
-                asChild
-                className={cn(
-                  "gap-2",
-                  location.pathname === item.href && "bg-accent text-accent-foreground"
-                )}
-              >
-                <Link to={item.href}>
-                  <item.icon className="w-4 h-4" />
-                  {item.label}
-                </Link>
-              </Button>
-            ))}
-          </nav>
-        </div>
-
-        {/* Center: Logo — always centered */}
+      <div className="container flex h-16 items-center justify-between">
+        {/* Left: Logo */}
         <Link to="/" className="flex items-center gap-2 shrink-0">
           <img src={logo} alt="Prompting for Nonnis" className="w-9 h-9" />
           <span className="text-sm sm:text-lg font-bold text-[#d4621a] whitespace-nowrap" style={{ fontFamily: "'Quicksand', sans-serif" }}>
             Prompting for Nonnis
           </span>
         </Link>
+
+        {/* Center: Desktop nav */}
+        <nav className="hidden md:flex items-center gap-1">
+          {navItems.map((item) => (
+            <Button
+              key={item.href}
+              variant="ghost"
+              size="sm"
+              asChild
+              className={cn(
+                "gap-2",
+                location.pathname === item.href && "bg-accent text-accent-foreground"
+              )}
+            >
+              <Link to={item.href}>
+                <item.icon className="w-4 h-4" />
+                {item.label}
+              </Link>
+            </Button>
+          ))}
+        </nav>
 
         {/* Right: auth + hamburger */}
         <div className="flex-1 flex items-center justify-end gap-2">
