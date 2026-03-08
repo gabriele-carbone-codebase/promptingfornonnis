@@ -44,8 +44,8 @@ export function Header() {
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Prompting for Nonnis" className="w-9 h-9" />
-            <span className="text-lg text-[#d4621a]" style={{ fontFamily: "'Quicksand', sans-serif", fontWeight: 700 }}>
-              Prompting <span className="text-base font-semibold">for</span> Nonnis
+            <span className="text-lg font-bold text-[#d4621a]" style={{ fontFamily: "'Quicksand', sans-serif" }}>
+              Prompting for Nonnis
             </span>
           </Link>
 
