@@ -10,14 +10,15 @@ import { CommunitySection } from "@/components/landing/CommunitySection";
 import { PromptWizard } from "@/components/wizard/PromptWizard";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
 type View = "landing" | "wizard";
 
 const Index = () => {
   const [view, setView] = useState<View>("landing");
   const location = useLocation();
+  const t = useTranslation();
 
-  // Reset to landing when navigating to "/" (e.g. clicking logo)
   useEffect(() => {
     setView("landing");
   }, [location.key]);
@@ -35,7 +36,7 @@ const Index = () => {
             className="mb-4 gap-2"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Home
+            {t.index.backToHome}
           </Button>
           <PromptWizard />
         </main>
