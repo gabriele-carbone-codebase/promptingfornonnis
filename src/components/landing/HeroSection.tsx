@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Smile, Heart, ArrowRight } from "lucide-react";
+import { Smile, Heart, ArrowRight, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-elderly.jpg";
 
