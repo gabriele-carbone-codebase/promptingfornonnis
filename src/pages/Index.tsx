@@ -11,6 +11,8 @@ import { PromptWizard } from "@/components/wizard/PromptWizard";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/i18n";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { NonniPopup } from "@/components/landing/NonniPopup";
 
 type View = "landing" | "wizard";
 
