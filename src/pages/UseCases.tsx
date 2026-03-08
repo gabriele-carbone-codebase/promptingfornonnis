@@ -157,8 +157,8 @@ const UseCases = () => {
               </Link>
             </Button>
           </div>
-        </div>
-      </main>
+            </>
+          )}
     </div>
   );
 };
