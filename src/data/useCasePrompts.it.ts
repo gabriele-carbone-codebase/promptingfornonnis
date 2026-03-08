@@ -173,11 +173,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 16,
-    title: "Creare una routine di allenamento",
+    title: "Creare una scheda di allenamento",
     category: "Personal",
     prompt: `Voglio creare un programma di allenamento per principianti di 4 settimane per chi vuole rimettersi in forma a casa senza attrezzatura.
 
-Come risultato mi aspetto di ricevere un programma progressivo con 3 giorni di allenamento a settimana, ogni sessione della durata di 20-30 minuti. Includi routine di riscaldamento e defaticamento, descrizioni degli esercizi con conteggio di ripetizioni/serie e linee guida per la progressione settimanale. Aggiungi raccomandazioni per i giorni di riposo.
+Come risultato mi aspetto di ricevere un programma progressivo con 3 giorni di allenamento a settimana, ogni sessione della durata di 20-30 minuti. Includi riscaldamento e defaticamento, descrizioni degli esercizi con ripetizioni e serie, e indicazioni per la progressione settimanale. Aggiungi consigli per i giorni di riposo.
 
 Per favore considera anche che la persona ha un lavoro sedentario d'ufficio e una lieve sensibilità alla zona lombare.
 
