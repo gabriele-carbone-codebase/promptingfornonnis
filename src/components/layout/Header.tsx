@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Heart, GraduationCap, UsersRound, Lightbulb, LogIn, LogOut, User } from "lucide-react";
+import { Heart, GraduationCap, UsersRound, Lightbulb, LogIn, LogOut, User, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
@@ -16,6 +17,7 @@ export function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut, isAuthenticated } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
     { href: "/", label: "Build", icon: Heart },
@@ -94,7 +96,7 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <>
-              <Button variant="ghost" size="sm" asChild>
+              <Button variant="ghost" size="sm" asChild className="hidden sm:flex">
                 <Link to="/auth">
                   <LogIn className="w-4 h-4 mr-2" />
                   Sign In
@@ -107,8 +109,57 @@ export function Header() {
               </Button>
             </>
           )}
+
+          {/* Mobile hamburger */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </Button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t bg-background p-4 space-y-2">
+          {navItems.map((item) => (
+            <Button
+              key={item.href}
+              variant="ghost"
+              asChild
+              className={cn(
+                "w-full justify-start gap-2",
+                location.pathname === item.href && "bg-accent text-accent-foreground"
+              )}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Link to={item.href}>
+                <item.icon className="w-4 h-4" />
+                {item.label}
+              </Link>
+            </Button>
+          ))}
+          {!isAuthenticated && (
+            <>
+              <hr className="border-border" />
+              <Button variant="ghost" asChild className="w-full justify-start gap-2" onClick={() => setMobileMenuOpen(false)}>
+                <Link to="/auth">
+                  <LogIn className="w-4 h-4" />
+                  Sign In
+                </Link>
+              </Button>
+              <Button asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                <Link to="/auth?mode=signup">
+                  Get Started
+                </Link>
+              </Button>
+            </>
+          )}
+        </div>
+      )}
     </header>
   );
 }
