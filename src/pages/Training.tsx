@@ -5,9 +5,12 @@ import { TrainingProgress } from "@/components/training/TrainingProgress";
 import { LessonCard } from "@/components/training/LessonCard";
 import { FinalQuiz } from "@/components/training/FinalQuiz";
 import { Certificate } from "@/components/training/Certificate";
-import { lessons } from "@/data/lessons";
+import { lessons as lessonsEn } from "@/data/lessons";
+import { lessonsIt } from "@/data/lessons.it";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "@/i18n/useTranslation";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 type TrainingState = 
   | "lessons_hub"
@@ -16,6 +19,10 @@ type TrainingState =
   | "certificate";
 
 const Training = () => {
+  const t = useTranslation();
+  const { lang } = useLanguage();
+  const lessons = lang === "it" ? lessonsIt : lessonsEn;
+
   const [trainingState, setTrainingState] = useState<TrainingState>("lessons_hub");
   const [currentLesson, setCurrentLesson] = useState(1);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
@@ -76,7 +83,7 @@ const Training = () => {
               className="mb-4 gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to lessons
+              {t.training.backToLessons}
             </Button>
             <LessonCard
               key={currentLesson}
@@ -88,11 +95,10 @@ const Training = () => {
           <div className="space-y-8">
             <div className="text-center space-y-4">
               <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
-                Free Training: Master Prompts in 5 Minutes
+                {t.training.pageTitle}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Learn the 5 essential techniques that will transform your AI
-                conversations. Each lesson takes about 1 minute.
+                {t.training.pageSubtitle}
               </p>
             </div>
 

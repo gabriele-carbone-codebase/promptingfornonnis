@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, Heart, Copy, Users, Globe, Lock, Trash2, Loader2 } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -20,6 +19,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { useTranslation } from "@/i18n/useTranslation";
+import { LocalizedLink } from "@/components/LocalizedLink";
 
 interface Prompt {
   id: string;
@@ -31,6 +32,7 @@ interface Prompt {
 }
 
 const MyPrompts = () => {
+  const t = useTranslation();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [loading, setLoading] = useState(true);
@@ -54,7 +56,7 @@ const MyPrompts = () => {
       .order("created_at", { ascending: false });
 
     if (error) {
-      toast.error("Failed to load prompts");
+      toast.error(t.myPrompts.failedLoad);
     } else {
       setPrompts(data || []);
     }
@@ -64,9 +66,9 @@ const MyPrompts = () => {
   const handleCopy = async (content: string) => {
     try {
       await navigator.clipboard.writeText(content);
-      toast.success("Prompt copied!");
+      toast.success(t.community.promptCopied);
     } catch (err) {
-      toast.error("Failed to copy");
+      toast.error(t.community.failedCopy);
     }
   };
 
@@ -77,12 +79,12 @@ const MyPrompts = () => {
       .eq("id", promptId);
 
     if (error) {
-      toast.error("Failed to update");
+      toast.error(t.myPrompts.failedUpdate);
     } else {
       setPrompts(prompts.map(p => 
         p.id === promptId ? { ...p, is_public: !currentStatus } : p
       ));
-      toast.success(currentStatus ? "Prompt is now private" : "Prompt is now public");
+      toast.success(currentStatus ? t.myPrompts.nowPrivate : t.myPrompts.nowPublic);
     }
   };
 
@@ -95,10 +97,10 @@ const MyPrompts = () => {
       .eq("id", deleteTarget);
 
     if (error) {
-      toast.error("Failed to delete");
+      toast.error(t.myPrompts.failedDelete);
     } else {
       setPrompts(prompts.filter(p => p.id !== deleteTarget));
-      toast.success("Prompt deleted");
+      toast.success(t.myPrompts.promptDeleted);
     }
     setDeleteTarget(null);
   };
@@ -126,12 +128,12 @@ const MyPrompts = () => {
               <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto">
                 <Users className="w-8 h-8 text-muted-foreground" />
               </div>
-              <h2 className="text-xl font-semibold">Sign in to see your prompts</h2>
+              <h2 className="text-xl font-semibold">{t.myPrompts.signInTitle}</h2>
               <p className="text-muted-foreground">
-                Create an account to save and manage your prompts.
+                {t.myPrompts.signInSubtitle}
               </p>
               <Button asChild>
-                <Link to="/auth">Sign In</Link>
+                <LocalizedLink to="/auth">{t.myPrompts.signIn}</LocalizedLink>
               </Button>
             </CardContent>
           </Card>
@@ -147,25 +149,23 @@ const MyPrompts = () => {
       <main className="container py-8">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center space-y-2">
-            <h1 className="text-3xl font-bold text-foreground">My Prompts</h1>
+            <h1 className="text-3xl font-bold text-foreground">{t.myPrompts.pageTitle}</h1>
             <p className="text-muted-foreground">
-              Manage your saved prompts
+              {t.myPrompts.pageSubtitle}
             </p>
           </div>
 
-          {/* Search */}
           <div className="relative max-w-md mx-auto">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
-              placeholder="Search your prompts..."
+              placeholder={t.myPrompts.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
-              aria-label="Search your prompts"
+              aria-label={t.myPrompts.searchPlaceholder}
             />
           </div>
 
-          {/* Prompts list */}
           {loading ? (
             <div className="flex justify-center py-12">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -174,10 +174,10 @@ const MyPrompts = () => {
             <Card className="shadow-card">
               <CardContent className="py-12 text-center space-y-4">
                 <p className="text-muted-foreground">
-                  {searchQuery ? "No prompts match your search" : "You haven't saved any prompts yet"}
+                  {searchQuery ? t.myPrompts.noMatch : t.myPrompts.noPrompts}
                 </p>
                 <Button asChild>
-                  <Link to="/">Build Your First Prompt</Link>
+                  <LocalizedLink to="/">{t.myPrompts.buildFirst}</LocalizedLink>
                 </Button>
               </CardContent>
             </Card>
@@ -195,12 +195,12 @@ const MyPrompts = () => {
                           {prompt.is_public ? (
                             <>
                               <Globe className="w-3 h-3 mr-1" />
-                              Public
+                              {t.myPrompts.public}
                             </>
                           ) : (
                             <>
                               <Lock className="w-3 h-3 mr-1" />
-                              Private
+                              {t.myPrompts.private}
                             </>
                           )}
                         </Badge>
@@ -212,7 +212,7 @@ const MyPrompts = () => {
                         <div className="flex items-center gap-4 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Heart className="w-3 h-3" />
-                            {prompt.likes_count} likes
+                            {prompt.likes_count} {t.myPrompts.likes}
                           </span>
                           <span>
                             {new Date(prompt.created_at).toLocaleDateString()}
@@ -223,7 +223,6 @@ const MyPrompts = () => {
                             variant="ghost"
                             size="icon"
                             onClick={() => handleCopy(prompt.content)}
-                            aria-label="Copy prompt"
                           >
                             <Copy className="w-4 h-4" />
                           </Button>
@@ -231,7 +230,6 @@ const MyPrompts = () => {
                             variant="ghost"
                             size="icon"
                             onClick={() => handleTogglePublic(prompt.id, prompt.is_public)}
-                            aria-label={prompt.is_public ? "Make private" : "Make public"}
                           >
                             {prompt.is_public ? (
                               <Lock className="w-4 h-4" />
@@ -244,7 +242,6 @@ const MyPrompts = () => {
                             size="icon"
                             onClick={() => setDeleteTarget(prompt.id)}
                             className="text-destructive hover:text-destructive"
-                            aria-label="Delete prompt"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
@@ -260,19 +257,18 @@ const MyPrompts = () => {
       </main>
       <Footer />
 
-      {/* Delete confirmation */}
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete this prompt?</AlertDialogTitle>
+            <AlertDialogTitle>{t.myPrompts.deleteTitle}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. The prompt will be permanently removed.
+              {t.myPrompts.deleteDescription}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t.myPrompts.cancel}</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-              Delete
+              {t.myPrompts.delete}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

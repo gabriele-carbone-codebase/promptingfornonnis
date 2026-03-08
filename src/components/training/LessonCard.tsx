@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Check, X, ArrowRight, Lightbulb } from "lucide-react";
 import type { Lesson } from "@/data/lessons";
+import { useTranslation } from "@/i18n/useTranslation";
 
 interface LessonCardProps {
   lesson: Lesson;
@@ -11,6 +12,7 @@ interface LessonCardProps {
 }
 
 export function LessonCard({ lesson, onComplete }: LessonCardProps) {
+  const t = useTranslation();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
@@ -50,17 +52,15 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
   if (!showQuiz) {
     return (
       <div className="w-full max-w-2xl mx-auto space-y-8 animate-fade-in">
-        {/* Lesson header */}
         <div className="text-center space-y-2">
           <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-            Lesson {lesson.id}
+            {t.training.lessonPrefix} {lesson.id}
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
             {lesson.title}
           </h2>
         </div>
 
-        {/* Explanation */}
         <Card className="shadow-card">
           <CardContent className="p-6 space-y-4">
             <p className="text-foreground leading-relaxed">{lesson.description}</p>
@@ -72,10 +72,9 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
           </CardContent>
         </Card>
 
-        {/* Start Quiz Button */}
         <div className="flex justify-center">
           <Button size="lg" onClick={handleStartQuiz} className="gap-2">
-            Start Quiz ({totalQuestions} questions)
+            {t.training.startQuiz} ({totalQuestions} {t.training.questions})
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
@@ -85,17 +84,15 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-8 animate-fade-in">
-      {/* Lesson header with progress */}
       <div className="text-center space-y-2">
         <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-          Lesson {lesson.id} - Question {currentQuestionIndex + 1} of {totalQuestions}
+          {t.training.lessonPrefix} {lesson.id} - {currentQuestionIndex + 1}/{totalQuestions}
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
           {lesson.title}
         </h2>
       </div>
 
-      {/* Progress dots */}
       <div className="flex justify-center gap-2">
         {lesson.quiz.map((_, idx) => (
           <div
@@ -110,7 +107,6 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
         ))}
       </div>
 
-      {/* Quiz */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-foreground">
           {currentQuestion.question}
@@ -164,7 +160,6 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
         </div>
       </div>
 
-      {/* Result and explanation */}
       {showResult && (
         <div
           className={cn(
@@ -173,13 +168,12 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
           )}
         >
           <p className="font-medium mb-2">
-            {isCorrect ? "🎉 Correct!" : "💡 Not quite, but that's okay!"}
+            {isCorrect ? t.training.correct : t.training.notQuite}
           </p>
           <p className="text-sm text-muted-foreground">{currentQuestion.explanation}</p>
         </div>
       )}
 
-      {/* Actions */}
       <div className="flex justify-center gap-4">
         {!showResult ? (
           <Button
@@ -187,11 +181,11 @@ export function LessonCard({ lesson, onComplete }: LessonCardProps) {
             onClick={handleCheck}
             disabled={!selectedAnswer}
           >
-            Check Answer
+            {t.training.checkAnswer}
           </Button>
         ) : (
           <Button size="lg" onClick={handleNext} className="gap-2">
-            {isLastQuestion ? "Complete Lesson" : "Next Question"}
+            {isLastQuestion ? t.training.completeLesson : t.training.nextQuestion}
             <ArrowRight className="w-4 h-4" />
           </Button>
         )}

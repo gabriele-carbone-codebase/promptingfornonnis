@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, X, Paperclip } from "lucide-react";
 import type { PromptData, Attachment } from "@/types/prompt";
+import { useTranslation } from "@/i18n/useTranslation";
 
 interface StepAttachmentsProps {
   promptData: PromptData;
@@ -17,25 +18,27 @@ export function StepAttachments({
   updateAttachment,
   removeAttachment,
 }: StepAttachmentsProps) {
+  const t = useTranslation();
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="text-center space-y-2">
         <div className="flex items-center justify-center gap-2">
           <h2 className="text-2xl sm:text-3xl font-semibold text-foreground">
-            Will you attach documents?
+            {t.wizard.stepAttachments.title}
           </h2>
           <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-muted text-muted-foreground">
-            Optional
+            {t.wizard.stepAttachments.optional}
           </span>
         </div>
         <p className="text-muted-foreground">
-          List files you'll upload separately to the AI chatbot
+          {t.wizard.stepAttachments.subtitle}
         </p>
       </div>
 
       <div className="bg-warning/20 rounded-lg p-4 text-sm text-warning-foreground">
         <p>
-          <strong>Note:</strong> These are references only. You'll need to upload the actual files in your AI chatbot. Describe what each file contains so the AI understands the context.
+          <strong>Note:</strong> {t.wizard.stepAttachments.note}
         </p>
       </div>
 
@@ -48,7 +51,7 @@ export function StepAttachments({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                 <Paperclip className="w-4 h-4" />
-                Attachment {index + 1}
+                {t.wizard.stepAttachments.attachment} {index + 1}
               </div>
               <Button
                 variant="ghost"
@@ -63,11 +66,11 @@ export function StepAttachments({
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="space-y-1">
                 <Label htmlFor={`filename-${attachment.id}`} className="text-sm">
-                  Filename
+                  {t.wizard.stepAttachments.filename}
                 </Label>
                 <Input
                   id={`filename-${attachment.id}`}
-                  placeholder="e.g., report.pdf"
+                  placeholder={t.wizard.stepAttachments.filenamePlaceholder}
                   value={attachment.filename}
                   onChange={(e) =>
                     updateAttachment(attachment.id, { filename: e.target.value })
@@ -76,11 +79,11 @@ export function StepAttachments({
               </div>
               <div className="space-y-1">
                 <Label htmlFor={`description-${attachment.id}`} className="text-sm">
-                  Description
+                  {t.wizard.stepAttachments.description}
                 </Label>
                 <Input
                   id={`description-${attachment.id}`}
-                  placeholder="e.g., Quarterly sales data"
+                  placeholder={t.wizard.stepAttachments.descriptionPlaceholder}
                   value={attachment.description}
                   onChange={(e) =>
                     updateAttachment(attachment.id, { description: e.target.value })
@@ -97,7 +100,7 @@ export function StepAttachments({
           className="w-full border-dashed"
         >
           <Plus className="w-4 h-4 mr-2" />
-          Add Attachment
+          {t.wizard.stepAttachments.addAttachment}
         </Button>
       </div>
     </div>

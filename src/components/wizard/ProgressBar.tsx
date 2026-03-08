@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
+import { useTranslation } from "@/i18n/useTranslation";
 
 interface ProgressBarProps {
   currentStep: number;
@@ -7,31 +8,20 @@ interface ProgressBarProps {
   onStepClick?: (step: number) => void;
 }
 
-const stepLabels = [
-  "Goal",
-  "Result",
-  "Attachments",
-  "Links",
-  "Notes",
-];
-
 export function ProgressBar({ currentStep, totalSteps, onStepClick }: ProgressBarProps) {
+  const t = useTranslation();
+  const stepLabels = t.wizard.stepLabels;
   const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
 
   return (
     <div className="w-full max-w-2xl mx-auto px-4 py-6">
-      {/* Progress line */}
       <div className="relative">
-        {/* Background line */}
         <div className="absolute top-4 left-0 right-0 h-1 bg-muted rounded-full" />
-        
-        {/* Active progress line */}
         <div
           className="absolute top-4 left-0 h-1 bg-primary rounded-full transition-all duration-500 ease-out"
           style={{ width: `${progressPercentage}%` }}
         />
 
-        {/* Step indicators */}
         <div className="relative flex justify-between">
           {Array.from({ length: totalSteps }, (_, i) => {
             const stepNumber = i + 1;
@@ -49,7 +39,6 @@ export function ProgressBar({ currentStep, totalSteps, onStepClick }: ProgressBa
                   isClickable ? "cursor-pointer" : "cursor-default"
                 )}
               >
-                {/* Circle */}
                 <div
                   className={cn(
                     "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300",
@@ -65,7 +54,6 @@ export function ProgressBar({ currentStep, totalSteps, onStepClick }: ProgressBa
                   )}
                 </div>
 
-                {/* Label */}
                 <span
                   className={cn(
                     "text-xs font-medium transition-colors duration-300 hidden sm:block",

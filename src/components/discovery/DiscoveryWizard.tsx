@@ -13,8 +13,10 @@ import {
   ageBucketLabels,
   activitiesByAge,
 } from "@/data/discoveryActivities";
+import { useTranslation } from "@/i18n/useTranslation";
 
 export function DiscoveryWizard() {
+  const t = useTranslation();
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [selectedAge, setSelectedAge] = useState<AgeBucket | null>(null);
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
@@ -34,7 +36,7 @@ export function DiscoveryWizard() {
         type: "activity",
         id: `act-${activity.id}`,
         title: activity.label,
-        description: "Example prompt for this activity",
+        description: "",
         prompt: activity.examplePrompt,
       });
 
@@ -64,7 +66,7 @@ export function DiscoveryWizard() {
   const copyPrompt = async (id: string, text: string) => {
     await navigator.clipboard.writeText(text);
     setCopiedId(id);
-    toast("Copied to clipboard!");
+    toast(t.discovery.copiedClipboard);
     setTimeout(() => setCopiedId(null), 2000);
   };
 
@@ -87,9 +89,9 @@ export function DiscoveryWizard() {
       {step === 1 && (
         <div className="space-y-6 text-center">
           <div>
-            <h2 className="text-2xl font-bold">How old are you?</h2>
+            <h2 className="text-2xl font-bold">{t.discovery.step1Title}</h2>
             <p className="text-muted-foreground mt-1">
-              This helps us show you the most relevant examples.
+              {t.discovery.step1Subtitle}
             </p>
           </div>
 
@@ -126,7 +128,7 @@ export function DiscoveryWizard() {
             disabled={!selectedAge}
             className="gap-2"
           >
-            Next
+            {t.discovery.next}
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
@@ -136,9 +138,9 @@ export function DiscoveryWizard() {
       {step === 2 && (
         <div className="space-y-6 text-center">
           <div>
-            <h2 className="text-2xl font-bold">What do you usually do?</h2>
+            <h2 className="text-2xl font-bold">{t.discovery.step2Title}</h2>
             <p className="text-muted-foreground mt-1">
-              Pick as many as you like — we'll find relevant AI use cases for you.
+              {t.discovery.step2Subtitle}
             </p>
           </div>
 
@@ -174,7 +176,7 @@ export function DiscoveryWizard() {
               className="gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back
+              {t.discovery.back}
             </Button>
             <Button
               size="lg"
@@ -182,7 +184,7 @@ export function DiscoveryWizard() {
               disabled={selectedActivities.length === 0}
               className="gap-2"
             >
-              Show me what AI can do
+              {t.discovery.showResults}
               <Sparkles className="w-4 h-4" />
             </Button>
           </div>
@@ -194,11 +196,13 @@ export function DiscoveryWizard() {
         <div className="space-y-6">
           <div className="text-center">
             <h2 className="text-2xl font-bold">
-              Here's what AI can help you with!
+              {t.discovery.step3Title}
             </h2>
             <p className="text-muted-foreground mt-1">
-              {results.length} result{results.length !== 1 && "s"} found.
-              Copy any prompt and paste it into ChatGPT, Claude, or any AI chatbot.
+              {t.discovery.step3Subtitle
+                .replace("{count}", String(results.length))
+                .replace("{plural}", results.length !== 1 ? "i" : "o")
+                .replace("{plural2}", results.length !== 1 ? "i" : "o")}
             </p>
           </div>
 
@@ -211,7 +215,7 @@ export function DiscoveryWizard() {
                       <div>
                         <h3 className="font-semibold">{item.title}</h3>
                         <Badge variant="secondary" className="mt-1">
-                          {item.type === "activity" ? "Activity prompt" : "Use case"}
+                          {item.type === "activity" ? t.discovery.activityPrompt : t.discovery.useCase}
                         </Badge>
                       </div>
                     </div>
@@ -224,7 +228,6 @@ export function DiscoveryWizard() {
                       {item.prompt}
                     </p>
                   </div>
-                  {/* Buttons stacked on mobile, inline on desktop */}
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
                       variant="outline"
@@ -235,12 +238,12 @@ export function DiscoveryWizard() {
                       {copiedId === item.id ? (
                         <>
                           <Check className="w-3.5 h-3.5" />
-                          Copied
+                          {t.wizard.output.copied}
                         </>
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" />
-                          Copy
+                          {t.discovery.copy}
                         </>
                       )}
                     </Button>
@@ -268,7 +271,7 @@ export function DiscoveryWizard() {
               className="gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              Change my answers
+              {t.discovery.changeAnswers}
             </Button>
           </div>
         </div>

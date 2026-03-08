@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Trophy } from "lucide-react";
-import { finalQuizQuestions } from "@/data/finalQuizQuestions";
+import { finalQuizQuestions as questionsEn } from "@/data/finalQuizQuestions";
+import { finalQuizQuestionsIt } from "@/data/finalQuizQuestions.it";
 import { FinalQuizQuestionCard } from "./FinalQuizQuestion";
+import { useTranslation } from "@/i18n/useTranslation";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface FinalQuizProps {
   onComplete: (score: number, total: number) => void;
@@ -11,6 +14,9 @@ interface FinalQuizProps {
 }
 
 export function FinalQuiz({ onComplete, onBack }: FinalQuizProps) {
+  const t = useTranslation();
+  const { lang } = useLanguage();
+  const finalQuizQuestions = lang === "it" ? finalQuizQuestionsIt : questionsEn;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1);
   const [correctAnswers, setCorrectAnswers] = useState(0);
 
@@ -27,7 +33,6 @@ export function FinalQuiz({ onComplete, onBack }: FinalQuizProps) {
     }
 
     if (currentQuestionIndex === totalQuestions - 1) {
-      // Quiz complete
       onComplete(correctAnswers + (isCorrect ? 1 : 0), totalQuestions);
     } else {
       setCurrentQuestionIndex((prev) => prev + 1);
@@ -44,7 +49,7 @@ export function FinalQuiz({ onComplete, onBack }: FinalQuizProps) {
           className="mb-4 gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to lessons
+          {t.training.backToLessons}
         </Button>
 
         <div className="text-center space-y-4">
@@ -52,36 +57,30 @@ export function FinalQuiz({ onComplete, onBack }: FinalQuizProps) {
             <Trophy className="w-10 h-10 text-primary" />
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
-            Final Quiz
+            {t.finalQuiz.title}
           </h1>
           <p className="text-lg text-muted-foreground max-w-md mx-auto">
-            Test your knowledge with {totalQuestions} questions covering all 5 prompt engineering concepts.
+            {t.finalQuiz.subtitle.replace("{count}", String(totalQuestions))}
           </p>
         </div>
 
         <Card className="shadow-card">
           <CardContent className="p-6 space-y-4">
-            <h3 className="font-semibold text-foreground">What to expect:</h3>
+            <h3 className="font-semibold text-foreground">{t.finalQuiz.whatToExpect}</h3>
             <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                {totalQuestions} questions with 3 options each
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                Immediate feedback after each answer
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary">•</span>
-                Earn a shareable certificate upon completion
-              </li>
+              {t.finalQuiz.expectations.map((exp, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-primary">•</span>
+                  {exp.replace("{count}", String(totalQuestions))}
+                </li>
+              ))}
             </ul>
           </CardContent>
         </Card>
 
         <div className="flex justify-center">
           <Button size="lg" onClick={handleStart} className="gap-2">
-            Start Final Quiz
+            {t.finalQuiz.startFinalQuiz}
             <Trophy className="w-4 h-4" />
           </Button>
         </div>
