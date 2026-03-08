@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Heart, GraduationCap, UsersRound, Lightbulb, Compass, LogIn, LogOut, User, Menu, X } from "lucide-react";
+import { Heart, GraduationCap, UsersRound, Lightbulb, LogIn, LogOut, User, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 import { useAuth } from "@/hooks/useAuth";
