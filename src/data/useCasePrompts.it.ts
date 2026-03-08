@@ -119,11 +119,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 11,
-    title: "Creare flashcard per lo studio",
+    title: "Creare schede di ripasso per lo studio",
     category: "Education",
-    prompt: `Voglio creare 20 flashcard per aiutarmi a studiare per un esame di psicologia sui bias cognitivi.
+    prompt: `Voglio creare 20 schede di ripasso (domanda/risposta) per prepararmi a un esame di psicologia sui bias cognitivi.
 
-Come risultato mi aspetto di ricevere 20 coppie di flashcard con il nome del bias su un lato e una definizione chiara più un esempio reale memorabile sull'altro lato. Organizzale dai bias più comuni a quelli meno comuni.
+Come risultato mi aspetto di ricevere 20 coppie con il nome del bias su un lato e una definizione chiara più un esempio reale memorabile sull'altro. Organizzale dai bias più comuni a quelli meno comuni.
 
 Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulteriormente?`,
   },
