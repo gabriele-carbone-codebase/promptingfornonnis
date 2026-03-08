@@ -141,7 +141,7 @@ const MyPrompts = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
       <main className="container py-8">
