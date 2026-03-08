@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, ArrowRight, Copy, Check, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, ExternalLink } from "lucide-react";
+import chatgptLogo from "@/assets/chatgpt-logo.svg";
 import { toast } from "@/components/ui/sonner";
 import {
   AgeBucket,
@@ -186,24 +187,35 @@ export function DiscoveryWizard() {
                         {prompt.category}
                       </Badge>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => copyPrompt(prompt)}
-                      className="shrink-0 gap-1.5"
-                    >
-                      {copiedId === prompt.id ? (
-                        <>
-                          <Check className="w-3.5 h-3.5" />
-                          Copied
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5" />
-                          Copy
-                        </>
-                      )}
-                    </Button>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => copyPrompt(prompt)}
+                        className="gap-1.5"
+                      >
+                        {copiedId === prompt.id ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            Copied
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5" />
+                            Copy
+                          </>
+                        )}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="gap-1.5 bg-success/10 border-success/30 text-success hover:bg-success/20"
+                        onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(prompt.prompt)}`, '_blank')}
+                      >
+                        <img src={chatgptLogo} alt="ChatGPT" className="w-3.5 h-3.5" />
+                        ChatGPT
+                      </Button>
+                    </div>
                   </div>
                   <p className="text-sm text-muted-foreground whitespace-pre-line line-clamp-4">
                     {prompt.prompt}
