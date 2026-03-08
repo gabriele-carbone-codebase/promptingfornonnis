@@ -87,7 +87,7 @@ const UseCases = () => {
       : useCasePrompts.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <main className="container py-12">
         <div className="max-w-5xl mx-auto space-y-8">
