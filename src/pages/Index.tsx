@@ -7,11 +7,10 @@ import { UseCasesSection } from "@/components/landing/UseCasesSection";
 import { TrainingSection } from "@/components/landing/TrainingSection";
 import { CommunitySection } from "@/components/landing/CommunitySection";
 import { PromptWizard } from "@/components/wizard/PromptWizard";
-import { DiscoveryWizard } from "@/components/discovery/DiscoveryWizard";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-type View = "landing" | "wizard" | "discovery";
+type View = "landing" | "wizard";
 
 const Index = () => {
   const [view, setView] = useState<View>("landing");
@@ -39,25 +38,9 @@ const Index = () => {
           </Button>
           <PromptWizard />
         </main>
-      ) : view === "discovery" ? (
-        <main className="container py-8">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setView("landing")}
-            className="mb-4 gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Button>
-          <DiscoveryWizard />
-        </main>
       ) : (
         <>
-          <HeroSection
-            onStartBuilding={() => setView("wizard")}
-            onDiscover={() => setView("discovery")}
-          />
+          <HeroSection onStartBuilding={() => setView("wizard")} />
           <WhoIsThisFor />
           <UseCasesSection />
           <TrainingSection />

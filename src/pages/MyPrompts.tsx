@@ -9,6 +9,16 @@ import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface Prompt {
   id: string;
@@ -24,6 +34,7 @@ const MyPrompts = () => {
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -74,18 +85,21 @@ const MyPrompts = () => {
     }
   };
 
-  const handleDelete = async (promptId: string) => {
+  const handleDelete = async () => {
+    if (!deleteTarget) return;
+    
     const { error } = await supabase
       .from("prompts")
       .delete()
-      .eq("id", promptId);
+      .eq("id", deleteTarget);
 
     if (error) {
       toast.error("Failed to delete");
     } else {
-      setPrompts(prompts.filter(p => p.id !== promptId));
+      setPrompts(prompts.filter(p => p.id !== deleteTarget));
       toast.success("Prompt deleted");
     }
+    setDeleteTarget(null);
   };
 
   const filteredPrompts = prompts.filter(p => 
@@ -146,6 +160,7 @@ const MyPrompts = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
+              aria-label="Search your prompts"
             />
           </div>
 
@@ -170,30 +185,30 @@ const MyPrompts = () => {
               {filteredPrompts.map((prompt) => (
                 <Card key={prompt.id} className="shadow-card">
                   <CardContent className="p-4">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-medium text-foreground truncate">
-                            {prompt.title}
-                          </h3>
-                          <Badge variant={prompt.is_public ? "default" : "secondary"} className="flex-shrink-0">
-                            {prompt.is_public ? (
-                              <>
-                                <Globe className="w-3 h-3 mr-1" />
-                                Public
-                              </>
-                            ) : (
-                              <>
-                                <Lock className="w-3 h-3 mr-1" />
-                                Private
-                              </>
-                            )}
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground line-clamp-2">
-                          {prompt.content}
-                        </p>
-                        <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                    <div className="space-y-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-medium text-foreground line-clamp-1 flex-1">
+                          {prompt.title}
+                        </h3>
+                        <Badge variant={prompt.is_public ? "default" : "secondary"} className="flex-shrink-0">
+                          {prompt.is_public ? (
+                            <>
+                              <Globe className="w-3 h-3 mr-1" />
+                              Public
+                            </>
+                          ) : (
+                            <>
+                              <Lock className="w-3 h-3 mr-1" />
+                              Private
+                            </>
+                          )}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {prompt.content}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Heart className="w-3 h-3" />
                             {prompt.likes_count} likes
@@ -202,34 +217,37 @@ const MyPrompts = () => {
                             {new Date(prompt.created_at).toLocaleDateString()}
                           </span>
                         </div>
-                      </div>
-                      <div className="flex items-center gap-1 flex-shrink-0">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleCopy(prompt.content)}
-                        >
-                          <Copy className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleTogglePublic(prompt.id, prompt.is_public)}
-                        >
-                          {prompt.is_public ? (
-                            <Lock className="w-4 h-4" />
-                          ) : (
-                            <Globe className="w-4 h-4" />
-                          )}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleDelete(prompt.id)}
-                          className="text-destructive hover:text-destructive"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleCopy(prompt.content)}
+                            aria-label="Copy prompt"
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleTogglePublic(prompt.id, prompt.is_public)}
+                            aria-label={prompt.is_public ? "Make private" : "Make public"}
+                          >
+                            {prompt.is_public ? (
+                              <Lock className="w-4 h-4" />
+                            ) : (
+                              <Globe className="w-4 h-4" />
+                            )}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setDeleteTarget(prompt.id)}
+                            className="text-destructive hover:text-destructive"
+                            aria-label="Delete prompt"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -239,6 +257,24 @@ const MyPrompts = () => {
           )}
         </div>
       </main>
+
+      {/* Delete confirmation */}
+      <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete this prompt?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. The prompt will be permanently removed.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
