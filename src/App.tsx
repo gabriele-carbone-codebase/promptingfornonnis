@@ -10,6 +10,7 @@ import UseCases from "./pages/UseCases";
 
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
+import Privacy from "./pages/Privacy";
 import MyPrompts from "./pages/MyPrompts";
 import NotFound from "./pages/NotFound";
 
