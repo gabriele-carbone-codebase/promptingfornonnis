@@ -182,6 +182,17 @@ const Auth = () => {
                       )}
                     </div>
 
+                    <div className="text-right">
+                      <Button
+                        type="button"
+                        variant="link"
+                        className="text-xs px-0 h-auto text-muted-foreground"
+                        onClick={handleForgotPassword}
+                      >
+                        Forgot password?
+                      </Button>
+                    </div>
+
                     <Button type="submit" className="w-full" disabled={loading}>
                       {loading ? (
                         <>
