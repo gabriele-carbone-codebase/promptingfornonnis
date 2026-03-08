@@ -5,29 +5,59 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, Copy, Check, Sparkles } from "lucide-react";
 import chatgptLogo from "@/assets/chatgpt-logo.svg";
 import { toast } from "@/components/ui/sonner";
 import {
   AgeBucket,
   ageBucketLabels,
   activitiesByAge,
+  UseCase,
 } from "@/data/discoveryActivities";
-import { useCasePrompts } from "@/data/useCasePrompts";
 
 export function DiscoveryWizard() {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [selectedAge, setSelectedAge] = useState<AgeBucket | null>(null);
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
-  const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const activities = selectedAge ? activitiesByAge[selectedAge] : [];
 
-  const filteredPrompts = useMemo(() => {
+  // Collect unique use cases from selected activities
+  const results = useMemo(() => {
     if (!selectedAge) return [];
     const chosen = activities.filter((a) => selectedActivities.includes(a.id));
-    const cats = new Set(chosen.flatMap((a) => a.categories));
-    return useCasePrompts.filter((p) => cats.has(p.category));
+
+    // Deduplicate use cases by id, and also include the activity-level example prompts
+    const items: { type: "activity" | "usecase"; id: string; title: string; description: string; prompt: string }[] = [];
+    const seenIds = new Set<string>();
+
+    for (const activity of chosen) {
+      // Add the activity's own example prompt
+      items.push({
+        type: "activity",
+        id: `act-${activity.id}`,
+        title: activity.label,
+        description: "Example prompt for this activity",
+        prompt: activity.examplePrompt,
+      });
+
+      // Add use cases
+      for (const uc of activity.useCases) {
+        if (!seenIds.has(uc.id)) {
+          seenIds.add(uc.id);
+          items.push({
+            type: "usecase",
+            id: uc.id,
+            title: uc.title,
+            description: uc.description,
+            prompt: uc.examplePrompt,
+          });
+        }
+      }
+    }
+
+    return items;
   }, [selectedAge, selectedActivities, activities]);
 
   const toggleActivity = (id: string) => {
@@ -36,9 +66,9 @@ export function DiscoveryWizard() {
     );
   };
 
-  const copyPrompt = async (prompt: typeof useCasePrompts[0]) => {
-    await navigator.clipboard.writeText(prompt.prompt);
-    setCopiedId(prompt.id);
+  const copyPrompt = async (id: string, text: string) => {
+    await navigator.clipboard.writeText(text);
+    setCopiedId(id);
     toast("Copied to clipboard!");
     setTimeout(() => setCopiedId(null), 2000);
   };
@@ -171,30 +201,30 @@ export function DiscoveryWizard() {
               Here's what AI can help you with!
             </h2>
             <p className="text-muted-foreground mt-1">
-              {filteredPrompts.length} use case{filteredPrompts.length !== 1 && "s"} found.
+              {results.length} result{results.length !== 1 && "s"} found.
               Copy any prompt and paste it into ChatGPT, Claude, or any AI chatbot.
             </p>
           </div>
 
           <div className="space-y-4">
-            {filteredPrompts.map((prompt) => (
-              <Card key={prompt.id}>
+            {results.map((item) => (
+              <Card key={item.id}>
                 <CardContent className="p-5 space-y-3">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h3 className="font-semibold">{prompt.title}</h3>
+                      <h3 className="font-semibold">{item.title}</h3>
                       <Badge variant="secondary" className="mt-1">
-                        {prompt.category}
+                        {item.type === "activity" ? "Activity prompt" : "Use case"}
                       </Badge>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => copyPrompt(prompt)}
+                        onClick={() => copyPrompt(item.id, item.prompt)}
                         className="gap-1.5"
                       >
-                        {copiedId === prompt.id ? (
+                        {copiedId === item.id ? (
                           <>
                             <Check className="w-3.5 h-3.5" />
                             Copied
@@ -210,15 +240,20 @@ export function DiscoveryWizard() {
                         variant="outline"
                         size="sm"
                         className="gap-1.5 bg-success/10 border-success/30 text-success hover:bg-success/20"
-                        onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(prompt.prompt)}`, '_blank')}
+                        onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(item.prompt)}`, '_blank')}
                       >
                         <img src={chatgptLogo} alt="ChatGPT" className="w-3.5 h-3.5" />
                         ChatGPT
                       </Button>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground whitespace-pre-line line-clamp-4">
-                    {prompt.prompt}
+                  {item.type === "usecase" && (
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                  )}
+                  <p className="text-sm text-muted-foreground whitespace-pre-line line-clamp-4 bg-muted/50 rounded-md p-3 italic">
+                    {item.prompt}
                   </p>
                 </CardContent>
               </Card>
