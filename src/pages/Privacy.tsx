@@ -6,7 +6,7 @@ const Privacy = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <main className="container py-12 flex-1">
-        <div className="max-w-3xl mx-auto prose prose-neutral dark:prose-invert">
+        <div className="max-w-3xl mx-auto space-y-6">
           <h1>Privacy Policy</h1>
           <p className="text-muted-foreground"><strong>Last updated:</strong> March 2026</p>
 
