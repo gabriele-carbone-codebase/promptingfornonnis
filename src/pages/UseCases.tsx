@@ -100,8 +100,8 @@ const UseCases = () => {
 
   const filtered =
     englishCategory === "All"
-      ? useCasePrompts
-      : useCasePrompts.filter((p) => p.category === englishCategory);
+      ? prompts
+      : prompts.filter((p) => p.category === englishCategory);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
