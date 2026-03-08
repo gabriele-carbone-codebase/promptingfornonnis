@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Check, Lock, Trophy } from "lucide-react";
+import { useTranslation } from "@/i18n/useTranslation";
 
 interface TrainingProgressProps {
   currentLesson: number;
@@ -10,14 +11,6 @@ interface TrainingProgressProps {
   onStartFinalQuiz: () => void;
 }
 
-const lessonTitles = [
-  "More text is better",
-  "Ask what info is needed",
-  "Use examples",
-  "Use quotes for text",
-  "Assign roles",
-];
-
 export function TrainingProgress({
   currentLesson,
   completedLessons,
@@ -26,18 +19,19 @@ export function TrainingProgress({
   allLessonsComplete,
   onStartFinalQuiz,
 }: TrainingProgressProps) {
+  const t = useTranslation();
+  const lessonTitles = t.training.lessonTitles;
   const progressPercentage = (completedLessons.length / totalLessons) * 100;
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6">
-      {/* Overall progress bar */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm font-medium text-foreground">
-            Your Progress
+            {t.training.yourProgress}
           </span>
           <span className="text-sm text-muted-foreground">
-            {completedLessons.length} of {totalLessons} lessons
+            {completedLessons.length} {t.training.lessonsOf} {totalLessons} {t.training.lessons}
           </span>
         </div>
         <div className="h-3 bg-muted rounded-full overflow-hidden">
@@ -48,7 +42,6 @@ export function TrainingProgress({
         </div>
       </div>
 
-      {/* Lesson cards */}
       <div className="grid gap-3">
         {Array.from({ length: totalLessons }, (_, i) => {
           const lessonNumber = i + 1;
@@ -69,7 +62,6 @@ export function TrainingProgress({
                 isLocked && "opacity-50 cursor-not-allowed"
               )}
             >
-              {/* Status icon */}
               <div
                 className={cn(
                   "w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0",
@@ -88,7 +80,6 @@ export function TrainingProgress({
                 )}
               </div>
 
-              {/* Lesson info */}
               <div className="flex-1 min-w-0">
                 <h3
                   className={cn(
@@ -98,23 +89,22 @@ export function TrainingProgress({
                     !isCompleted && !isCurrent && "text-foreground"
                   )}
                 >
-                  Lesson {lessonNumber}: {lessonTitles[i]}
+                  {t.training.lessonPrefix} {lessonNumber}: {lessonTitles[i]}
                 </h3>
                 <p className="text-sm text-muted-foreground truncate">
                   {isCompleted
-                    ? "Completed ✓"
+                    ? t.training.completed
                     : isCurrent
-                    ? "In progress..."
+                    ? t.training.inProgress
                     : isLocked
-                    ? "Complete previous lesson to unlock"
-                    : "Ready to start"}
+                    ? t.training.unlockPrevious
+                    : t.training.readyToStart}
                 </p>
               </div>
             </button>
           );
         })}
 
-        {/* Final Quiz Card */}
         <button
           onClick={onStartFinalQuiz}
           disabled={!allLessonsComplete}
@@ -125,7 +115,6 @@ export function TrainingProgress({
               : "opacity-50 cursor-not-allowed border-border"
           )}
         >
-          {/* Status icon */}
           <div
             className={cn(
               "w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0",
@@ -141,7 +130,6 @@ export function TrainingProgress({
             )}
           </div>
 
-          {/* Quiz info */}
           <div className="flex-1 min-w-0">
             <h3
               className={cn(
@@ -149,12 +137,12 @@ export function TrainingProgress({
                 allLessonsComplete ? "text-primary" : "text-foreground"
               )}
             >
-              🏆 Final Quiz
+              {t.training.finalQuiz}
             </h3>
             <p className="text-sm text-muted-foreground truncate">
               {allLessonsComplete
-                ? "20 questions • Earn your certificate!"
-                : "Complete all lessons to unlock"}
+                ? t.training.finalQuizUnlocked
+                : t.training.finalQuizLocked}
             </p>
           </div>
         </button>

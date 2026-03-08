@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Link, Twitter, Linkedin, Check } from "lucide-react";
 import html2canvas from "html2canvas";
+import { useTranslation } from "@/i18n/useTranslation";
 
 interface ShareButtonsProps {
   certificateRef: React.RefObject<HTMLDivElement>;
@@ -10,10 +11,13 @@ interface ShareButtonsProps {
 }
 
 export function ShareButtons({ certificateRef, score, total }: ShareButtonsProps) {
+  const t = useTranslation();
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
-  const shareText = `🎓 I just earned my Prompt Engineering Certificate! Score: ${score}/${total} 🚀 Learn prompt engineering for free:`;
+  const shareText = t.share.shareText
+    .replace("{score}", String(score))
+    .replace("{total}", String(total));
   const shareUrl = window.location.origin + "/training";
 
   const handleCopyLink = async () => {
@@ -67,7 +71,7 @@ export function ShareButtons({ certificateRef, score, total }: ShareButtonsProps
         className="gap-2"
       >
         {copied ? <Check className="w-4 h-4" /> : <Link className="w-4 h-4" />}
-        {copied ? "Copied!" : "Copy Link"}
+        {copied ? t.share.copiedLink : t.share.copyLink}
       </Button>
       
       <Button
@@ -78,7 +82,7 @@ export function ShareButtons({ certificateRef, score, total }: ShareButtonsProps
         className="gap-2"
       >
         <Download className="w-4 h-4" />
-        {downloading ? "Downloading..." : "Download Image"}
+        {downloading ? t.share.downloading : t.share.downloadImage}
       </Button>
       
       <Button
@@ -88,7 +92,7 @@ export function ShareButtons({ certificateRef, score, total }: ShareButtonsProps
         className="gap-2"
       >
         <Twitter className="w-4 h-4" />
-        Share on X
+        {t.share.shareOnX}
       </Button>
       
       <Button
@@ -98,7 +102,7 @@ export function ShareButtons({ certificateRef, score, total }: ShareButtonsProps
         className="gap-2"
       >
         <Linkedin className="w-4 h-4" />
-        Share on LinkedIn
+        {t.share.shareOnLinkedIn}
       </Button>
     </div>
   );

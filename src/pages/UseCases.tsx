@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -10,8 +9,8 @@ import { Copy, Check, ChevronDown, ChevronUp, Sparkles, Compass } from "lucide-r
 import { useCasePrompts, type UseCasePrompt } from "@/data/useCasePrompts";
 import { DiscoveryWizard } from "@/components/discovery/DiscoveryWizard";
 import { toast } from "sonner";
-
-const categories = ["All", "Business", "Education", "Creative", "Marketing", "Personal"] as const;
+import { useTranslation } from "@/i18n/useTranslation";
+import { LocalizedLink } from "@/components/LocalizedLink";
 
 const categoryColors: Record<string, string> = {
   Business: "bg-primary/10 text-primary border-primary/20",
@@ -22,13 +21,14 @@ const categoryColors: Record<string, string> = {
 };
 
 function PromptCard({ prompt }: { prompt: UseCasePrompt }) {
+  const t = useTranslation();
   const [expanded, setExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(prompt.prompt);
     setCopied(true);
-    toast.success("Prompt copied!");
+    toast.success(t.useCasesPage.promptCopied);
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -52,22 +52,22 @@ function PromptCard({ prompt }: { prompt: UseCasePrompt }) {
           <Button size="sm" variant="ghost" onClick={() => setExpanded(!expanded)}>
             {expanded ? (
               <>
-                <ChevronUp className="w-4 h-4 mr-1" /> Less
+                <ChevronUp className="w-4 h-4 mr-1" /> {t.useCasesPage.less}
               </>
             ) : (
               <>
-                <ChevronDown className="w-4 h-4 mr-1" /> More
+                <ChevronDown className="w-4 h-4 mr-1" /> {t.useCasesPage.more}
               </>
             )}
           </Button>
           <Button size="sm" onClick={handleCopy}>
             {copied ? (
               <>
-                <Check className="w-4 h-4 mr-1" /> Copied
+                <Check className="w-4 h-4 mr-1" /> {t.useCasesPage.copiedMsg}
               </>
             ) : (
               <>
-                <Copy className="w-4 h-4 mr-1" /> Copy
+                <Copy className="w-4 h-4 mr-1" /> {t.useCasesPage.copy}
               </>
             )}
           </Button>
@@ -78,33 +78,45 @@ function PromptCard({ prompt }: { prompt: UseCasePrompt }) {
 }
 
 const UseCases = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const t = useTranslation();
+  const categories = t.useCasesPage.categories;
+  const [activeCategory, setActiveCategory] = useState<string>(categories[0]);
   const [showDiscovery, setShowDiscovery] = useState(false);
 
+  const categoryMap: Record<string, string> = {
+    [categories[0]]: "All",
+    [categories[1]]: "Business",
+    [categories[2]]: "Education",
+    [categories[3]]: "Creative",
+    [categories[4]]: "Marketing",
+    [categories[5]]: "Personal",
+  };
+
+  const englishCategory = categoryMap[activeCategory] || "All";
+
   const filtered =
-    activeCategory === "All"
+    englishCategory === "All"
       ? useCasePrompts
-      : useCasePrompts.filter((p) => p.category === activeCategory);
+      : useCasePrompts.filter((p) => p.category === englishCategory);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <main className="container py-12">
         <div className="max-w-5xl mx-auto space-y-8">
-          {/* Discovery CTA */}
           {!showDiscovery ? (
             <Card className="border-primary/20 bg-primary/5 shadow-card">
               <CardContent className="flex flex-col sm:flex-row items-center gap-4 py-6">
                 <Compass className="w-10 h-10 text-primary shrink-0" />
                 <div className="text-center sm:text-left flex-1">
-                  <h2 className="text-lg font-semibold text-foreground">Not sure how AI can help you?</h2>
+                  <h2 className="text-lg font-semibold text-foreground">{t.useCasesPage.discoverTitle}</h2>
                   <p className="text-muted-foreground text-sm">
-                    Take our quick 2-step questionnaire to discover how chatbots can help with your everyday activities.
+                    {t.useCasesPage.discoverSubtitle}
                   </p>
                 </div>
                 <Button onClick={() => setShowDiscovery(true)} className="gap-2 shrink-0">
                   <Compass className="w-4 h-4" />
-                  Discover Now
+                  {t.useCasesPage.discoverNow}
                 </Button>
               </CardContent>
             </Card>
@@ -112,7 +124,7 @@ const UseCases = () => {
             <div className="space-y-4">
               <div className="flex justify-end">
                 <Button variant="ghost" size="sm" onClick={() => setShowDiscovery(false)}>
-                  ← Back to examples
+                  {t.useCasesPage.backToExamples}
                 </Button>
               </div>
               <DiscoveryWizard />
@@ -123,41 +135,41 @@ const UseCases = () => {
             <>
               <div className="text-center space-y-3">
                 <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
-                  Prompt Examples
+                  {t.useCasesPage.pageTitle}
                 </h1>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Browse 20 ready-to-use prompts across different categories. Copy any prompt and paste it into your favourite AI chatbot.
+                  {t.useCasesPage.pageSubtitle}
                 </p>
               </div>
 
-          <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
-            <TabsList className="flex flex-wrap h-auto gap-1 bg-transparent p-0">
-              {categories.map((cat) => (
-                <TabsTrigger
-                  key={cat}
-                  value={cat}
-                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full px-4"
-                >
-                  {cat}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+              <Tabs value={activeCategory} onValueChange={setActiveCategory} className="w-full">
+                <TabsList className="flex flex-wrap h-auto gap-1 bg-transparent p-0">
+                  {categories.map((cat) => (
+                    <TabsTrigger
+                      key={cat}
+                      value={cat}
+                      className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full px-4"
+                    >
+                      {cat}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {filtered.map((prompt) => (
-              <PromptCard key={prompt.id} prompt={prompt} />
-            ))}
-          </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {filtered.map((prompt) => (
+                  <PromptCard key={prompt.id} prompt={prompt} />
+                ))}
+              </div>
 
-          <div className="text-center pt-4">
-            <Button size="lg" asChild className="gap-2">
-              <Link to="/">
-                <Sparkles className="w-5 h-5" />
-                Create Your Own Prompt
-              </Link>
-            </Button>
-          </div>
+              <div className="text-center pt-4">
+                <Button size="lg" asChild className="gap-2">
+                  <LocalizedLink to="/">
+                    <Sparkles className="w-5 h-5" />
+                    {t.useCasesPage.createYourOwn}
+                  </LocalizedLink>
+                </Button>
+              </div>
             </>
           )}
         </div>

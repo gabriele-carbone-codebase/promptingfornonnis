@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import type { PromptData, Attachment, WebLink } from "@/types/prompt";
+import { useTranslation } from "@/i18n/useTranslation";
 
 const initialPromptData: PromptData = {
   goal: "",
@@ -10,6 +11,7 @@ const initialPromptData: PromptData = {
 };
 
 export function usePromptBuilder() {
+  const t = useTranslation();
   const [step, setStep] = useState(1);
   const [promptData, setPromptData] = useState<PromptData>(initialPromptData);
 
@@ -99,44 +101,39 @@ export function usePromptBuilder() {
   }, []);
 
   const generatePrompt = useCallback((): string => {
+    const pb = t.promptBuilder;
     const parts: string[] = [];
 
-    // Always include the goal
-    parts.push(`I want to:\n${promptData.goal}`);
+    parts.push(`${pb.iWantTo}\n${promptData.goal}`);
 
-    // Expected result (only if provided)
     if (promptData.expectedResult.trim()) {
-      parts.push(`As a result I expect to receive:\n${promptData.expectedResult}`);
+      parts.push(`${pb.asResult}\n${promptData.expectedResult}`);
     }
 
-    // Attachments (only if any have filenames)
     const validAttachments = promptData.attachments.filter((att) => att.filename.trim());
     if (validAttachments.length > 0) {
       const attachmentsList = validAttachments
         .map((att) => `- ${att.filename}${att.description ? ` : ${att.description}` : ""}`)
         .join("\n");
-      parts.push(`To help with this task, you will find the following attachments:\n${attachmentsList}`);
+      parts.push(`${pb.attachmentsIntro}\n${attachmentsList}`);
     }
 
-    // Web links (only if any have URLs)
     const validLinks = promptData.webLinks.filter((link) => link.url.trim());
     if (validLinks.length > 0) {
       const linksList = validLinks
         .map((link) => `- ${link.url}${link.description ? ` : ${link.description}` : ""}`)
         .join("\n");
-      parts.push(`As additional resources you can also navigate these webpages:\n${linksList}`);
+      parts.push(`${pb.linksIntro}\n${linksList}`);
     }
 
-    // Extra notes (only if provided)
     if (promptData.extraNotes.trim()) {
-      parts.push(`For added context, these are some additional information:\n${promptData.extraNotes}`);
+      parts.push(`${pb.notesIntro}\n${promptData.extraNotes}`);
     }
 
-    // Closing question
-    parts.push(`Can you help me? If so, how?\nDo you need any additional information?`);
+    parts.push(pb.closing);
 
     return parts.join("\n\n");
-  }, [promptData]);
+  }, [promptData, t]);
 
   const isStepValid = useCallback((stepNumber: number): boolean => {
     switch (stepNumber) {
@@ -146,7 +143,7 @@ export function usePromptBuilder() {
       case 3:
       case 4:
       case 5:
-        return true; // Optional steps
+        return true;
       default:
         return false;
     }

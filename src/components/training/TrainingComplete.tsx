@@ -1,12 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trophy, ArrowRight, Sparkles } from "lucide-react";
+import { useTranslation } from "@/i18n/useTranslation";
 
 interface TrainingCompleteProps {
   onStartFinalQuiz: () => void;
 }
 
 export function TrainingComplete({ onStartFinalQuiz }: TrainingCompleteProps) {
+  const t = useTranslation();
+
   return (
     <div className="w-full max-w-2xl mx-auto space-y-8 animate-fade-in text-center">
       <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-success/10">
@@ -15,10 +18,10 @@ export function TrainingComplete({ onStartFinalQuiz }: TrainingCompleteProps) {
 
       <div className="space-y-4">
         <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
-          🎉 All Lessons Complete!
+          {t.trainingComplete.title}
         </h1>
         <p className="text-lg text-muted-foreground max-w-md mx-auto">
-          You've mastered the 5 essential prompt engineering techniques. Now it's time for the final challenge!
+          {t.trainingComplete.subtitle}
         </p>
       </div>
 
@@ -26,17 +29,17 @@ export function TrainingComplete({ onStartFinalQuiz }: TrainingCompleteProps) {
         <CardContent className="p-6 space-y-4">
           <div className="flex items-center justify-center gap-2 text-primary">
             <Sparkles className="w-5 h-5" />
-            <h3 className="font-semibold">Final Quiz Unlocked</h3>
+            <h3 className="font-semibold">{t.trainingComplete.quizUnlocked}</h3>
             <Sparkles className="w-5 h-5" />
           </div>
           <p className="text-muted-foreground">
-            Take the 20-question final quiz to test your knowledge and earn a shareable certificate!
+            {t.trainingComplete.quizDescription}
           </p>
         </CardContent>
       </Card>
 
       <Button size="lg" onClick={onStartFinalQuiz} className="gap-2">
-        Start Final Quiz
+        {t.trainingComplete.startFinalQuiz}
         <ArrowRight className="w-4 h-4" />
       </Button>
     </div>

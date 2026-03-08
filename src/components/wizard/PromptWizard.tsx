@@ -8,8 +8,10 @@ import { StepAttachments } from "./StepAttachments";
 import { StepLinks } from "./StepLinks";
 import { StepNotes } from "./StepNotes";
 import { PromptOutput } from "./PromptOutput";
+import { useTranslation } from "@/i18n/useTranslation";
 
 export function PromptWizard() {
+  const t = useTranslation();
   const {
     step,
     totalSteps,
@@ -35,7 +37,7 @@ export function PromptWizard() {
 
   const handleNext = () => {
     if (isLastStep) {
-      goToStep(totalSteps + 1); // Go to output
+      goToStep(totalSteps + 1);
     } else {
       nextStep();
     }
@@ -115,7 +117,7 @@ export function PromptWizard() {
               className="gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back
+              {t.wizard.back}
             </Button>
 
             <Button
@@ -126,11 +128,11 @@ export function PromptWizard() {
               {isLastStep ? (
                 <>
                   <Sparkles className="w-4 h-4" />
-                  Generate Prompt
+                  {t.wizard.generatePrompt}
                 </>
               ) : (
                 <>
-                  Next
+                  {t.wizard.next}
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

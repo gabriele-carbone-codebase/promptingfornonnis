@@ -7,11 +7,14 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, Heart, Copy, Users, Loader2 } from "lucide-react";
 import chatgptLogo from "@/assets/chatgpt-logo.svg";
-import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { fakeCommunityPrompts } from "@/data/fakeCommunityPrompts";
+import { fakeCommunityPromptsIt } from "@/data/fakeCommunityPrompts.it";
+import { useTranslation } from "@/i18n/useTranslation";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { LocalizedLink } from "@/components/LocalizedLink";
 
 interface PublicPrompt {
   id: string;
@@ -24,6 +27,8 @@ interface PublicPrompt {
 }
 
 const Community = () => {
+  const t = useTranslation();
+  const { lang } = useLanguage();
   const { user, isAuthenticated } = useAuth();
   const [prompts, setPrompts] = useState<PublicPrompt[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,12 +36,14 @@ const Community = () => {
   const [userLikes, setUserLikes] = useState<Set<string>>(new Set());
   const [likingIds, setLikingIds] = useState<Set<string>>(new Set());
 
+  const fakePrompts = lang === "it" ? fakeCommunityPromptsIt : fakeCommunityPrompts;
+
   useEffect(() => {
     fetchPrompts();
     if (user) {
       fetchUserLikes();
     }
-  }, [user]);
+  }, [user, lang]);
 
   const fetchPrompts = async () => {
     setLoading(true);
@@ -45,6 +52,7 @@ const Community = () => {
       .from("prompts")
       .select("id, title, content, likes_count, created_at, user_id")
       .eq("is_public", true)
+      .eq("language", lang)
       .order("likes_count", { ascending: false })
       .limit(50);
 
@@ -68,9 +76,9 @@ const Community = () => {
         display_name: profilesMap.get(p.user_id) || null,
       }));
       
-      setPrompts([...promptsWithProfiles, ...fakeCommunityPrompts]);
+      setPrompts([...promptsWithProfiles, ...fakePrompts]);
     } else {
-      setPrompts(fakeCommunityPrompts);
+      setPrompts(fakePrompts);
     }
     
     setLoading(false);
@@ -92,9 +100,9 @@ const Community = () => {
   const handleCopy = async (content: string) => {
     try {
       await navigator.clipboard.writeText(content);
-      toast.success("Prompt copied!");
+      toast.success(t.community.promptCopied);
     } catch (err) {
-      toast.error("Failed to copy");
+      toast.error(t.community.failedCopy);
     }
   };
 
@@ -107,17 +115,15 @@ const Community = () => {
 
   const handleLike = async (promptId: string) => {
     if (!isAuthenticated) {
-      toast.error("Sign in to like prompts");
+      toast.error(t.community.signInToLike);
       return;
     }
 
-    // Prevent liking fake prompts
     if (isFakePrompt(promptId)) {
-      toast.info("This is an example prompt");
+      toast.info(t.community.examplePrompt);
       return;
     }
 
-    // Prevent double-click
     if (likingIds.has(promptId)) return;
     setLikingIds(prev => new Set([...prev, promptId]));
 
@@ -175,26 +181,24 @@ const Community = () => {
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center space-y-4">
             <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
-              Community Prompts
+              {t.community.pageTitle}
             </h1>
             <p className="text-lg text-muted-foreground">
-              Discover and share prompts created by our community
+              {t.community.pageSubtitle}
             </p>
           </div>
 
-          {/* Search bar */}
           <div className="relative max-w-md mx-auto">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
-              placeholder="Search prompts..."
+              placeholder={t.community.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
-              aria-label="Search community prompts"
+              aria-label={t.community.searchPlaceholder}
             />
           </div>
 
-          {/* Prompts list */}
           {loading ? (
             <div className="flex justify-center py-12">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -207,12 +211,12 @@ const Community = () => {
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold text-foreground">
-                    {searchQuery ? "No prompts found" : "Be the first to share!"}
+                    {searchQuery ? t.community.noPromptsFound : t.community.beFirst}
                   </h3>
                   <p className="text-muted-foreground max-w-sm mx-auto">
                     {searchQuery 
-                      ? "Try a different search term" 
-                      : "Sign up to save your prompts and share them with the community."
+                      ? t.community.tryDifferent 
+                      : t.community.signUpMessage
                     }
                   </p>
                 </div>
@@ -220,11 +224,11 @@ const Community = () => {
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     {!isAuthenticated && (
                       <Button asChild>
-                        <Link to="/auth?mode=signup">Create Account</Link>
+                        <LocalizedLink to="/auth?mode=signup">{t.community.createAccount}</LocalizedLink>
                       </Button>
                     )}
                     <Button variant="outline" asChild>
-                      <Link to="/">Build a Prompt</Link>
+                      <LocalizedLink to="/">{t.community.buildPrompt}</LocalizedLink>
                     </Button>
                   </div>
                 )}
@@ -242,7 +246,7 @@ const Community = () => {
                             {prompt.title}
                           </h3>
                           <Badge variant="secondary" className="text-xs mt-1">
-                            by {prompt.display_name || "Anonymous"}
+                            {t.community.by} {prompt.display_name || t.community.anonymous}
                           </Badge>
                         </div>
                       </div>
@@ -260,7 +264,6 @@ const Community = () => {
                             onClick={() => handleLike(prompt.id)}
                             className={userLikes.has(prompt.id) ? "text-destructive" : ""}
                             disabled={likingIds.has(prompt.id)}
-                            aria-label={userLikes.has(prompt.id) ? "Unlike prompt" : "Like prompt"}
                           >
                             <Heart className={`w-4 h-4 mr-1 ${userLikes.has(prompt.id) ? "fill-current" : ""}`} />
                             {prompt.likes_count}
@@ -269,7 +272,7 @@ const Community = () => {
                             variant="ghost"
                             size="icon"
                             onClick={() => handleCopy(prompt.content)}
-                            aria-label="Copy prompt"
+                            aria-label={t.community.promptCopied}
                           >
                             <Copy className="w-4 h-4" />
                           </Button>

@@ -9,10 +9,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2, Lock } from "lucide-react";
 import { z } from "zod";
-
-const passwordSchema = z.string().min(6, { message: "Password must be at least 6 characters" }).max(72);
+import { useTranslation } from "@/i18n/useTranslation";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const ResetPassword = () => {
+  const t = useTranslation();
+  const { localePath } = useLanguage();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,14 +22,14 @@ const ResetPassword = () => {
   const [isRecovery, setIsRecovery] = useState(false);
   const [errors, setErrors] = useState<{ password?: string; confirm?: string }>({});
 
+  const passwordSchema = z.string().min(6, { message: t.auth.passwordMin }).max(72);
+
   useEffect(() => {
-    // Check for recovery token in URL hash
     const hash = window.location.hash;
     if (hash.includes("type=recovery")) {
       setIsRecovery(true);
     }
 
-    // Also listen for auth state change with recovery event
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === "PASSWORD_RECOVERY") {
         setIsRecovery(true);
@@ -47,7 +49,7 @@ const ResetPassword = () => {
     }
 
     if (password !== confirmPassword) {
-      newErrors.confirm = "Passwords do not match";
+      newErrors.confirm = t.resetPassword.passwordsNoMatch;
     }
 
     setErrors(newErrors);
@@ -60,8 +62,8 @@ const ResetPassword = () => {
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success("Password updated successfully!");
-      navigate("/");
+      toast.success(t.resetPassword.passwordUpdated);
+      navigate(localePath("/"));
     }
   };
 
@@ -73,12 +75,12 @@ const ResetPassword = () => {
           <Card className="max-w-md mx-auto shadow-card">
             <CardContent className="py-12 text-center space-y-4">
               <Lock className="w-12 h-12 text-muted-foreground mx-auto" />
-              <h2 className="text-xl font-semibold">Invalid reset link</h2>
+              <h2 className="text-xl font-semibold">{t.resetPassword.invalidLink}</h2>
               <p className="text-muted-foreground">
-                This link is invalid or has expired. Please request a new password reset.
+                {t.resetPassword.invalidLinkDesc}
               </p>
-              <Button onClick={() => navigate("/auth")}>
-                Back to Sign In
+              <Button onClick={() => navigate(localePath("/auth"))}>
+                {t.resetPassword.backToSignIn}
               </Button>
             </CardContent>
           </Card>
@@ -94,18 +96,18 @@ const ResetPassword = () => {
         <div className="max-w-md mx-auto">
           <Card className="shadow-soft">
             <CardHeader>
-              <CardTitle className="text-center">Set New Password</CardTitle>
+              <CardTitle className="text-center">{t.resetPassword.setNewPassword}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleReset} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="new-password">New Password</Label>
+                  <Label htmlFor="new-password">{t.resetPassword.newPassword}</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       id="new-password"
                       type="password"
-                      placeholder="At least 6 characters"
+                      placeholder={t.auth.atLeast6}
                       value={password}
                       onChange={(e) => {
                         setPassword(e.target.value);
@@ -120,13 +122,13 @@ const ResetPassword = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="confirm-password">Confirm Password</Label>
+                  <Label htmlFor="confirm-password">{t.resetPassword.confirmPassword}</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       id="confirm-password"
                       type="password"
-                      placeholder="Repeat your password"
+                      placeholder={t.resetPassword.repeatPassword}
                       value={confirmPassword}
                       onChange={(e) => {
                         setConfirmPassword(e.target.value);
@@ -144,10 +146,10 @@ const ResetPassword = () => {
                   {loading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Updating...
+                      {t.resetPassword.updating}
                     </>
                   ) : (
-                    "Update Password"
+                    t.resetPassword.updatePassword
                   )}
                 </Button>
               </form>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check, X, ArrowRight } from "lucide-react";
 import type { FinalQuizQuestion } from "@/data/finalQuizQuestions";
+import { useTranslation } from "@/i18n/useTranslation";
 
 interface FinalQuizQuestionProps {
   question: FinalQuizQuestion;
@@ -19,6 +20,7 @@ export function FinalQuizQuestionCard({
   onAnswer,
   isLastQuestion,
 }: FinalQuizQuestionProps) {
+  const t = useTranslation();
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
 
@@ -42,17 +44,17 @@ export function FinalQuizQuestionCard({
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6 animate-fade-in">
-      {/* Question header */}
       <div className="text-center space-y-2">
         <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-          Question {questionNumber} of {totalQuestions}
+          {t.finalQuiz.questionOf
+            .replace("{current}", String(questionNumber))
+            .replace("{total}", String(totalQuestions))}
         </span>
         <p className="text-xs text-muted-foreground">
-          Concept: {question.concept}
+          {t.finalQuiz.concept} {question.concept}
         </p>
       </div>
 
-      {/* Progress bar */}
       <div className="h-2 bg-muted rounded-full overflow-hidden">
         <div
           className="h-full bg-primary transition-all duration-300"
@@ -60,7 +62,6 @@ export function FinalQuizQuestionCard({
         />
       </div>
 
-      {/* Question */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-foreground">
           {question.question}
@@ -114,7 +115,6 @@ export function FinalQuizQuestionCard({
         </div>
       </div>
 
-      {/* Result and explanation */}
       {showResult && (
         <div
           className={cn(
@@ -123,13 +123,12 @@ export function FinalQuizQuestionCard({
           )}
         >
           <p className="font-medium mb-2">
-            {isCorrect ? "🎉 Correct!" : "💡 Not quite, but keep learning!"}
+            {isCorrect ? t.finalQuiz.correctMsg : t.finalQuiz.incorrectMsg}
           </p>
           <p className="text-sm text-muted-foreground">{question.explanation}</p>
         </div>
       )}
 
-      {/* Actions */}
       <div className="flex justify-center gap-4">
         {!showResult ? (
           <Button
@@ -137,11 +136,11 @@ export function FinalQuizQuestionCard({
             onClick={handleCheck}
             disabled={!selectedAnswer}
           >
-            Check Answer
+            {t.training.checkAnswer}
           </Button>
         ) : (
           <Button size="lg" onClick={handleNext} className="gap-2">
-            {isLastQuestion ? "See Results" : "Next Question"}
+            {isLastQuestion ? t.finalQuiz.seeResults : t.training.nextQuestion}
             <ArrowRight className="w-4 h-4" />
           </Button>
         )}
