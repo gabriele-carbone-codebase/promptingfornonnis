@@ -46,8 +46,13 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
 
   const handleSave = async () => {
     if (!user) return;
-    if (!title.trim()) {
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) {
       toast.error("Please enter a title");
+      return;
+    }
+    if (trimmedTitle.length > 100) {
+      toast.error("Title must be less than 100 characters");
       return;
     }
 
