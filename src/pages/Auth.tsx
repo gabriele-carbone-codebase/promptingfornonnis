@@ -146,17 +146,15 @@ const Auth = () => {
           </div>
 
           <Card className="shadow-soft">
-            <CardHeader className="pb-4">
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <CardHeader className="pb-4">
                 <TabsList className="grid w-full grid-cols-2">
                   <TabsTrigger value="signin">Sign In</TabsTrigger>
                   <TabsTrigger value="signup">Sign Up</TabsTrigger>
                 </TabsList>
-              </Tabs>
-            </CardHeader>
+              </CardHeader>
 
-            <CardContent>
-              <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <CardContent>
                 <TabsContent value="signin" className="mt-0">
                   <form onSubmit={handleSignIn} className="space-y-4">
                     <div className="space-y-2">
