@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Copy, Check, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
+import { Copy, Check, ChevronDown, ChevronUp, Sparkles, Compass } from "lucide-react";
 import { useCasePrompts, type UseCasePrompt } from "@/data/useCasePrompts";
+import { DiscoveryWizard } from "@/components/discovery/DiscoveryWizard";
 import { toast } from "sonner";
 
 const categories = ["All", "Business", "Education", "Creative", "Marketing", "Personal"] as const;
