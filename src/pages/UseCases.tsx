@@ -159,6 +159,8 @@ const UseCases = () => {
           </div>
             </>
           )}
+        </div>
+      </main>
     </div>
   );
 };
