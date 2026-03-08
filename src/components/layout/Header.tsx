@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Heart, GraduationCap, UsersRound, Lightbulb, LogIn, LogOut, User, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { useLanguage, useTranslation } from "@/i18n";
+import { LocalizedLink } from "@/components/LocalizedLink";
+import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,35 +22,41 @@ export function Header() {
   const navigate = useNavigate();
   const { user, signOut, isAuthenticated } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const t = useTranslation();
+  const { localePath } = useLanguage();
 
   const navItems = [
-    { href: "/", label: "Build", icon: Heart },
-    { href: "/use-cases", label: "Use Cases", icon: Lightbulb },
-    { href: "/training", label: "Training", icon: GraduationCap },
-    { href: "/community", label: "Community", icon: UsersRound },
+    { href: "/", label: t.nav.build, icon: Heart },
+    { href: "/use-cases", label: t.nav.useCases, icon: Lightbulb },
+    { href: "/training", label: t.nav.training, icon: GraduationCap },
+    { href: "/community", label: t.nav.community, icon: UsersRound },
   ];
+
+  // Strip /it prefix for matching
+  const basePath = location.pathname.startsWith("/it")
+    ? location.pathname.slice(3) || "/"
+    : location.pathname;
 
   const handleSignOut = async () => {
     const { error } = await signOut();
     if (error) {
-      toast.error("Failed to sign out");
+      toast.error(t.auth.failedSignOut);
     } else {
-      toast.success("Signed out successfully");
-      navigate("/");
+      toast.success(t.auth.signedOut);
+      navigate(localePath("/"));
     }
   };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      {/* Desktop: nav centered below logo row / Mobile: logo centered */}
       <div className="container relative flex h-16 items-center justify-between">
         {/* Left: Logo */}
-        <Link to="/" className="flex items-center gap-2 shrink-0">
+        <LocalizedLink to="/" className="flex items-center gap-2 shrink-0">
           <img src={logo} alt="Prompting for Nonnis" className="w-9 h-9" />
           <span className="text-sm sm:text-lg font-bold text-[#d4621a] whitespace-nowrap" style={{ fontFamily: "'Quicksand', sans-serif" }}>
             Prompting for Nonnis
           </span>
-        </Link>
+        </LocalizedLink>
 
         {/* Center: Desktop nav */}
         <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
@@ -59,19 +68,21 @@ export function Header() {
               asChild
               className={cn(
                 "gap-2",
-                location.pathname === item.href && "bg-accent text-accent-foreground"
+                basePath === item.href && "bg-accent text-accent-foreground"
               )}
             >
-              <Link to={item.href}>
+              <LocalizedLink to={item.href}>
                 <item.icon className="w-4 h-4" />
                 {item.label}
-              </Link>
+              </LocalizedLink>
             </Button>
           ))}
         </nav>
 
-        {/* Right: auth + hamburger */}
-        <div className="flex items-center gap-2">
+        {/* Right: language + auth + hamburger */}
+        <div className="flex items-center gap-1">
+          <LanguageSelector />
+          
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -84,29 +95,29 @@ export function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuItem asChild>
-                  <Link to="/my-prompts" className="cursor-pointer">
-                    My Prompts
-                  </Link>
+                  <LocalizedLink to="/my-prompts" className="cursor-pointer">
+                    {t.nav.myPrompts}
+                  </LocalizedLink>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
                   <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
+                  {t.nav.signOut}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <>
               <Button variant="ghost" size="sm" asChild className="hidden sm:flex">
-                <Link to="/auth">
+                <LocalizedLink to="/auth">
                   <LogIn className="w-4 h-4 mr-2" />
-                  Sign In
-                </Link>
+                  {t.nav.signIn}
+                </LocalizedLink>
               </Button>
               <Button size="sm" asChild className="hidden sm:flex">
-                <Link to="/auth?mode=signup">
-                  Get Started
-                </Link>
+                <LocalizedLink to="/auth?mode=signup">
+                  {t.nav.getStarted}
+                </LocalizedLink>
               </Button>
             </>
           )}
@@ -133,24 +144,24 @@ export function Header() {
               asChild
               className={cn(
                 "w-full justify-start gap-2",
-                location.pathname === item.href && "bg-accent text-accent-foreground"
+                basePath === item.href && "bg-accent text-accent-foreground"
               )}
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Link to={item.href}>
+              <LocalizedLink to={item.href}>
                 <item.icon className="w-4 h-4" />
                 {item.label}
-              </Link>
+              </LocalizedLink>
             </Button>
           ))}
           <hr className="border-border" />
           {isAuthenticated ? (
             <>
               <Button variant="ghost" asChild className="w-full justify-start gap-2" onClick={() => setMobileMenuOpen(false)}>
-                <Link to="/my-prompts">
+                <LocalizedLink to="/my-prompts">
                   <User className="w-4 h-4" />
-                  My Prompts
-                </Link>
+                  {t.nav.myPrompts}
+                </LocalizedLink>
               </Button>
               <Button
                 variant="ghost"
@@ -161,21 +172,21 @@ export function Header() {
                 }}
               >
                 <LogOut className="w-4 h-4" />
-                Sign Out
+                {t.nav.signOut}
               </Button>
             </>
           ) : (
             <>
               <Button variant="ghost" asChild className="w-full justify-start gap-2" onClick={() => setMobileMenuOpen(false)}>
-                <Link to="/auth">
+                <LocalizedLink to="/auth">
                   <LogIn className="w-4 h-4" />
-                  Sign In
-                </Link>
+                  {t.nav.signIn}
+                </LocalizedLink>
               </Button>
               <Button asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                <Link to="/auth?mode=signup">
-                  Get Started
-                </Link>
+                <LocalizedLink to="/auth?mode=signup">
+                  {t.nav.getStarted}
+                </LocalizedLink>
               </Button>
             </>
           )}

@@ -19,6 +19,7 @@ export type Database = {
           created_at: string
           display_name: string | null
           id: string
+          preferred_language: string
           updated_at: string
           user_id: string
         }
@@ -26,6 +27,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id?: string
+          preferred_language?: string
           updated_at?: string
           user_id: string
         }
@@ -33,6 +35,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id?: string
+          preferred_language?: string
           updated_at?: string
           user_id?: string
         }
@@ -77,6 +80,7 @@ export type Database = {
           goal: string | null
           id: string
           is_public: boolean
+          language: string
           likes_count: number
           title: string
           updated_at: string
@@ -92,6 +96,7 @@ export type Database = {
           goal?: string | null
           id?: string
           is_public?: boolean
+          language?: string
           likes_count?: number
           title?: string
           updated_at?: string
@@ -107,6 +112,7 @@ export type Database = {
           goal?: string | null
           id?: string
           is_public?: boolean
+          language?: string
           likes_count?: number
           title?: string
           updated_at?: string
