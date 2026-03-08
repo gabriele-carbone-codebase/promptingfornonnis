@@ -10,6 +10,7 @@ import UseCases from "./pages/UseCases";
 
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
+import Privacy from "./pages/Privacy";
 import MyPrompts from "./pages/MyPrompts";
 import NotFound from "./pages/NotFound";
 
@@ -29,6 +30,7 @@ const App = () => (
           
           <Route path="/auth" element={<Auth />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/my-prompts" element={<MyPrompts />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

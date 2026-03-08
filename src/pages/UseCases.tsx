@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -86,7 +87,7 @@ const UseCases = () => {
       : useCasePrompts.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <main className="container py-12">
         <div className="max-w-5xl mx-auto space-y-8">
@@ -161,6 +162,7 @@ const UseCases = () => {
           )}
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { TrainingProgress } from "@/components/training/TrainingProgress";
 import { LessonCard } from "@/components/training/LessonCard";
 import { FinalQuiz } from "@/components/training/FinalQuiz";
@@ -51,7 +52,7 @@ const Training = () => {
   const currentLessonData = lessons.find((l) => l.id === currentLesson);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
       <main className="container py-8">
@@ -106,6 +107,7 @@ const Training = () => {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 };
