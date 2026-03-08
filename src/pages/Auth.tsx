@@ -34,8 +34,8 @@ const Auth = () => {
     }
   }, [isAuthenticated, authLoading, navigate]);
 
-  const validateForm = (): boolean => {
-    const newErrors: { email?: string; password?: string } = {};
+  const validateForm = (isSignUp = false): boolean => {
+    const newErrors: { email?: string; password?: string; displayName?: string } = {};
 
     const emailResult = emailSchema.safeParse(email);
     if (!emailResult.success) {
@@ -45,6 +45,13 @@ const Auth = () => {
     const passwordResult = passwordSchema.safeParse(password);
     if (!passwordResult.success) {
       newErrors.password = passwordResult.error.errors[0]?.message;
+    }
+
+    if (isSignUp) {
+      const nameResult = displayNameSchema.safeParse(displayName);
+      if (!nameResult.success) {
+        newErrors.displayName = nameResult.error.errors[0]?.message;
+      }
     }
 
     setErrors(newErrors);
