@@ -291,6 +291,7 @@ const Community = () => {
           )}
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

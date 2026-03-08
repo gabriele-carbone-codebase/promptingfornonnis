@@ -107,6 +107,7 @@ const Training = () => {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 };

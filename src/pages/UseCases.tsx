@@ -162,6 +162,7 @@ const UseCases = () => {
           )}
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
