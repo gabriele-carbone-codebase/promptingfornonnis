@@ -70,7 +70,7 @@ export function DiscoveryWizard() {
   };
 
   return (
-    <div className="container max-w-2xl py-12 space-y-8">
+    <div className="container max-w-2xl py-12 px-4 space-y-8">
       {/* Progress indicator */}
       <div className="flex items-center gap-2 justify-center" role="progressbar" aria-valuenow={step} aria-valuemin={1} aria-valuemax={3} aria-label={`Step ${step} of 3`}>
         {[1, 2, 3].map((s) => (
