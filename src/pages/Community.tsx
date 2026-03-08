@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, Heart, Copy, Users, Loader2, ExternalLink } from "lucide-react";
+import { Search, Heart, Copy, Users, Loader2 } from "lucide-react";
+import chatgptLogo from "@/assets/chatgpt-logo.svg";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -257,7 +258,7 @@ const Community = () => {
                           onClick={() => handleOpenChatGPT(prompt.content)}
                           title="Open in ChatGPT"
                         >
-                          <ExternalLink className="w-4 h-4" />
+                          <img src={chatgptLogo} alt="ChatGPT" className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>
