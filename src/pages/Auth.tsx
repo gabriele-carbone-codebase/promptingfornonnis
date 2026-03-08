@@ -198,6 +198,28 @@ const Auth = () => {
                 <TabsContent value="signup" className="mt-0">
                   <form onSubmit={handleSignUp} className="space-y-4">
                     <div className="space-y-2">
+                      <Label htmlFor="signup-name">Username</Label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                        <Input
+                          id="signup-name"
+                          type="text"
+                          placeholder="Your display name"
+                          value={displayName}
+                          onChange={(e) => {
+                            setDisplayName(e.target.value);
+                            setErrors((prev) => ({ ...prev, displayName: undefined }));
+                          }}
+                          className="pl-10"
+                          maxLength={30}
+                        />
+                      </div>
+                      {errors.displayName && (
+                        <p className="text-sm text-destructive">{errors.displayName}</p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
                       <Label htmlFor="signup-email">Email</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
