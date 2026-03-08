@@ -187,6 +187,7 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
                 placeholder="Give your prompt a name..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                maxLength={100}
               />
             </div>
             <div className="flex items-center justify-between">
