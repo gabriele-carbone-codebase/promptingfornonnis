@@ -71,11 +71,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 7,
-    title: "Creare un piano di lezione",
+    title: "Preparare una lezione scolastica",
     category: "Education",
-    prompt: `Voglio creare un piano di lezione di 45 minuti per insegnare il ciclo dell'acqua a studenti di terza media.
+    prompt: `Voglio preparare una lezione di 45 minuti per insegnare il ciclo dell'acqua a studenti di terza media.
 
-Come risultato mi aspetto di ricevere un piano di lezione strutturato con obiettivi di apprendimento, un'attività di riscaldamento, l'istruzione principale con un esperimento pratico, una componente di discussione di gruppo e un quiz di verifica con 5 domande. Includi un elenco dei materiali necessari.
+Come risultato mi aspetto di ricevere una lezione strutturata con obiettivi di apprendimento, un'attività introduttiva, la spiegazione principale con un esperimento pratico, un momento di discussione di gruppo e una verifica con 5 domande. Includi un elenco dei materiali necessari.
 
 Per favore considera anche che la classe ha 25 studenti e attrezzature di laboratorio limitate.
 
