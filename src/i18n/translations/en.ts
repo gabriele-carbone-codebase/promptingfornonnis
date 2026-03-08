@@ -13,7 +13,7 @@ export const en = {
     badge: "So easy, even your nonno can do it",
     title: "Let's talk to AI",
     titleHighlight: "together, step by step",
-    subtitle: "Our friendly guide walks you through building powerful prompts that get amazing results from ChatGPT, Claude, and other AI chatbots.",
+    subtitle: "Our friendly guide walks you through building powerful prompts that get amazing results from ChatGPT, Gemini, Copilot, and other Artificial Intelligence (AI) chatbots.",
     cta: "Start Building",
     ctaSecondary: "I don't know what AI can do for me",
     features: "✓ 100% free \u00a0•\u00a0 ✓ No tech skills needed \u00a0•\u00a0 ✓ Works with any AI",
