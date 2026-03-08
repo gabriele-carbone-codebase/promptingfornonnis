@@ -13,7 +13,7 @@ export const it = {
     badge: "Così facile che anche il nonno può farlo",
     title: "Parliamo con l'IA",
     titleHighlight: "insieme, passo dopo passo",
-    subtitle: "La nostra guida ti accompagna nella creazione di prompt efficaci per ottenere risultati straordinari da ChatGPT, Claude e altri chatbot AI.",
+    subtitle: "La nostra guida ti accompagna nella creazione di prompt efficaci per ottenere risultati straordinari da ChatGPT, Copilot, Gemini e altri chatbot di intelligenza artificiale (IA).",
     cta: "Inizia a creare",
     ctaSecondary: "Non so cosa può fare l'IA per me",
     features: "✓ 100% gratuito \u00a0•\u00a0 ✓ Nessuna competenza tecnica \u00a0•\u00a0 ✓ Funziona con qualsiasi IA",
