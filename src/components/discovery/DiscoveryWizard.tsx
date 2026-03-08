@@ -10,7 +10,6 @@ import chatgptLogo from "@/assets/chatgpt-logo.svg";
 import { toast } from "@/components/ui/sonner";
 import {
   AgeBucket,
-  ageBucketLabels,
   activitiesByAge,
 } from "@/data/discoveryActivities";
 import { useTranslation } from "@/i18n/useTranslation";
