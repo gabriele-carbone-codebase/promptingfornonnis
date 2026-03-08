@@ -228,9 +228,8 @@ export function DiscoveryWizard() {
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
                       variant="outline"
-                      size="sm"
                       onClick={() => copyPrompt(item.id, item.prompt)}
-                      className="gap-1.5 flex-1 sm:flex-none"
+                      className="gap-1.5 flex-1 sm:flex-none min-h-[44px]"
                       aria-label={`Copy ${item.title} prompt`}
                     >
                       {copiedId === item.id ? (
