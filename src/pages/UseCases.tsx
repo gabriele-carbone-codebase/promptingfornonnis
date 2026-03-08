@@ -81,6 +81,8 @@ function PromptCard({ prompt }: { prompt: UseCasePrompt }) {
 
 const UseCases = () => {
   const t = useTranslation();
+  const { lang } = useLanguage();
+  const prompts = lang === "it" ? useCasePromptsIt : useCasePrompts;
   const categories = t.useCasesPage.categories;
   const [activeCategory, setActiveCategory] = useState<string>(categories[0]);
   const [showDiscovery, setShowDiscovery] = useState(false);
