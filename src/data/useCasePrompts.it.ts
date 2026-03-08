@@ -83,11 +83,11 @@ Se qualcosa non è chiaro, chiedimi prima di procedere. Come puoi aiutarmi ulter
   },
   {
     id: 8,
-    title: "Scrivere una descrizione prodotto",
+    title: "Scrivere una scheda prodotto",
     category: "Marketing",
-    prompt: `Voglio scrivere una descrizione prodotto convincente per delle cuffie wireless con cancellazione del rumore vendute su un sito e-commerce.
+    prompt: `Voglio scrivere una scheda prodotto convincente per delle cuffie wireless con cancellazione del rumore vendute su un sito e-commerce.
 
-Come risultato mi aspetto di ricevere una descrizione prodotto con un titolo accattivante, 3 paragrafi focalizzati sui benefici, un elenco puntato delle caratteristiche e una frase di chiusura persuasiva. La descrizione dovrebbe essere ottimizzata per la SEO con posizionamento naturale delle parole chiave.
+Come risultato mi aspetto di ricevere una scheda prodotto con un titolo accattivante, 3 paragrafi focalizzati sui benefici, un elenco puntato delle caratteristiche e una frase di chiusura persuasiva. La descrizione dovrebbe essere ottimizzata per la SEO con posizionamento naturale delle parole chiave.
 
 Per favore considera anche che il pubblico target sono lavoratori in smart working tra i 25 e i 40 anni che apprezzano il comfort durante lunghe sessioni di lavoro.
 
