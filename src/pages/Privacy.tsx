@@ -7,7 +7,7 @@ const Privacy = () => {
       <Header />
       <main className="container py-12 flex-1">
         <div className="max-w-3xl mx-auto space-y-6">
-          <h1>Privacy Policy</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-foreground">Privacy Policy</h1>
           <p className="text-muted-foreground"><strong>Last updated:</strong> March 2026</p>
 
           <h2>1. Data Controller</h2>
