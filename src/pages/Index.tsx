@@ -11,6 +11,8 @@ import { PromptWizard } from "@/components/wizard/PromptWizard";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/i18n";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { NonniPopup } from "@/components/landing/NonniPopup";
 
 type View = "landing" | "wizard";
 
@@ -18,6 +20,7 @@ const Index = () => {
   const [view, setView] = useState<View>("landing");
   const location = useLocation();
   const t = useTranslation();
+  const { lang } = useLanguage();
 
   useEffect(() => {
     setView("landing");
@@ -49,6 +52,7 @@ const Index = () => {
           <CommunitySection />
         </>
       )}
+      {lang === "en" && view === "landing" && <NonniPopup />}
       <Footer />
     </div>
   );
