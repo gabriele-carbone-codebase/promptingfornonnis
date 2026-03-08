@@ -258,6 +258,7 @@ const MyPrompts = () => {
           )}
         </div>
       </main>
+      <Footer />
 
       {/* Delete confirmation */}
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
