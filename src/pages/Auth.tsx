@@ -8,11 +8,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
-import { Loader2, Mail, Lock, Heart } from "lucide-react";
+import { Loader2, Mail, Lock, Heart, User } from "lucide-react";
 import { z } from "zod";
 
 const emailSchema = z.string().trim().email({ message: "Please enter a valid email address" }).max(255);
 const passwordSchema = z.string().min(6, { message: "Password must be at least 6 characters" }).max(72);
+const displayNameSchema = z.string().trim().min(2, { message: "Username must be at least 2 characters" }).max(30, { message: "Username must be less than 30 characters" }).regex(/^[a-zA-Z0-9_.\- ]+$/, { message: "Only letters, numbers, spaces, dots, hyphens and underscores" });
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -22,8 +23,9 @@ const Auth = () => {
   const [activeTab, setActiveTab] = useState(searchParams.get("mode") === "signup" ? "signup" : "signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string; displayName?: string }>({});
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -32,8 +34,8 @@ const Auth = () => {
     }
   }, [isAuthenticated, authLoading, navigate]);
 
-  const validateForm = (): boolean => {
-    const newErrors: { email?: string; password?: string } = {};
+  const validateForm = (isSignUp = false): boolean => {
+    const newErrors: { email?: string; password?: string; displayName?: string } = {};
 
     const emailResult = emailSchema.safeParse(email);
     if (!emailResult.success) {
@@ -43,6 +45,13 @@ const Auth = () => {
     const passwordResult = passwordSchema.safeParse(password);
     if (!passwordResult.success) {
       newErrors.password = passwordResult.error.errors[0]?.message;
+    }
+
+    if (isSignUp) {
+      const nameResult = displayNameSchema.safeParse(displayName);
+      if (!nameResult.success) {
+        newErrors.displayName = nameResult.error.errors[0]?.message;
+      }
     }
 
     setErrors(newErrors);
@@ -73,10 +82,10 @@ const Auth = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm(true)) return;
 
     setLoading(true);
-    const { error } = await signUp(email, password);
+    const { error } = await signUp(email, password, displayName.trim());
     setLoading(false);
 
     if (error) {
@@ -188,6 +197,28 @@ const Auth = () => {
 
                 <TabsContent value="signup" className="mt-0">
                   <form onSubmit={handleSignUp} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="signup-name">Username</Label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                        <Input
+                          id="signup-name"
+                          type="text"
+                          placeholder="Your display name"
+                          value={displayName}
+                          onChange={(e) => {
+                            setDisplayName(e.target.value);
+                            setErrors((prev) => ({ ...prev, displayName: undefined }));
+                          }}
+                          className="pl-10"
+                          maxLength={30}
+                        />
+                      </div>
+                      {errors.displayName && (
+                        <p className="text-sm text-destructive">{errors.displayName}</p>
+                      )}
+                    </div>
+
                     <div className="space-y-2">
                       <Label htmlFor="signup-email">Email</Label>
                       <div className="relative">
