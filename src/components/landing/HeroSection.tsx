@@ -46,7 +46,7 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
               size="lg"
               variant="outline"
               asChild
-              className="text-lg px-6 gap-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm leading-snug"
+              className="text-base sm:text-lg px-4 sm:px-6 gap-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm leading-snug whitespace-nowrap"
             >
               <Link to="/use-cases">
                 <HelpCircle className="w-5 h-5 shrink-0" />
