@@ -7,6 +7,8 @@ import { TrainingSection } from "@/components/landing/TrainingSection";
 import { CommunitySection } from "@/components/landing/CommunitySection";
 import { PromptWizard } from "@/components/wizard/PromptWizard";
 import { DiscoveryWizard } from "@/components/discovery/DiscoveryWizard";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 type View = "landing" | "wizard" | "discovery";
 
@@ -19,10 +21,28 @@ const Index = () => {
       
       {view === "wizard" ? (
         <main className="container py-8">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setView("landing")}
+            className="mb-4 gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </Button>
           <PromptWizard />
         </main>
       ) : view === "discovery" ? (
-        <main>
+        <main className="container py-8">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setView("landing")}
+            className="mb-4 gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </Button>
           <DiscoveryWizard />
         </main>
       ) : (

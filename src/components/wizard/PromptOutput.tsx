@@ -148,7 +148,7 @@ export function PromptOutput({ generatedPrompt, promptData, onReset }: PromptOut
       <div className="text-center">
         <Button
           size="lg"
-          className="bg-[hsl(145,60%,40%)] hover:bg-[hsl(145,60%,35%)] text-white"
+          className="bg-success hover:bg-success/90 text-success-foreground"
           onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(generatedPrompt)}`, '_blank')}
         >
           <img src={chatgptLogo} alt="ChatGPT" className="w-5 h-5" />
