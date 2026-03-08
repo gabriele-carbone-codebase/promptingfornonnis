@@ -36,7 +36,7 @@ export function NonniPopup() {
           <X className="w-4 h-4" />
         </button>
         <p className="text-sm font-semibold mb-1">
-          🇮🇹 What does <em>"Nonni"</em> mean?
+          What does <em>"Nonni"</em> mean?
         </p>
         <p className="text-sm text-muted-foreground leading-relaxed">
           "Nonni" is the Italian word for "grandparents." This project was born to make AI technology accessible to everyone — no matter your age or tech experience.
