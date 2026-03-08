@@ -46,10 +46,11 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
               size="lg"
               variant="outline"
               asChild
-              className="text-lg px-6 gap-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
+              className="text-lg px-6 gap-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm leading-snug"
             >
               <Link to="/use-cases">
-                Explore Use Cases
+                <HelpCircle className="w-5 h-5 shrink-0" />
+                <span>I don't know what AI can do for me</span>
               </Link>
             </Button>
           </div>
