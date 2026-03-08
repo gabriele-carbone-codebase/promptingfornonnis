@@ -3,10 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import { useCasePrompts } from "@/data/useCasePrompts";
+import { useCasePromptsIt } from "@/data/useCasePrompts.it";
 import { useTranslation } from "@/i18n";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { LocalizedLink } from "@/components/LocalizedLink";
-
-const featured = useCasePrompts.slice(0, 4);
 
 const categoryColors: Record<string, string> = {
   Business: "bg-primary/10 text-primary border-primary/20",
@@ -18,6 +18,8 @@ const categoryColors: Record<string, string> = {
 
 export function UseCasesSection() {
   const t = useTranslation();
+  const { lang } = useLanguage();
+  const featured = (lang === "it" ? useCasePromptsIt : useCasePrompts).slice(0, 4);
 
   return (
     <section className="py-16 sm:py-20 bg-muted/40">
