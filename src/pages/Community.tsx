@@ -67,9 +67,9 @@ const Community = () => {
         display_name: profilesMap.get(p.user_id) || null,
       }));
       
-      setPrompts(promptsWithProfiles);
+      setPrompts([...promptsWithProfiles, ...fakeCommunityPrompts]);
     } else {
-      setPrompts([]);
+      setPrompts(fakeCommunityPrompts);
     }
     
     setLoading(false);
