@@ -28,6 +28,7 @@ const Community = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [userLikes, setUserLikes] = useState<Set<string>>(new Set());
+  const [likingIds, setLikingIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetchPrompts();
@@ -39,7 +40,6 @@ const Community = () => {
   const fetchPrompts = async () => {
     setLoading(true);
     
-    // First fetch public prompts
     const { data: promptsData, error: promptsError } = await supabase
       .from("prompts")
       .select("id, title, content, likes_count, created_at, user_id")
@@ -53,7 +53,6 @@ const Community = () => {
       return;
     }
 
-    // Then fetch profiles for those prompts
     if (promptsData && promptsData.length > 0) {
       const userIds = [...new Set(promptsData.map(p => p.user_id))];
       const { data: profilesData } = await supabase
@@ -103,44 +102,62 @@ const Community = () => {
     window.open(url, "_blank");
   };
 
+  const isFakePrompt = (id: string) => id.startsWith("fake-");
+
   const handleLike = async (promptId: string) => {
     if (!isAuthenticated) {
       toast.error("Sign in to like prompts");
       return;
     }
 
+    // Prevent liking fake prompts
+    if (isFakePrompt(promptId)) {
+      toast.info("This is an example prompt");
+      return;
+    }
+
+    // Prevent double-click
+    if (likingIds.has(promptId)) return;
+    setLikingIds(prev => new Set([...prev, promptId]));
+
     const isLiked = userLikes.has(promptId);
 
-    if (isLiked) {
-      // Unlike
-      const { error } = await supabase
-        .from("prompt_likes")
-        .delete()
-        .eq("prompt_id", promptId)
-        .eq("user_id", user!.id);
+    try {
+      if (isLiked) {
+        const { error } = await supabase
+          .from("prompt_likes")
+          .delete()
+          .eq("prompt_id", promptId)
+          .eq("user_id", user!.id);
 
-      if (!error) {
-        setUserLikes(prev => {
-          const next = new Set(prev);
-          next.delete(promptId);
-          return next;
-        });
-        setPrompts(prompts.map(p => 
-          p.id === promptId ? { ...p, likes_count: p.likes_count - 1 } : p
-        ));
-      }
-    } else {
-      // Like
-      const { error } = await supabase
-        .from("prompt_likes")
-        .insert({ prompt_id: promptId, user_id: user!.id });
+        if (!error) {
+          setUserLikes(prev => {
+            const next = new Set(prev);
+            next.delete(promptId);
+            return next;
+          });
+          setPrompts(prompts.map(p => 
+            p.id === promptId ? { ...p, likes_count: p.likes_count - 1 } : p
+          ));
+        }
+      } else {
+        const { error } = await supabase
+          .from("prompt_likes")
+          .insert({ prompt_id: promptId, user_id: user!.id });
 
-      if (!error) {
-        setUserLikes(prev => new Set([...prev, promptId]));
-        setPrompts(prompts.map(p => 
-          p.id === promptId ? { ...p, likes_count: p.likes_count + 1 } : p
-        ));
+        if (!error) {
+          setUserLikes(prev => new Set([...prev, promptId]));
+          setPrompts(prompts.map(p => 
+            p.id === promptId ? { ...p, likes_count: p.likes_count + 1 } : p
+          ));
+        }
       }
+    } finally {
+      setLikingIds(prev => {
+        const next = new Set(prev);
+        next.delete(promptId);
+        return next;
+      });
     }
   };
 
@@ -172,6 +189,7 @@ const Community = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
+              aria-label="Search community prompts"
             />
           </div>
 
@@ -216,50 +234,53 @@ const Community = () => {
               {filteredPrompts.map((prompt) => (
                 <Card key={prompt.id} className="shadow-card hover:shadow-soft transition-shadow">
                   <CardContent className="p-4">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-medium text-foreground">
+                    <div className="space-y-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-medium text-foreground line-clamp-1">
                             {prompt.title}
                           </h3>
-                          <Badge variant="secondary" className="text-xs">
+                          <Badge variant="secondary" className="text-xs mt-1">
                             by {prompt.display_name || "Anonymous"}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground line-clamp-3 whitespace-pre-wrap">
-                          {prompt.content}
-                        </p>
-                        <div className="flex items-center gap-4 mt-3 text-xs text-muted-foreground">
-                          <span>
-                            {new Date(prompt.created_at).toLocaleDateString()}
-                          </span>
-                        </div>
                       </div>
-                      <div className="flex items-center gap-1 flex-shrink-0">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleLike(prompt.id)}
-                          className={userLikes.has(prompt.id) ? "text-destructive" : ""}
-                        >
-                          <Heart className={`w-4 h-4 mr-1 ${userLikes.has(prompt.id) ? "fill-current" : ""}`} />
-                          {prompt.likes_count}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleCopy(prompt.content)}
-                        >
-                          <Copy className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleOpenChatGPT(prompt.content)}
-                          title="Open in ChatGPT"
-                        >
-                          <img src={chatgptLogo} alt="ChatGPT" className="w-4 h-4" />
-                        </Button>
+                      <p className="text-sm text-muted-foreground line-clamp-3 whitespace-pre-wrap">
+                        {prompt.content}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(prompt.created_at).toLocaleDateString()}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleLike(prompt.id)}
+                            className={userLikes.has(prompt.id) ? "text-destructive" : ""}
+                            disabled={likingIds.has(prompt.id)}
+                            aria-label={userLikes.has(prompt.id) ? "Unlike prompt" : "Like prompt"}
+                          >
+                            <Heart className={`w-4 h-4 mr-1 ${userLikes.has(prompt.id) ? "fill-current" : ""}`} />
+                            {prompt.likes_count}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleCopy(prompt.content)}
+                            aria-label="Copy prompt"
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleOpenChatGPT(prompt.content)}
+                            aria-label="Open in ChatGPT"
+                          >
+                            <img src={chatgptLogo} alt="" className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </CardContent>
