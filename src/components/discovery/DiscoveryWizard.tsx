@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, ArrowRight, Copy, Check, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, ExternalLink } from "lucide-react";
+import chatgptLogo from "@/assets/chatgpt-logo.svg";
 import { toast } from "@/components/ui/sonner";
 import {
   AgeBucket,
