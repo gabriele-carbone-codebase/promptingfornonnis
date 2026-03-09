@@ -83,7 +83,7 @@ export function TrainingProgress({
               <div className="flex-1 min-w-0">
                 <h3
                   className={cn(
-                    "font-medium truncate",
+                    "font-medium",
                     isCurrent && "text-primary",
                     isCompleted && "text-foreground",
                     !isCompleted && !isCurrent && "text-foreground"
@@ -91,7 +91,7 @@ export function TrainingProgress({
                 >
                   {t.training.lessonPrefix} {lessonNumber}: {lessonTitles[i]}
                 </h3>
-                <p className="text-sm text-muted-foreground truncate">
+                <p className="text-sm text-muted-foreground">
                   {isCompleted
                     ? t.training.completed
                     : isCurrent
@@ -139,7 +139,7 @@ export function TrainingProgress({
             >
               {t.training.finalQuiz}
             </h3>
-            <p className="text-sm text-muted-foreground truncate">
+            <p className="text-sm text-muted-foreground">
               {allLessonsComplete
                 ? t.training.finalQuizUnlocked
                 : t.training.finalQuizLocked}
