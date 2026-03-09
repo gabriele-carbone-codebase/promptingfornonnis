@@ -1,69 +1,58 @@
 
 
-# "I Don't Know What AI Can Do For Me" Discovery Flow
+## Plan: Replace screenshot-based certificate with a proper PDF download
 
-## Summary
-Add a secondary CTA button in the hero section that leads users through a short 2-step questionnaire (age group, then age-appropriate activities), and then displays matching use cases from the existing prompt library.
+### Problem
+On mobile, the current certificate is rendered as an HTML card and "downloaded" via `html2canvas` as a PNG screenshot, which produces poor quality on small screens and doesn't scale well.
 
----
+### Solution
+Replace the `html2canvas` PNG download with a proper **PDF certificate** generated client-side using the browser's built-in `window.print()` / CSS `@media print` approach — or more reliably, using a lightweight PDF generation approach with a hidden print-optimized layout.
 
-## User Flow
+Since we want a **standard, clean PDF** and not a screenshot, the best approach for a frontend-only app is to generate the PDF using **canvas-based rendering** or a simple **print-to-PDF** flow. Given we already have `html2canvas`, we can pair it with a lightweight PDF library. However, to keep it truly clean and vector-based, the simplest robust approach is:
 
-1. User clicks **"I don't know what AI can do for me"** in the hero section
-2. **Step 1 -- Age**: User picks an age bucket (Under 15, 15-25, 25-40, 40-60, 60+)
-3. **Step 2 -- Activities**: Based on the selected age, user sees a relevant set of activities to choose from (multi-select). For example, a 60+ user might see "Writing letters", "Planning travel", "Cooking", "Staying in touch with family"; a 25-40 user might see "Managing a team", "Side projects", "Social media", "Job hunting"
-4. **Results**: A filtered list of use cases from the existing `useCasePrompts` data is shown, matching the selected activities. Each card can be copied or opened in the prompt builder.
+**Use a dedicated print-friendly certificate layout + `window.print()`** with `@media print` CSS that hides everything except the certificate. This produces a proper PDF on all devices (mobile included, via "Save as PDF" in print dialog).
 
----
+But for a seamless "Download PDF" button experience without the print dialog, we should use **jsPDF** (lightweight library).
 
-## What Changes
+### Changes
 
-### New files
+**1. Add `jspdf` dependency**
 
-**`src/components/discovery/DiscoveryWizard.tsx`**
-- A self-contained multi-step component managing state for age selection, activity selection, and results display
-- Step 1: Radio-button cards for age buckets
-- Step 2: Checkbox cards for activities (list varies by age bucket)
-- Step 3: Filtered use case cards with copy button, reusing the existing `useCasePrompts` data
+**2. Prompt user for name if not provided**
+- Add a new intermediate state `"name_prompt"` in `Training.tsx` between quiz completion and certificate display
+- Show a simple dialog/input asking for the user's name before showing the certificate
+- Pre-fill with auth user's display name if available
 
-**`src/data/discoveryActivities.ts`**
-- Data file mapping each age bucket to a list of activities
-- Each activity maps to one or more use case categories (Business, Education, Creative, Marketing, Personal) used to filter results
+**3. Rewrite `ShareButtons.tsx` download handler**
+- Replace `html2canvas` PNG approach with `jsPDF` to generate a proper vector PDF
+- The PDF will contain:
+  - Title: "Certificate of Completion" / "Certificato di completamento"
+  - Course name
+  - User name
+  - Grade, Score, Accuracy
+  - Completion date
+  - Clean layout that works identically on mobile and desktop
 
-### Modified files
+**4. Update `Certificate.tsx`**
+- Accept `userName` as required (after name prompt step)
+- Keep the visual HTML card for on-screen display (it looks good)
+- The download button produces the PDF separately (not a screenshot of the card)
 
-**`src/components/landing/HeroSection.tsx`**
-- Add an `onDiscover` callback prop alongside existing `onStartBuilding`
-- Add a secondary button: outlined/ghost style, white text, labeled "I don't know what AI can do for me" with a HelpCircle icon
-- Both buttons sit side-by-side on desktop, stacked on mobile
+**5. Update `Training.tsx`**
+- Add `"name_prompt"` state after quiz completion
+- Add name input UI (simple card with text input + confirm button)
+- Pass confirmed name to Certificate component
 
-**`src/pages/Index.tsx`**
-- Add a new state `showDiscovery` (alongside existing `showWizard`)
-- When `showDiscovery` is true, render `<DiscoveryWizard />` instead of the landing sections
-- Pass `onDiscover` callback to `HeroSection`
+**6. Add translations (both EN and IT)**
+- "Enter your name for the certificate" / "Inserisci il tuo nome per il certificato"
+- "Your name" / "Il tuo nome"
+- "Generate Certificate" / "Genera certificato"
 
----
-
-## Technical Details
-
-### Age-to-Activities Mapping (example)
-
-| Age Bucket | Activities |
-|---|---|
-| Under 15 | Homework help, Creative writing, Learning new things, Fun projects |
-| 15-25 | Study & exams, Job applications, Social media content, Creative projects |
-| 25-40 | Work emails, Marketing, Meal planning, Side projects, Job hunting |
-| 40-60 | Business communication, Travel planning, Learning tech, Health & fitness |
-| 60+ | Writing letters, Cooking recipes, Staying connected with family, Travel, Understanding technology |
-
-### Activity-to-Category Mapping (example)
-
-Each activity maps to one or more categories from `useCasePrompts` (Business, Education, Creative, Marketing, Personal). The results step filters the 20 existing prompts by the union of categories matched by selected activities.
-
-### Component Structure
-
-The `DiscoveryWizard` uses simple `useState` for step tracking, selected age, and selected activities. No backend or database needed -- everything is client-side using existing data.
-
-### No new dependencies
-Uses existing UI components: Card, Button, Badge, Checkbox, RadioGroup.
+### Files to modify
+- `package.json` — add `jspdf`
+- `src/pages/Training.tsx` — add name prompt state
+- `src/components/training/ShareButtons.tsx` — replace html2canvas with jsPDF
+- `src/components/training/Certificate.tsx` — minor props adjustment
+- `src/i18n/translations/en.ts` — add name prompt strings
+- `src/i18n/translations/it.ts` — add name prompt strings
 
