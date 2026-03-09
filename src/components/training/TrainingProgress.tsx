@@ -82,10 +82,8 @@ export function TrainingProgress({
               <div className="flex-1 min-w-0">
                 <h3
                   className={cn(
-                    "font-medium",
-                    isCurrent && "text-primary",
-                    isCompleted && "text-foreground",
-                    !isCompleted && !isCurrent && "text-foreground"
+                    "font-medium text-foreground",
+                    isCurrent && !isCompleted && "text-primary"
                   )}
                 >
                   {t.training.lessonPrefix} {lessonNumber}: {lessonTitles[i]}
