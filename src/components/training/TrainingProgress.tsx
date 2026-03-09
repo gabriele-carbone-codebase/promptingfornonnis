@@ -91,7 +91,7 @@ export function TrainingProgress({
                 >
                   {t.training.lessonPrefix} {lessonNumber}: {lessonTitles[i]}
                 </h3>
-                <p className="text-sm text-muted-foreground truncate">
+                <p className="text-sm text-muted-foreground">
                   {isCompleted
                     ? t.training.completed
                     : isCurrent
