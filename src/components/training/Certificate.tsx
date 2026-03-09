@@ -84,19 +84,19 @@ export function Certificate({ userName, score, total, completionDate }: Certific
             <p className="text-2xl font-semibold text-foreground">{userName}</p>
           </div>
 
-          <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-primary/5 border border-primary/20">
-            <div className="text-center">
-              <p className="text-3xl font-bold text-primary">{grade}</p>
+          <div className="flex items-center justify-center gap-3 sm:gap-4 px-4 sm:px-6 py-3 rounded-full bg-primary/5 border border-primary/20 max-w-full">
+            <div className="text-center min-w-0">
+              <p className="text-2xl sm:text-3xl font-bold text-primary">{grade}</p>
               <p className="text-xs text-muted-foreground">{t.certificate.grade}</p>
             </div>
-            <div className="w-px h-10 bg-border" />
-            <div className="text-center">
-              <p className="text-3xl font-bold text-foreground">{score}/{total}</p>
+            <div className="w-px h-10 bg-border shrink-0" />
+            <div className="text-center min-w-0">
+              <p className="text-2xl sm:text-3xl font-bold text-foreground">{score}/{total}</p>
               <p className="text-xs text-muted-foreground">{t.certificate.score}</p>
             </div>
-            <div className="w-px h-10 bg-border" />
-            <div className="text-center">
-              <p className="text-3xl font-bold text-foreground">{percentage}%</p>
+            <div className="w-px h-10 bg-border shrink-0" />
+            <div className="text-center min-w-0">
+              <p className="text-2xl sm:text-3xl font-bold text-foreground">{percentage}%</p>
               <p className="text-xs text-muted-foreground">{t.certificate.accuracy}</p>
             </div>
           </div>
