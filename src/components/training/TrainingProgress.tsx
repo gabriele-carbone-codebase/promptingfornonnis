@@ -56,8 +56,8 @@ export function TrainingProgress({
               disabled={isLocked}
               className={cn(
                 "flex items-center gap-4 p-4 rounded-lg border text-left transition-all duration-200",
-                isCurrent && "border-primary bg-primary/5 shadow-soft",
-                isCompleted && !isCurrent && "border-success/50 bg-success/5",
+                isCurrent && !isCompleted && "border-primary bg-primary/5 shadow-soft",
+                isCompleted && "border-success/50 bg-success/5",
                 !isCompleted && !isCurrent && !isLocked && "border-border hover:border-primary/50 hover:bg-muted/50",
                 isLocked && "opacity-50 cursor-not-allowed"
               )}
@@ -67,8 +67,7 @@ export function TrainingProgress({
                   "w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0",
                   isCompleted && "bg-success text-success-foreground",
                   isCurrent && !isCompleted && "bg-primary text-primary-foreground",
-                  !isCompleted && !isCurrent && !isLocked && "bg-muted text-muted-foreground",
-                  isLocked && "bg-muted text-muted-foreground"
+                  !isCompleted && !isCurrent && "bg-muted text-muted-foreground"
                 )}
               >
                 {isCompleted ? (
@@ -83,10 +82,8 @@ export function TrainingProgress({
               <div className="flex-1 min-w-0">
                 <h3
                   className={cn(
-                    "font-medium",
-                    isCurrent && "text-primary",
-                    isCompleted && "text-foreground",
-                    !isCompleted && !isCurrent && "text-foreground"
+                    "font-medium text-foreground",
+                    isCurrent && !isCompleted && "text-primary"
                   )}
                 >
                   {t.training.lessonPrefix} {lessonNumber}: {lessonTitles[i]}
