@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { TrainingProgress } from "@/components/training/TrainingProgress";
@@ -15,6 +15,7 @@ import { ArrowLeft, Award } from "lucide-react";
 import { useTranslation } from "@/i18n/useTranslation";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useTrainingProgress } from "@/hooks/useTrainingProgress";
 
 type TrainingState = 
   | "lessons_hub"
