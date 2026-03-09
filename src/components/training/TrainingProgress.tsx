@@ -56,8 +56,8 @@ export function TrainingProgress({
               disabled={isLocked}
               className={cn(
                 "flex items-center gap-4 p-4 rounded-lg border text-left transition-all duration-200",
-                isCurrent && "border-primary bg-primary/5 shadow-soft",
-                isCompleted && !isCurrent && "border-success/50 bg-success/5",
+                isCurrent && !isCompleted && "border-primary bg-primary/5 shadow-soft",
+                isCompleted && "border-success/50 bg-success/5",
                 !isCompleted && !isCurrent && !isLocked && "border-border hover:border-primary/50 hover:bg-muted/50",
                 isLocked && "opacity-50 cursor-not-allowed"
               )}
