@@ -139,7 +139,7 @@ export function TrainingProgress({
             >
               {t.training.finalQuiz}
             </h3>
-            <p className="text-sm text-muted-foreground truncate">
+            <p className="text-sm text-muted-foreground">
               {allLessonsComplete
                 ? t.training.finalQuizUnlocked
                 : t.training.finalQuizLocked}
