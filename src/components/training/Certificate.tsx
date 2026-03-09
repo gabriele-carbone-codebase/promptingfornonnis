@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trophy, Heart, ArrowRight } from "lucide-react";
@@ -8,7 +7,7 @@ import { useTranslation } from "@/i18n/useTranslation";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 interface CertificateProps {
-  userName?: string;
+  userName: string;
   score: number;
   total: number;
   completionDate: Date;
@@ -17,10 +16,8 @@ interface CertificateProps {
 export function Certificate({ userName, score, total, completionDate }: CertificateProps) {
   const t = useTranslation();
   const { lang, localePath } = useLanguage();
-  const certificateRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   
-  const displayName = userName || t.certificate.defaultName;
   const percentage = Math.round((score / total) * 100);
   const formattedDate = completionDate.toLocaleDateString(lang === "it" ? "it-IT" : "en-US", {
     year: "numeric",
@@ -56,10 +53,7 @@ export function Certificate({ userName, score, total, completionDate }: Certific
         </p>
       </div>
 
-      <Card
-        ref={certificateRef}
-        className="relative overflow-hidden border-2 border-primary/20 shadow-xl"
-      >
+      <Card className="relative overflow-hidden border-2 border-primary/20 shadow-xl">
         <div className="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-primary/30 rounded-tl-lg" />
         <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-primary/30 rounded-tr-lg" />
         <div className="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-primary/30 rounded-bl-lg" />
@@ -87,7 +81,7 @@ export function Certificate({ userName, score, total, completionDate }: Certific
 
           <div className="space-y-1">
             <p className="text-sm text-muted-foreground">{t.certificate.awardedTo}</p>
-            <p className="text-2xl font-semibold text-foreground">{displayName}</p>
+            <p className="text-2xl font-semibold text-foreground">{userName}</p>
           </div>
 
           <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-primary/5 border border-primary/20">
@@ -117,7 +111,14 @@ export function Certificate({ userName, score, total, completionDate }: Certific
         <p className="text-center text-sm text-muted-foreground">
           {t.certificate.shareAchievement}
         </p>
-        <ShareButtons certificateRef={certificateRef} score={score} total={total} />
+        <ShareButtons
+          userName={userName}
+          score={score}
+          total={total}
+          completionDate={completionDate}
+          grade={grade}
+          percentage={percentage}
+        />
       </div>
 
       <div className="flex justify-center pt-4">

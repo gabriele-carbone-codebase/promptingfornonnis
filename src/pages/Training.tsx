@@ -8,25 +8,33 @@ import { Certificate } from "@/components/training/Certificate";
 import { lessons as lessonsEn } from "@/data/lessons";
 import { lessonsIt } from "@/data/lessons.it";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
+import { ArrowLeft, Award } from "lucide-react";
 import { useTranslation } from "@/i18n/useTranslation";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useAuth } from "@/hooks/useAuth";
 
 type TrainingState = 
   | "lessons_hub"
   | "lesson_active"
   | "final_quiz_active"
+  | "name_prompt"
   | "certificate";
 
 const Training = () => {
   const t = useTranslation();
   const { lang } = useLanguage();
+  const { user } = useAuth();
   const lessons = lang === "it" ? lessonsIt : lessonsEn;
 
   const [trainingState, setTrainingState] = useState<TrainingState>("lessons_hub");
   const [currentLesson, setCurrentLesson] = useState(1);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
   const [finalQuizScore, setFinalQuizScore] = useState({ score: 0, total: 0 });
+  const [userName, setUserName] = useState("");
+  const [nameInput, setNameInput] = useState("");
 
   const totalLessons = lessons.length;
   const allLessonsComplete = completedLessons.length === totalLessons;
@@ -53,6 +61,16 @@ const Training = () => {
 
   const handleFinalQuizComplete = (score: number, total: number) => {
     setFinalQuizScore({ score, total });
+    // Pre-fill with auth user's display name if available
+    const prefill = user?.user_metadata?.display_name || "";
+    setNameInput(prefill);
+    setTrainingState("name_prompt");
+  };
+
+  const handleNameSubmit = () => {
+    const name = nameInput.trim();
+    if (!name) return;
+    setUserName(name);
     setTrainingState("certificate");
   };
 
@@ -65,10 +83,46 @@ const Training = () => {
       <main className="container py-8">
         {trainingState === "certificate" ? (
           <Certificate
+            userName={userName}
             score={finalQuizScore.score}
             total={finalQuizScore.total}
             completionDate={new Date()}
           />
+        ) : trainingState === "name_prompt" ? (
+          <div className="w-full max-w-md mx-auto space-y-6 animate-fade-in">
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-2">
+                <Award className="w-8 h-8 text-primary" />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+                {t.certificate.namePrompt.title}
+              </h1>
+              <p className="text-muted-foreground">
+                {t.certificate.namePrompt.subtitle}
+              </p>
+            </div>
+            <Card className="p-6 space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="certificate-name">{t.certificate.namePrompt.placeholder}</Label>
+                <Input
+                  id="certificate-name"
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                  placeholder={t.certificate.namePrompt.placeholder}
+                  onKeyDown={(e) => e.key === "Enter" && handleNameSubmit()}
+                  autoFocus
+                />
+              </div>
+              <Button
+                onClick={handleNameSubmit}
+                disabled={!nameInput.trim()}
+                className="w-full"
+                size="lg"
+              >
+                {t.certificate.namePrompt.continue}
+              </Button>
+            </Card>
+          </div>
         ) : trainingState === "final_quiz_active" ? (
           <FinalQuiz
             onComplete={handleFinalQuizComplete}
