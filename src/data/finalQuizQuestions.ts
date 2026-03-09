@@ -11,50 +11,50 @@ export interface FinalQuizQuestion {
 }
 
 export const finalQuizQuestions: FinalQuizQuestion[] = [
-  // Concept 1: More text is better (Questions 1-4)
+  // Concept 1: More context is better (Questions 1-4)
   {
     id: 1,
-    concept: "More text is better",
+    concept: "More context is better",
     question: "You want AI to write a blog post. Which prompt will give you the best result?",
     options: [
       { id: "a", text: "Write a blog post about productivity", isCorrect: false },
-      { id: "b", text: "Write a 800-word blog post about productivity tips for remote workers, with 5 actionable tips, a friendly tone, and include a personal anecdote in the intro", isCorrect: true },
+      { id: "b", text: "Write an 800-word blog post with productivity tips for remote workers. I run a small HR consultancy and this is for our company newsletter. Use a friendly tone and include 5 actionable tips.", isCorrect: true },
       { id: "c", text: "Blog post please", isCorrect: false },
     ],
-    explanation: "The detailed prompt specifies length, topic focus, structure (5 tips), tone, and style elements. This gives the AI everything it needs.",
+    explanation: "The context-rich prompt shares who you are, who the audience is, where it will be published, and what style to use. This background produces a far more relevant result.",
   },
   {
     id: 2,
-    concept: "More text is better",
-    question: "What's the main reason detailed prompts work better?",
+    concept: "More context is better",
+    question: "What's the main reason context-rich prompts work better?",
     options: [
       { id: "a", text: "They show the AI you're serious", isCorrect: false },
-      { id: "b", text: "They eliminate guesswork and narrow down possibilities", isCorrect: true },
+      { id: "b", text: "They remove assumptions by telling the AI the purpose, audience, and constraints", isCorrect: true },
       { id: "c", text: "They take longer to process so the AI tries harder", isCorrect: false },
     ],
-    explanation: "Every detail you add removes an assumption the AI would have to make. Fewer assumptions = more accurate results.",
+    explanation: "Context — like who it's for, why you need it, and any constraints — eliminates guesswork. It's not about writing more words, but giving the right background.",
   },
   {
     id: 3,
-    concept: "More text is better",
-    question: "Which detail would NOT improve a prompt asking for a recipe?",
+    concept: "More context is better",
+    question: "Which piece of context would NOT improve a prompt asking for a recipe?",
     options: [
       { id: "a", text: "Specifying dietary restrictions", isCorrect: false },
       { id: "b", text: "Mentioning the current weather outside", isCorrect: true },
       { id: "c", text: "Stating available cooking time", isCorrect: false },
     ],
-    explanation: "Details should be relevant. Weather rarely affects recipe choice, but dietary needs and time constraints are crucial information.",
+    explanation: "Good context is relevant context. Weather rarely affects recipe choice, but dietary needs and time constraints directly shape the answer.",
   },
   {
     id: 4,
-    concept: "More text is better",
-    question: "You need help with a presentation. What information should you include?",
+    concept: "More context is better",
+    question: "You need help with a presentation. What context should you include?",
     options: [
       { id: "a", text: "Just the topic", isCorrect: false },
       { id: "b", text: "Topic, audience, length, purpose, and key points to cover", isCorrect: true },
       { id: "c", text: "Only the number of slides", isCorrect: false },
     ],
-    explanation: "All these details help tailor the presentation. Who's watching, why they're watching, and what they should learn are all crucial.",
+    explanation: "All this context helps tailor the presentation. Who's watching, why they're watching, and what they should take away are essential background for the AI.",
   },
 
   // Concept 2: Ask what info is needed (Questions 5-8)
