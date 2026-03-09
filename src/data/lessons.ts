@@ -21,10 +21,10 @@ export interface Lesson {
 export const lessons: Lesson[] = [
   {
     id: 1,
-    title: "More text is better",
-    concept: "Details matter",
-    description: "AI chatbots work best when you give them lots of details. The more specific you are, the better the results. AI hates guessing!",
-    tip: "Think of it like giving directions: 'Go to the store' vs 'Go to the grocery store on Main Street, the one with the red sign, and buy fresh tomatoes for pasta sauce.'",
+    title: "More context is better",
+    concept: "Context matters",
+    description: "AI chatbots work best when you provide context — who you are, what you need, why you need it, and who it's for. The more background you give, the better the results!",
+    tip: "Think of it like asking a friend for help: 'Help me write something' vs 'I'm a teacher writing a note to parents about a school trip next Friday. It should be warm but informative, about 3 sentences.'",
     quiz: [
       {
         id: 1,
@@ -34,47 +34,47 @@ export const lessons: Lesson[] = [
           { id: "b", text: "Write a professional email to my manager asking for Friday off next week. Keep it polite but brief, about 3 sentences.", isCorrect: true },
           { id: "c", text: "Email please", isCorrect: false },
         ],
-        explanation: "The detailed prompt tells the AI exactly what you need: the type of email, who it's for, the purpose, tone, and length. This leaves no room for guessing!",
+        explanation: "The context-rich prompt tells the AI the purpose, audience, tone, and length. This background eliminates guesswork and produces a relevant result.",
       },
       {
         id: 2,
         question: "What's wrong with the prompt: 'Help me cook dinner'?",
         options: [
-          { id: "a", text: "It's too vague - doesn't specify cuisine, ingredients, skill level, or time available", isCorrect: true },
+          { id: "a", text: "It lacks context — no cuisine, ingredients, skill level, or time available", isCorrect: true },
           { id: "b", text: "It's too long and complicated", isCorrect: false },
           { id: "c", text: "Nothing wrong, it's perfect", isCorrect: false },
         ],
-        explanation: "Without knowing what ingredients you have, your cooking skill, dietary restrictions, or how much time you have, the AI has to guess everything!",
+        explanation: "Without context about your ingredients, cooking skill, dietary needs, or available time, the AI has no background to tailor its answer to your situation.",
       },
       {
         id: 3,
-        question: "Which detail helps the AI most when writing content?",
+        question: "Which type of information helps the AI most when writing content?",
         options: [
           { id: "a", text: "Saying 'write fast'", isCorrect: false },
-          { id: "b", text: "Specifying the word count, like '500 words'", isCorrect: true },
+          { id: "b", text: "Providing context: who will read it, why, and in what format", isCorrect: true },
           { id: "c", text: "Adding 'thanks' at the end", isCorrect: false },
         ],
-        explanation: "Concrete details like word count, format, or structure give the AI a clear target. Vague instructions or pleasantries don't improve output quality.",
+        explanation: "Context about the audience, purpose, and format gives the AI a clear picture. Vague instructions or pleasantries don't improve output quality.",
       },
       {
         id: 4,
-        question: "Pick the most specific prompt:",
+        question: "Pick the prompt with the best context:",
         options: [
           { id: "a", text: "Make a logo", isCorrect: false },
           { id: "b", text: "Design a blue minimalist logo for a coffee shop called 'Bean & Brew' targeting young professionals", isCorrect: true },
           { id: "c", text: "Logo for business", isCorrect: false },
         ],
-        explanation: "The second prompt includes color, style, business name, business type, and target audience - giving the AI everything it needs to create something relevant.",
+        explanation: "This prompt provides context about the brand, style, audience, and purpose — giving the AI everything it needs to create something relevant.",
       },
       {
         id: 5,
-        question: "Why do detailed prompts work better?",
+        question: "Why does providing context work better than just writing more words?",
         options: [
           { id: "a", text: "AI enjoys reading longer text", isCorrect: false },
-          { id: "b", text: "Less guessing means more accurate results", isCorrect: true },
+          { id: "b", text: "Context removes assumptions and helps the AI understand your real need", isCorrect: true },
           { id: "c", text: "It's considered polite to the AI", isCorrect: false },
         ],
-        explanation: "When you provide specifics, the AI doesn't have to make assumptions. Every detail you add narrows down the possibilities to what you actually want.",
+        explanation: "It's not about writing more — it's about giving the right background. Context like purpose, audience, and constraints helps the AI focus on what you actually need.",
       },
     ],
   },

@@ -3,10 +3,10 @@ import type { Lesson } from "./lessons";
 export const lessonsIt: Lesson[] = [
   {
     id: 1,
-    title: "Più testo è meglio",
-    concept: "I dettagli contano",
-    description: "I chatbot AI funzionano meglio quando dai loro molti dettagli. Più sei specifico, migliori saranno i risultati. L'IA odia indovinare!",
-    tip: "Pensala come dare indicazioni stradali: 'Vai al negozio' vs 'Vai al supermercato in Via Roma, quello con l'insegna rossa, e compra pomodori freschi per il sugo alla pasta.'",
+    title: "Più contesto è meglio",
+    concept: "Il contesto conta",
+    description: "I chatbot AI funzionano meglio quando fornisci contesto — chi sei, cosa ti serve, perché ti serve e per chi è. Più informazioni di sfondo dai, migliori saranno i risultati!",
+    tip: "Pensala come chiedere aiuto a un amico: 'Aiutami a scrivere qualcosa' vs 'Sono un insegnante e devo scrivere un avviso ai genitori su una gita scolastica venerdì prossimo. Deve essere caloroso ma informativo, circa 3 frasi.'",
     quiz: [
       {
         id: 1,
@@ -16,47 +16,47 @@ export const lessonsIt: Lesson[] = [
           { id: "b", text: "Scrivi un'email professionale al mio responsabile per chiedere il venerdì libero la prossima settimana. Mantieni un tono cortese ma breve, circa 3 frasi.", isCorrect: true },
           { id: "c", text: "Email per favore", isCorrect: false },
         ],
-        explanation: "Il prompt dettagliato dice all'IA esattamente cosa serve: il tipo di email, per chi, lo scopo, il tono e la lunghezza. Non lascia spazio alle supposizioni!",
+        explanation: "Il prompt ricco di contesto dice all'IA lo scopo, il destinatario, il tono e la lunghezza. Questo sfondo elimina le supposizioni e produce un risultato pertinente.",
       },
       {
         id: 2,
         question: "Cosa c'è di sbagliato nel prompt: 'Aiutami a cucinare la cena'?",
         options: [
-          { id: "a", text: "È troppo vago - non specifica cucina, ingredienti, livello di abilità o tempo disponibile", isCorrect: true },
+          { id: "a", text: "Manca il contesto — niente cucina, ingredienti, livello di abilità o tempo disponibile", isCorrect: true },
           { id: "b", text: "È troppo lungo e complicato", isCorrect: false },
           { id: "c", text: "Niente di sbagliato, è perfetto", isCorrect: false },
         ],
-        explanation: "Senza sapere quali ingredienti hai, la tua abilità in cucina, le restrizioni alimentari o quanto tempo hai, l'IA deve indovinare tutto!",
+        explanation: "Senza contesto sui tuoi ingredienti, abilità in cucina, esigenze alimentari o tempo disponibile, l'IA non ha le informazioni di base per adattare la risposta alla tua situazione.",
       },
       {
         id: 3,
-        question: "Quale dettaglio aiuta di più l'IA quando scrive contenuti?",
+        question: "Quale tipo di informazione aiuta di più l'IA quando scrive contenuti?",
         options: [
           { id: "a", text: "Dire 'scrivi veloce'", isCorrect: false },
-          { id: "b", text: "Specificare il numero di parole, come '500 parole'", isCorrect: true },
+          { id: "b", text: "Fornire contesto: chi leggerà, perché e in quale formato", isCorrect: true },
           { id: "c", text: "Aggiungere 'grazie' alla fine", isCorrect: false },
         ],
-        explanation: "Dettagli concreti come il numero di parole, il formato o la struttura danno all'IA un obiettivo chiaro. Istruzioni vaghe o cortesie non migliorano la qualità dell'output.",
+        explanation: "Il contesto sul pubblico, lo scopo e il formato dà all'IA un quadro chiaro. Istruzioni vaghe o cortesie non migliorano la qualità dell'output.",
       },
       {
         id: 4,
-        question: "Scegli il prompt più specifico:",
+        question: "Scegli il prompt con il contesto migliore:",
         options: [
           { id: "a", text: "Fai un logo", isCorrect: false },
           { id: "b", text: "Progetta un logo blu minimalista per un bar chiamato 'Caffè & Gusto' rivolto a giovani professionisti", isCorrect: true },
           { id: "c", text: "Logo per attività", isCorrect: false },
         ],
-        explanation: "Il secondo prompt include colore, stile, nome dell'attività, tipo di attività e pubblico target - dando all'IA tutto il necessario per creare qualcosa di rilevante.",
+        explanation: "Questo prompt fornisce contesto sul brand, lo stile, il pubblico e lo scopo — dando all'IA tutto il necessario per creare qualcosa di rilevante.",
       },
       {
         id: 5,
-        question: "Perché i prompt dettagliati funzionano meglio?",
+        question: "Perché fornire contesto funziona meglio che scrivere semplicemente più parole?",
         options: [
           { id: "a", text: "L'IA si diverte a leggere testi più lunghi", isCorrect: false },
-          { id: "b", text: "Meno supposizioni significano risultati più accurati", isCorrect: true },
+          { id: "b", text: "Il contesto elimina le ipotesi e aiuta l'IA a capire la tua vera esigenza", isCorrect: true },
           { id: "c", text: "È considerato educato verso l'IA", isCorrect: false },
         ],
-        explanation: "Quando fornisci dettagli specifici, l'IA non deve fare ipotesi. Ogni dettaglio che aggiungi restringe le possibilità a ciò che vuoi davvero.",
+        explanation: "Non si tratta di scrivere di più — si tratta di dare le giuste informazioni di sfondo. Contesto come scopo, pubblico e vincoli aiuta l'IA a concentrarsi su ciò di cui hai davvero bisogno.",
       },
     ],
   },
