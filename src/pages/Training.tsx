@@ -51,16 +51,12 @@ const Training = () => {
   const [currentLesson, setCurrentLesson] = useState(1);
 
   // Sync currentLesson when progress loads
-  useState(() => {
-    if (!progressLoading) {
-      setCurrentLesson(initialLesson);
-    }
-  });
+  useMemo(() => {
+    setCurrentLesson(initialLesson);
+  }, [initialLesson]);
 
   const handleLessonComplete = () => {
-    if (!completedLessons.includes(currentLesson)) {
-      setCompletedLessons((prev) => [...prev, currentLesson]);
-    }
+    markLessonComplete(currentLesson);
     setTrainingState("lessons_hub");
   };
 
