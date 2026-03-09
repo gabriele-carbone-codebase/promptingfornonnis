@@ -1,69 +1,32 @@
 
 
-# "I Don't Know What AI Can Do For Me" Discovery Flow
+## Plan: Rename Lesson 1 from "More text is better" to "More context is better"
 
-## Summary
-Add a secondary CTA button in the hero section that leads users through a short 2-step questionnaire (age group, then age-appropriate activities), and then displays matching use cases from the existing prompt library.
+### Scope
+Update lesson 1's title, description, tip, quiz questions/explanations, and final exam questions in **both EN and IT** files to reflect the concept of "more context" rather than "more text."
 
----
+### Files to edit
 
-## User Flow
+**1. `src/data/lessons.ts`** (Lesson 1, lines 23-78)
+- Title: "More text is better" → "More context is better"
+- Concept: "Details matter" → "Context matters"
+- Description: Reframe around providing context (background, purpose, audience) not just "lots of details/text"
+- Tip: Update the analogy to emphasize context over verbosity
+- Quiz questions (5): Update wording and explanations to use "context" language — e.g. Q5 "Why do detailed prompts work better?" → "Why does providing context work better?"
 
-1. User clicks **"I don't know what AI can do for me"** in the hero section
-2. **Step 1 -- Age**: User picks an age bucket (Under 15, 15-25, 25-40, 40-60, 60+)
-3. **Step 2 -- Activities**: Based on the selected age, user sees a relevant set of activities to choose from (multi-select). For example, a 60+ user might see "Writing letters", "Planning travel", "Cooking", "Staying in touch with family"; a 25-40 user might see "Managing a team", "Side projects", "Social media", "Job hunting"
-4. **Results**: A filtered list of use cases from the existing `useCasePrompts` data is shown, matching the selected activities. Each card can be copied or opened in the prompt builder.
+**2. `src/data/lessons.it.ts`** (Lesson 1, lines 3-61)
+- Title: "Più testo è meglio" → "Più contesto è meglio"
+- Concept: "I dettagli contano" → "Il contesto conta"
+- Same reframing in Italian for description, tip, and all 5 quiz items
 
----
+**3. `src/data/finalQuizQuestions.ts`** (Questions 1-4, lines 13-58)
+- Update `concept` field: "More text is better" → "More context is better"
+- Reword questions and explanations to focus on context rather than text length
 
-## What Changes
+**4. `src/data/finalQuizQuestions.it.ts`** (Questions 1-4, lines 4-7)
+- Update `concept` field: "Più testo è meglio" → "Più contesto è meglio"
+- Reword Italian questions and explanations accordingly
 
-### New files
-
-**`src/components/discovery/DiscoveryWizard.tsx`**
-- A self-contained multi-step component managing state for age selection, activity selection, and results display
-- Step 1: Radio-button cards for age buckets
-- Step 2: Checkbox cards for activities (list varies by age bucket)
-- Step 3: Filtered use case cards with copy button, reusing the existing `useCasePrompts` data
-
-**`src/data/discoveryActivities.ts`**
-- Data file mapping each age bucket to a list of activities
-- Each activity maps to one or more use case categories (Business, Education, Creative, Marketing, Personal) used to filter results
-
-### Modified files
-
-**`src/components/landing/HeroSection.tsx`**
-- Add an `onDiscover` callback prop alongside existing `onStartBuilding`
-- Add a secondary button: outlined/ghost style, white text, labeled "I don't know what AI can do for me" with a HelpCircle icon
-- Both buttons sit side-by-side on desktop, stacked on mobile
-
-**`src/pages/Index.tsx`**
-- Add a new state `showDiscovery` (alongside existing `showWizard`)
-- When `showDiscovery` is true, render `<DiscoveryWizard />` instead of the landing sections
-- Pass `onDiscover` callback to `HeroSection`
-
----
-
-## Technical Details
-
-### Age-to-Activities Mapping (example)
-
-| Age Bucket | Activities |
-|---|---|
-| Under 15 | Homework help, Creative writing, Learning new things, Fun projects |
-| 15-25 | Study & exams, Job applications, Social media content, Creative projects |
-| 25-40 | Work emails, Marketing, Meal planning, Side projects, Job hunting |
-| 40-60 | Business communication, Travel planning, Learning tech, Health & fitness |
-| 60+ | Writing letters, Cooking recipes, Staying connected with family, Travel, Understanding technology |
-
-### Activity-to-Category Mapping (example)
-
-Each activity maps to one or more categories from `useCasePrompts` (Business, Education, Creative, Marketing, Personal). The results step filters the 20 existing prompts by the union of categories matched by selected activities.
-
-### Component Structure
-
-The `DiscoveryWizard` uses simple `useState` for step tracking, selected age, and selected activities. No backend or database needed -- everything is client-side using existing data.
-
-### No new dependencies
-Uses existing UI components: Card, Button, Badge, Checkbox, RadioGroup.
+### Key content shift
+The core teaching changes from "write more text / be more detailed" to "provide more context — background, purpose, audience, constraints." The quiz answers and explanations will reflect that context (not just volume) is what makes prompts effective.
 
