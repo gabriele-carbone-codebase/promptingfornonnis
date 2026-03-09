@@ -109,10 +109,10 @@ export function TrainingProgress({
           onClick={onStartFinalQuiz}
           disabled={!allLessonsComplete}
           className={cn(
-            "flex items-center gap-4 p-4 rounded-lg border text-left transition-all duration-200 mt-2",
+            "flex items-center gap-4 p-4 rounded-lg border text-left transition-all duration-200 mt-2 bg-accent border-primary/30",
             allLessonsComplete
-              ? "border-primary bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/15 hover:to-primary/10 shadow-soft"
-              : "opacity-50 cursor-not-allowed border-border"
+              ? "hover:bg-accent/80 shadow-soft"
+              : "opacity-50 cursor-not-allowed"
           )}
         >
           <div
