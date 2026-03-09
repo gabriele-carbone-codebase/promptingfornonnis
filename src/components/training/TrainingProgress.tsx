@@ -67,8 +67,7 @@ export function TrainingProgress({
                   "w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0",
                   isCompleted && "bg-success text-success-foreground",
                   isCurrent && !isCompleted && "bg-primary text-primary-foreground",
-                  !isCompleted && !isCurrent && !isLocked && "bg-muted text-muted-foreground",
-                  isLocked && "bg-muted text-muted-foreground"
+                  !isCompleted && !isCurrent && "bg-muted text-muted-foreground"
                 )}
               >
                 {isCompleted ? (
