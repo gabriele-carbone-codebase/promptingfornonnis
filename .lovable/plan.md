@@ -1,43 +1,69 @@
 
 
-## Piano: Persistenza progressi training (localStorage + database)
+# "I Don't Know What AI Can Do For Me" Discovery Flow
 
-### Approccio
-- **Utenti non loggati**: salvare `completedLessons` in localStorage
-- **Utenti loggati**: salvare in una tabella `training_progress` nel database, sincronizzando al login
+## Summary
+Add a secondary CTA button in the hero section that leads users through a short 2-step questionnaire (age group, then age-appropriate activities), and then displays matching use cases from the existing prompt library.
 
-### Modifiche
+---
 
-**1. Nuova tabella `training_progress`** (migrazione SQL)
-```sql
-create table public.training_progress (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users(id) on delete cascade,
-  completed_lessons integer[] not null default '{}',
-  updated_at timestamptz not null default now(),
-  unique (user_id)
-);
-alter table public.training_progress enable row level security;
--- RLS: utenti possono leggere/scrivere solo i propri progressi
-create policy "Users can view own progress" on public.training_progress for select using (auth.uid() = user_id);
-create policy "Users can insert own progress" on public.training_progress for insert with check (auth.uid() = user_id);
-create policy "Users can update own progress" on public.training_progress for update using (auth.uid() = user_id);
-```
+## User Flow
 
-**2. Nuovo hook `src/hooks/useTrainingProgress.ts`**
-- Al mount: carica `completedLessons` da localStorage
-- Se l'utente è autenticato: carica dal database e fa merge (unione) con localStorage
-- Al completamento di una lezione: salva in localStorage **e** nel database (se loggato) con upsert
-- Espone: `completedLessons`, `markLessonComplete(lessonId)`
+1. User clicks **"I don't know what AI can do for me"** in the hero section
+2. **Step 1 -- Age**: User picks an age bucket (Under 15, 15-25, 25-40, 40-60, 60+)
+3. **Step 2 -- Activities**: Based on the selected age, user sees a relevant set of activities to choose from (multi-select). For example, a 60+ user might see "Writing letters", "Planning travel", "Cooking", "Staying in touch with family"; a 25-40 user might see "Managing a team", "Side projects", "Social media", "Job hunting"
+4. **Results**: A filtered list of use cases from the existing `useCasePrompts` data is shown, matching the selected activities. Each card can be copied or opened in the prompt builder.
 
-**3. Aggiornamento `src/pages/Training.tsx`**
-- Sostituire lo stato locale `completedLessons` con il nuovo hook `useTrainingProgress`
-- `handleLessonComplete` chiamerà `markLessonComplete(currentLesson)` dal hook
-- `currentLesson` iniziale calcolato come primo non completato (così l'utente riparte da dove aveva lasciato)
+---
 
-### Flusso utente
-1. Utente non loggato completa lezioni 1-2 → salvate in localStorage
-2. Chiude il browser, ritorna → lezioni 1-2 risultano completate, parte dalla 3
-3. Se fa login → i progressi localStorage vengono sincronizzati nel database
-4. Su un altro dispositivo (loggato) → vede gli stessi progressi dal database
+## What Changes
+
+### New files
+
+**`src/components/discovery/DiscoveryWizard.tsx`**
+- A self-contained multi-step component managing state for age selection, activity selection, and results display
+- Step 1: Radio-button cards for age buckets
+- Step 2: Checkbox cards for activities (list varies by age bucket)
+- Step 3: Filtered use case cards with copy button, reusing the existing `useCasePrompts` data
+
+**`src/data/discoveryActivities.ts`**
+- Data file mapping each age bucket to a list of activities
+- Each activity maps to one or more use case categories (Business, Education, Creative, Marketing, Personal) used to filter results
+
+### Modified files
+
+**`src/components/landing/HeroSection.tsx`**
+- Add an `onDiscover` callback prop alongside existing `onStartBuilding`
+- Add a secondary button: outlined/ghost style, white text, labeled "I don't know what AI can do for me" with a HelpCircle icon
+- Both buttons sit side-by-side on desktop, stacked on mobile
+
+**`src/pages/Index.tsx`**
+- Add a new state `showDiscovery` (alongside existing `showWizard`)
+- When `showDiscovery` is true, render `<DiscoveryWizard />` instead of the landing sections
+- Pass `onDiscover` callback to `HeroSection`
+
+---
+
+## Technical Details
+
+### Age-to-Activities Mapping (example)
+
+| Age Bucket | Activities |
+|---|---|
+| Under 15 | Homework help, Creative writing, Learning new things, Fun projects |
+| 15-25 | Study & exams, Job applications, Social media content, Creative projects |
+| 25-40 | Work emails, Marketing, Meal planning, Side projects, Job hunting |
+| 40-60 | Business communication, Travel planning, Learning tech, Health & fitness |
+| 60+ | Writing letters, Cooking recipes, Staying connected with family, Travel, Understanding technology |
+
+### Activity-to-Category Mapping (example)
+
+Each activity maps to one or more categories from `useCasePrompts` (Business, Education, Creative, Marketing, Personal). The results step filters the 20 existing prompts by the union of categories matched by selected activities.
+
+### Component Structure
+
+The `DiscoveryWizard` uses simple `useState` for step tracking, selected age, and selected activities. No backend or database needed -- everything is client-side using existing data.
+
+### No new dependencies
+Uses existing UI components: Card, Button, Badge, Checkbox, RadioGroup.
 

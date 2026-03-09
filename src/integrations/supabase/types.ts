@@ -121,6 +121,27 @@ export type Database = {
         }
         Relationships: []
       }
+      training_progress: {
+        Row: {
+          completed_lessons: number[]
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_lessons?: number[]
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_lessons?: number[]
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
