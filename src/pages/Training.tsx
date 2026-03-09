@@ -30,15 +30,32 @@ const Training = () => {
   const { user } = useAuth();
   const lessons = lang === "it" ? lessonsIt : lessonsEn;
 
+  const { completedLessons, markLessonComplete, loading: progressLoading } = useTrainingProgress();
+
   const [trainingState, setTrainingState] = useState<TrainingState>("lessons_hub");
-  const [currentLesson, setCurrentLesson] = useState(1);
-  const [completedLessons, setCompletedLessons] = useState<number[]>([]);
   const [finalQuizScore, setFinalQuizScore] = useState({ score: 0, total: 0 });
   const [userName, setUserName] = useState("");
   const [nameInput, setNameInput] = useState("");
 
   const totalLessons = lessons.length;
   const allLessonsComplete = completedLessons.length === totalLessons;
+
+  // Auto-resume: first incomplete lesson
+  const initialLesson = useMemo(() => {
+    for (let i = 1; i <= totalLessons; i++) {
+      if (!completedLessons.includes(i)) return i;
+    }
+    return 1;
+  }, [completedLessons, totalLessons]);
+
+  const [currentLesson, setCurrentLesson] = useState(1);
+
+  // Sync currentLesson when progress loads
+  useState(() => {
+    if (!progressLoading) {
+      setCurrentLesson(initialLesson);
+    }
+  });
 
   const handleLessonComplete = () => {
     if (!completedLessons.includes(currentLesson)) {
