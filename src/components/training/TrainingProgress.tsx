@@ -83,7 +83,7 @@ export function TrainingProgress({
               <div className="flex-1 min-w-0">
                 <h3
                   className={cn(
-                    "font-medium",
+                    "font-medium truncate",
                     isCurrent && "text-primary",
                     isCompleted && "text-foreground",
                     !isCompleted && !isCurrent && "text-foreground"
