@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -94,6 +94,10 @@ const UseCases = () => {
   const categories = t.useCasesPage.categories;
   const [activeCategory, setActiveCategory] = useState<string>(categories[0]);
   const [showDiscovery, setShowDiscovery] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const categoryMap: Record<string, string> = {
     [categories[0]]: "All",
