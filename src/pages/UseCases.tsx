@@ -74,6 +74,14 @@ function PromptCard({ prompt }: { prompt: UseCasePrompt }) {
               </>
             )}
           </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(prompt.prompt)}`, '_blank')}
+          >
+            <img src={chatgptLogo} alt="ChatGPT" className="w-4 h-4 mr-1" />
+            ChatGPT
+          </Button>
         </div>
       </CardContent>
     </Card>
