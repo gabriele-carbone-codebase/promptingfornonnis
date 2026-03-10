@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Copy, Check, ChevronDown, ChevronUp, Sparkles, Compass } from "lucide-react";
+import chatgptLogo from "@/assets/chatgpt-logo.svg";
 import { useCasePrompts, type UseCasePrompt } from "@/data/useCasePrompts";
 import { useCasePromptsIt } from "@/data/useCasePrompts.it";
 import { DiscoveryWizard } from "@/components/discovery/DiscoveryWizard";
