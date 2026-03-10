@@ -205,9 +205,9 @@ const MyPrompts = () => {
                           )}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground line-clamp-2">
+                      <pre className="text-sm text-muted-foreground whitespace-pre-wrap font-sans">
                         {prompt.content}
-                      </p>
+                      </pre>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
