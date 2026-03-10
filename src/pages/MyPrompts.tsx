@@ -192,7 +192,11 @@ const MyPrompts = () => {
                         <h3 className="font-medium text-foreground line-clamp-1 flex-1">
                           {prompt.title}
                         </h3>
-                        <Badge variant={prompt.is_public ? "default" : "secondary"} className="flex-shrink-0">
+                        <Badge
+                          variant={prompt.is_public ? "default" : "secondary"}
+                          className="flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+                          onClick={() => handleTogglePublic(prompt.id, prompt.is_public)}
+                        >
                           {prompt.is_public ? (
                             <>
                               <Globe className="w-3 h-3 mr-1" />
@@ -230,13 +234,10 @@ const MyPrompts = () => {
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => handleTogglePublic(prompt.id, prompt.is_public)}
+                            onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(prompt.content)}`, '_blank')}
+                            title={t.wizard?.output?.openInChatGPT || "Open in ChatGPT"}
                           >
-                            {prompt.is_public ? (
-                              <Lock className="w-4 h-4" />
-                            ) : (
-                              <Globe className="w-4 h-4" />
-                            )}
+                            <img src={chatgptLogo} alt="ChatGPT" className="w-4 h-4" />
                           </Button>
                           <Button
                             variant="ghost"
