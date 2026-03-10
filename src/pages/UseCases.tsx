@@ -95,6 +95,10 @@ const UseCases = () => {
   const [activeCategory, setActiveCategory] = useState<string>(categories[0]);
   const [showDiscovery, setShowDiscovery] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const categoryMap: Record<string, string> = {
     [categories[0]]: "All",
     [categories[1]]: "Business",
