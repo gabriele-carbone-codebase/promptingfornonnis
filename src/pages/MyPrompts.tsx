@@ -232,8 +232,8 @@ const MyPrompts = () => {
                             <Copy className="w-4 h-4" />
                           </Button>
                           <Button
-                            variant="ghost"
                             size="icon"
+                            className="bg-[#74aa9c] hover:bg-[#74aa9c]/90 text-white"
                             onClick={() => window.open(`https://chat.openai.com/?q=${encodeURIComponent(prompt.content)}`, '_blank')}
                             title={t.wizard?.output?.openInChatGPT || "Open in ChatGPT"}
                           >
