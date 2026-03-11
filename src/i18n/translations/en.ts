@@ -378,7 +378,7 @@ export const en = {
     sections: {
       s1: {
         title: "1. Data Controller",
-        content: 'The data controller for this website is <strong>Gabriele Carbone</strong>.<br />For any privacy-related inquiries, you can contact us at: <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>',
+        content: 'The data controller for this website is <strong>Gabriele Carbone</strong>.<br />For any privacy-related inquiries, you can contact us at: <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>',
       },
       s2: {
         title: "2. What Data We Collect",
