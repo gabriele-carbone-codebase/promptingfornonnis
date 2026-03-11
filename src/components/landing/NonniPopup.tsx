@@ -27,7 +27,7 @@ export function NonniPopup() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 max-w-xs animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="relative rounded-xl border border-primary/20 bg-accent/30 text-card-foreground shadow-lg p-5 pr-10 backdrop-blur-sm">
+      <div className="relative rounded-xl border border-border bg-card text-card-foreground shadow-xl p-5 pr-10">
         <button
           onClick={dismiss}
           className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
