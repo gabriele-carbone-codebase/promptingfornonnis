@@ -44,7 +44,13 @@ const Privacy = () => {
 
           <section className="space-y-3">
             <h2 className="text-xl font-semibold text-foreground">{s.s4.title}</h2>
-            <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: s.s4.content }} />
+            <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: s.s4.intro }} />
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              {s.s4.items.map((item, i) => (
+                <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
+            </ul>
+            <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: s.s4.outro }} />
           </section>
 
           <section className="space-y-3">
