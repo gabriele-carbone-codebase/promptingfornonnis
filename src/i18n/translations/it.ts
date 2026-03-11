@@ -428,10 +428,30 @@ export const it = {
       },
       s7: {
         title: "7. Cookie",
-        content: "Questo sito web utilizza solo cookie essenziali necessari per l'autenticazione e la gestione della sessione. Non utilizziamo cookie di tracciamento o analytics di terze parti.",
+        intro: "Questo sito web utilizza le seguenti categorie di cookie:",
+        items: [
+          "<strong>Cookie essenziali</strong> — necessari per l'autenticazione e la gestione della sessione. Non possono essere disattivati.",
+          "<strong>Cookie analitici</strong> (Google Analytics) — ci aiutano a comprendere il traffico e i modelli di utilizzo. Attivati solo con il tuo consenso.",
+          "<strong>Cookie di prestazione</strong> (Microsoft Clarity) — consentono registrazioni di sessione anonimizzate e mappe di calore per migliorare l'esperienza utente. Attivati solo con il tuo consenso.",
+        ],
+        outro: "Il consenso ai cookie è gestito tramite <strong>Clickio CMP</strong>. Alla tua prima visita, un banner di consenso ti permette di accettare o rifiutare i cookie non essenziali. <strong>Google Consent Mode v2 (Advanced)</strong> garantisce che nessun tracciamento analitico o di prestazione si attivi finché non hai dato il tuo consenso esplicito.",
       },
       s8: {
-        title: "8. Modifiche a questa informativa",
+        title: "8. Trasferimento dei dati",
+        content: "Alcuni dei servizi di terze parti sopra elencati potrebbero elaborare i dati al di fuori dello Spazio Economico Europeo (SEE). In tali casi, sono in atto garanzie adeguate in conformità con i requisiti del GDPR.",
+      },
+      s9: {
+        title: "9. Gestione del consenso",
+        intro: "Utilizziamo <strong>Clickio</strong> come piattaforma di gestione del consenso (CMP) per garantire la conformità al GDPR e alle normative ePrivacy.",
+        items: [
+          "Un banner di consenso ai cookie viene mostrato alla tua prima visita.",
+          "Puoi accettare o rifiutare i cookie non essenziali in qualsiasi momento.",
+          "Puoi modificare le tue preferenze in qualsiasi momento cliccando sul link delle impostazioni cookie nel footer o sul widget di consenso Clickio.",
+          "<strong>Google Consent Mode v2 (Advanced)</strong> è implementato, il che significa che Google Analytics e altri servizi Google rispettano le tue scelte di consenso in tempo reale.",
+        ],
+      },
+      s10: {
+        title: "10. Modifiche a questa informativa",
         content: 'Potremmo aggiornare questa informativa sulla privacy di tanto in tanto. Eventuali modifiche saranno riportate su questa pagina con una data "Ultimo aggiornamento" aggiornata.',
       },
     },

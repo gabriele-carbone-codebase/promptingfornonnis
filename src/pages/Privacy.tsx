@@ -71,12 +71,33 @@ const Privacy = () => {
 
           <section className="space-y-3">
             <h2 className="text-xl font-semibold text-foreground">{s.s7.title}</h2>
-            <p className="text-muted-foreground leading-relaxed">{s.s7.content}</p>
+            <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: s.s7.intro }} />
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              {s.s7.items.map((item, i) => (
+                <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
+            </ul>
+            <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: s.s7.outro }} />
           </section>
 
           <section className="space-y-3">
             <h2 className="text-xl font-semibold text-foreground">{s.s8.title}</h2>
-            <p className="text-muted-foreground leading-relaxed">{s.s8.content}</p>
+            <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: s.s8.content }} />
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-xl font-semibold text-foreground">{s.s9.title}</h2>
+            <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: s.s9.intro }} />
+            <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+              {s.s9.items.map((item, i) => (
+                <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
+            </ul>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-xl font-semibold text-foreground">{s.s10.title}</h2>
+            <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: s.s10.content }} />
           </section>
         </div>
       </main>

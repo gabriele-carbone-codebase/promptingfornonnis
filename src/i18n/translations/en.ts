@@ -428,10 +428,30 @@ export const en = {
       },
       s7: {
         title: "7. Cookies",
-        content: "This website uses only essential cookies required for authentication and session management. We do not use tracking cookies or third-party analytics.",
+        intro: "This website uses the following categories of cookies:",
+        items: [
+          "<strong>Essential cookies</strong> — required for authentication and session management. These cannot be disabled.",
+          "<strong>Analytics cookies</strong> (Google Analytics) — help us understand traffic and usage patterns. Only activated with your consent.",
+          "<strong>Performance cookies</strong> (Microsoft Clarity) — enable anonymized session recordings and heatmaps to improve user experience. Only activated with your consent.",
+        ],
+        outro: "Cookie consent is managed via <strong>Clickio CMP</strong>. When you first visit the site, a consent banner allows you to accept or reject non-essential cookies. <strong>Google Consent Mode v2 (Advanced)</strong> ensures that no analytics or performance tracking fires until you have given explicit consent.",
       },
       s8: {
-        title: "8. Changes to This Policy",
+        title: "8. Data Transfers",
+        content: "Some of the third-party services listed above may process data outside the European Economic Area (EEA). In such cases, appropriate safeguards are in place in accordance with GDPR requirements.",
+      },
+      s9: {
+        title: "9. Consent Management",
+        intro: "We use <strong>Clickio</strong> as our Consent Management Platform (CMP) to ensure compliance with GDPR and ePrivacy regulations.",
+        items: [
+          "A cookie consent banner is displayed on your first visit.",
+          "You can accept or reject non-essential cookies at any time.",
+          "You can change your preferences at any time by clicking the cookie settings link in the footer or the Clickio consent widget.",
+          "<strong>Google Consent Mode v2 (Advanced)</strong> is implemented, which means Google Analytics and other Google services respect your consent choices in real time.",
+        ],
+      },
+      s10: {
+        title: "10. Changes to This Policy",
         content: 'We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated "Last updated" date.',
       },
     },
