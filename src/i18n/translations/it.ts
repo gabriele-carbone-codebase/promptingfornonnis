@@ -387,6 +387,7 @@ export const it = {
           "<strong>Indirizzo email</strong> — utilizzato per l'autenticazione e il recupero dell'account.",
           "<strong>Nome visualizzato</strong> — scelto da te durante la registrazione, mostrato pubblicamente nella community.",
           "<strong>Prompt che crei</strong> — salvati per permetterti di gestirli e opzionalmente condividerli.",
+          "<strong>Dati di utilizzo e analytics</strong> — raccolti automaticamente, tra cui pagine visitate, informazioni su dispositivo e browser, modelli di interazione e registrazioni di sessione anonimizzate.",
         ],
         outro: "<strong>Non</strong> raccogliamo dati personali sensibili, informazioni di pagamento o dati sulla posizione.",
       },
