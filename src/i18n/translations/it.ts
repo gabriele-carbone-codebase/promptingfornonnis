@@ -413,7 +413,7 @@ export const it = {
       },
       s5: {
         title: "5. Conservazione dei dati",
-        content: 'I tuoi dati vengono conservati finché il tuo account è attivo. Se desideri eliminare il tuo account e tutti i dati associati, contattaci a <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>.',
+        content: 'I tuoi dati vengono conservati finché il tuo account è attivo. Se desideri eliminare il tuo account e tutti i dati associati, contattaci a: <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>.',
       },
       s6: {
         title: "6. I tuoi diritti",
