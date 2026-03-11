@@ -387,6 +387,7 @@ export const en = {
           "<strong>Email address</strong> — used for authentication and account recovery.",
           "<strong>Display name</strong> — chosen by you during registration, shown publicly in the community.",
           "<strong>Prompts you create</strong> — stored to let you save, manage, and optionally share them.",
+          "<strong>Usage and analytics data</strong> — collected automatically, including pages visited, device and browser information, interaction patterns, and anonymized session recordings.",
         ],
         outro: "We do <strong>not</strong> collect sensitive personal data, payment information, or location data.",
       },
@@ -402,7 +403,13 @@ export const en = {
       },
       s4: {
         title: "4. Data Sharing",
-        content: "We do <strong>not</strong> sell, rent, or share your personal data with third parties for marketing purposes. Your data is stored securely using industry-standard cloud infrastructure.",
+        intro: "We do <strong>not</strong> sell or rent your personal data. However, we use the following third-party services to improve our website:",
+        items: [
+          "<strong>Google Analytics</strong> — collects anonymized usage and traffic data to help us understand how visitors interact with the site. Operates under <strong>Google Consent Mode v2 (Advanced)</strong>, meaning no tracking occurs without your explicit consent.",
+          "<strong>Clickio</strong> — our Consent Management Platform (CMP) that displays the cookie consent banner and manages your preferences in compliance with GDPR and ePrivacy regulations.",
+          "<strong>Microsoft Clarity</strong> — captures anonymized session recordings and heatmaps to help us improve usability. Personal data is masked automatically.",
+        ],
+        outro: "All data processed by these services is anonymized or pseudonymized. Your data is stored securely using industry-standard cloud infrastructure.",
       },
       s5: {
         title: "5. Data Retention",
@@ -421,10 +428,30 @@ export const en = {
       },
       s7: {
         title: "7. Cookies",
-        content: "This website uses only essential cookies required for authentication and session management. We do not use tracking cookies or third-party analytics.",
+        intro: "This website uses the following categories of cookies:",
+        items: [
+          "<strong>Essential cookies</strong> — required for authentication and session management. These cannot be disabled.",
+          "<strong>Analytics cookies</strong> (Google Analytics) — help us understand traffic and usage patterns. Only activated with your consent.",
+          "<strong>Performance cookies</strong> (Microsoft Clarity) — enable anonymized session recordings and heatmaps to improve user experience. Only activated with your consent.",
+        ],
+        outro: "Cookie consent is managed via <strong>Clickio CMP</strong>. When you first visit the site, a consent banner allows you to accept or reject non-essential cookies. <strong>Google Consent Mode v2 (Advanced)</strong> ensures that no analytics or performance tracking fires until you have given explicit consent.",
       },
       s8: {
-        title: "8. Changes to This Policy",
+        title: "8. Data Transfers",
+        content: "Some of the third-party services listed above may process data outside the European Economic Area (EEA). In such cases, appropriate safeguards are in place in accordance with GDPR requirements.",
+      },
+      s9: {
+        title: "9. Consent Management",
+        intro: "We use <strong>Clickio</strong> as our Consent Management Platform (CMP) to ensure compliance with GDPR and ePrivacy regulations.",
+        items: [
+          "A cookie consent banner is displayed on your first visit.",
+          "You can accept or reject non-essential cookies at any time.",
+          "You can change your preferences at any time by clicking the cookie settings link in the footer or the Clickio consent widget.",
+          "<strong>Google Consent Mode v2 (Advanced)</strong> is implemented, which means Google Analytics and other Google services respect your consent choices in real time.",
+        ],
+      },
+      s10: {
+        title: "10. Changes to This Policy",
         content: 'We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated "Last updated" date.',
       },
     },
