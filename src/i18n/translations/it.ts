@@ -403,7 +403,13 @@ export const it = {
       },
       s4: {
         title: "4. Condivisione dei dati",
-        content: "<strong>Non</strong> vendiamo, affittiamo o condividiamo i tuoi dati personali con terze parti per scopi di marketing. I tuoi dati sono conservati in modo sicuro utilizzando infrastrutture cloud standard del settore.",
+        intro: "<strong>Non</strong> vendiamo né affittiamo i tuoi dati personali. Tuttavia, utilizziamo i seguenti servizi di terze parti per migliorare il nostro sito:",
+        items: [
+          "<strong>Google Analytics</strong> — raccoglie dati anonimizzati su utilizzo e traffico per aiutarci a capire come i visitatori interagiscono con il sito. Opera con <strong>Google Consent Mode v2 (Advanced)</strong>, il che significa che nessun tracciamento avviene senza il tuo consenso esplicito.",
+          "<strong>Clickio</strong> — la nostra piattaforma di gestione del consenso (CMP) che mostra il banner dei cookie e gestisce le tue preferenze in conformità con il GDPR e le normative ePrivacy.",
+          "<strong>Microsoft Clarity</strong> — registra sessioni anonimizzate e mappe di calore per aiutarci a migliorare l'usabilità. I dati personali vengono mascherati automaticamente.",
+        ],
+        outro: "Tutti i dati elaborati da questi servizi sono anonimizzati o pseudonimizzati. I tuoi dati sono conservati in modo sicuro utilizzando infrastrutture cloud standard del settore.",
       },
       s5: {
         title: "5. Conservazione dei dati",
