@@ -413,7 +413,7 @@ export const en = {
       },
       s5: {
         title: "5. Data Retention",
-        content: 'Your data is retained for as long as your account is active. If you wish to delete your account and all associated data, please contact us at <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>.',
+        content: 'Your data is retained for as long as your account is active. If you wish to delete your account and all associated data, please contact us at <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>.',
       },
       s6: {
         title: "6. Your Rights",
