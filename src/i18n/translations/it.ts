@@ -424,7 +424,7 @@ export const it = {
           "Richiedere la cancellazione dei tuoi dati.",
           "Revocare il consenso in qualsiasi momento.",
         ],
-        outro: 'Per esercitare uno di questi diritti, scrivici a <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>.',
+        outro: 'Per esercitare uno di questi diritti, scrivici a: <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>.',
       },
       s7: {
         title: "7. Cookie",

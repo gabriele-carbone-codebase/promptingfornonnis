@@ -424,7 +424,7 @@ export const en = {
           "Request deletion of your data.",
           "Withdraw consent at any time.",
         ],
-        outro: 'To exercise any of these rights, email us at <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>.',
+        outro: 'To exercise any of these rights, email us at <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>.',
       },
       s7: {
         title: "7. Cookies",
