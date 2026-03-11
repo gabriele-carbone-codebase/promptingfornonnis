@@ -13,7 +13,7 @@ export function HeroSection({ onStartBuilding }: HeroSectionProps) {
 
   return (
     <section className="relative overflow-hidden py-24 sm:py-32 min-h-[500px]">
-      <img src={heroImage} alt="Elderly woman smiling while using a smartphone" <img src={heroImage} alt="Elderly woman smiling while using a smartphone" className="absolute inset-0 w-full h-full object-cover object-[30%_center] sm:object-center" /> />
+      <img src={heroImage} alt="Elderly woman smiling while using a smartphone" className="absolute inset-0 w-full h-full object-cover object-left-top sm:object-center" />
       <div className="absolute inset-0 bg-black/60" />
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center space-y-8">
