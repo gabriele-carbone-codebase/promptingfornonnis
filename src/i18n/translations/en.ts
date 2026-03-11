@@ -378,7 +378,7 @@ export const en = {
     sections: {
       s1: {
         title: "1. Data Controller",
-        content: 'The data controller for this website is <strong>Gabriele Carbone</strong>.<br />For any privacy-related inquiries, you can contact us at: <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>',
+        content: 'The data controller for this website is <strong>Gabriele Carbone</strong>.<br />For any privacy-related inquiries, you can contact us at: <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>',
       },
       s2: {
         title: "2. What Data We Collect",
@@ -413,7 +413,7 @@ export const en = {
       },
       s5: {
         title: "5. Data Retention",
-        content: 'Your data is retained for as long as your account is active. If you wish to delete your account and all associated data, please contact us at <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>.',
+        content: 'Your data is retained for as long as your account is active. If you wish to delete your account and all associated data, please contact us at <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>.',
       },
       s6: {
         title: "6. Your Rights",
@@ -424,7 +424,7 @@ export const en = {
           "Request deletion of your data.",
           "Withdraw consent at any time.",
         ],
-        outro: 'To exercise any of these rights, email us at <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>.',
+        outro: 'To exercise any of these rights, email us at <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>.',
       },
       s7: {
         title: "7. Cookies",

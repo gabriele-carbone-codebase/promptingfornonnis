@@ -378,7 +378,7 @@ export const it = {
     sections: {
       s1: {
         title: "1. Titolare del trattamento",
-        content: 'Il titolare del trattamento dei dati di questo sito web è <strong>Gabriele Carbone</strong>.<br />Per qualsiasi richiesta relativa alla privacy, puoi contattarci a: <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>',
+        content: 'Il titolare del trattamento dei dati di questo sito web è <strong>Gabriele Carbone</strong>.<br />Per qualsiasi richiesta relativa alla privacy, puoi contattarci a: <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>',
       },
       s2: {
         title: "2. Quali dati raccogliamo",
@@ -413,7 +413,7 @@ export const it = {
       },
       s5: {
         title: "5. Conservazione dei dati",
-        content: 'I tuoi dati vengono conservati finché il tuo account è attivo. Se desideri eliminare il tuo account e tutti i dati associati, contattaci a <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>.',
+        content: 'I tuoi dati vengono conservati finché il tuo account è attivo. Se desideri eliminare il tuo account e tutti i dati associati, contattaci a: <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>.',
       },
       s6: {
         title: "6. I tuoi diritti",
@@ -424,7 +424,7 @@ export const it = {
           "Richiedere la cancellazione dei tuoi dati.",
           "Revocare il consenso in qualsiasi momento.",
         ],
-        outro: 'Per esercitare uno di questi diritti, scrivici a <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>.',
+        outro: 'Per esercitare uno di questi diritti, scrivici a: <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>.',
       },
       s7: {
         title: "7. Cookie",
