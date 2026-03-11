@@ -403,7 +403,13 @@ export const en = {
       },
       s4: {
         title: "4. Data Sharing",
-        content: "We do <strong>not</strong> sell, rent, or share your personal data with third parties for marketing purposes. Your data is stored securely using industry-standard cloud infrastructure.",
+        intro: "We do <strong>not</strong> sell or rent your personal data. However, we use the following third-party services to improve our website:",
+        items: [
+          "<strong>Google Analytics</strong> — collects anonymized usage and traffic data to help us understand how visitors interact with the site. Operates under <strong>Google Consent Mode v2 (Advanced)</strong>, meaning no tracking occurs without your explicit consent.",
+          "<strong>Clickio</strong> — our Consent Management Platform (CMP) that displays the cookie consent banner and manages your preferences in compliance with GDPR and ePrivacy regulations.",
+          "<strong>Microsoft Clarity</strong> — captures anonymized session recordings and heatmaps to help us improve usability. Personal data is masked automatically.",
+        ],
+        outro: "All data processed by these services is anonymized or pseudonymized. Your data is stored securely using industry-standard cloud infrastructure.",
       },
       s5: {
         title: "5. Data Retention",
