@@ -387,6 +387,7 @@ export const en = {
           "<strong>Email address</strong> — used for authentication and account recovery.",
           "<strong>Display name</strong> — chosen by you during registration, shown publicly in the community.",
           "<strong>Prompts you create</strong> — stored to let you save, manage, and optionally share them.",
+          "<strong>Usage and analytics data</strong> — collected automatically, including pages visited, device and browser information, interaction patterns, and anonymized session recordings.",
         ],
         outro: "We do <strong>not</strong> collect sensitive personal data, payment information, or location data.",
       },
