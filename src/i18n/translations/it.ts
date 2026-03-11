@@ -378,7 +378,7 @@ export const it = {
     sections: {
       s1: {
         title: "1. Titolare del trattamento",
-        content: 'Il titolare del trattamento dei dati di questo sito web è <strong>Gabriele Carbone</strong>.<br />Per qualsiasi richiesta relativa alla privacy, puoi contattarci a: <a href="mailto:info@gabrielecarbone.it">info@gabrielecarbone.it</a>',
+        content: 'Il titolare del trattamento dei dati di questo sito web è <strong>Gabriele Carbone</strong>.<br />Per qualsiasi richiesta relativa alla privacy, puoi contattarci a: <a href="mailto:info@promptingfornonnis.com">info@promptingfornonnis.com</a>',
       },
       s2: {
         title: "2. Quali dati raccogliamo",
