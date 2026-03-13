@@ -72,9 +72,9 @@ export const en = {
     stepGoal: {
       title: "What do you want the chatbot to do?",
       subtitle: "Describe the main task you need help with",
-      placeholder: "e.g., Write a professional email to my boss asking for time off next week...",
+      placeholder: "e.g., Help me write a birthday message for my grandchild...",
       inspiration: "Need inspiration? Try one of these:",
-      examples: ["Write an email", "Summarize a text", "Create a poem", "Plan my week", "Explain a concept", "Generate ideas", "Write code", "Translate text"],
+      examples: ["Write a letter", "Summarize a text", "Create a poem", "Plan my week", "Explain a concept", "Generate ideas", "Plan a trip", "Translate text"],
     },
     stepResult: {
       title: "What result are you expecting?",
