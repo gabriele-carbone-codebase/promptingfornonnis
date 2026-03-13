@@ -117,7 +117,7 @@ export const it = {
       title: "Altre informazioni o note?",
       optional: "Facoltativo",
       subtitle: "Aggiungi qualsiasi altra cosa che l'IA dovrebbe sapere",
-      placeholder: "es., Per favore evita il gergo tecnico, sto scrivendo per un pubblico generico. Inoltre, preferirei elenchi puntati dove possibile...",
+      placeholder: "es., Per favore usa un linguaggio semplice, evita termini tecnici. Vorrei un risultato amichevole e facile da leggere...",
       ideasTitle: "✨ Idee per note aggiuntive:",
       ideas: [
         "Cose da evitare o includere",
