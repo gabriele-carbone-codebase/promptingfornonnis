@@ -80,7 +80,7 @@ export const it = {
       title: "Che risultato ti aspetti?",
       optional: "Facoltativo",
       subtitle: "Descrivi il tuo output ideale: tono, lunghezza, livello di dettaglio",
-      placeholder: "es., Un'email formale ma cordiale, di circa 3 paragrafi, che spieghi chiaramente la mia richiesta e suggerisca date specifiche...",
+      placeholder: "es., Un messaggio caloroso e amichevole, di circa 3-4 frasi, che suoni naturale e personale...",
       tipsTitle: "💡 Consigli per risultati migliori:",
       tips: [
         { label: "Tono:", text: "Formale, informale, cordiale, professionale?" },
