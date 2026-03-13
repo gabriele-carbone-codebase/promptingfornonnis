@@ -117,7 +117,7 @@ export const en = {
       title: "Any extra details or notes?",
       optional: "Optional",
       subtitle: "Add anything else the AI should know",
-      placeholder: "e.g., Please avoid using jargon, I'm writing for a general audience. Also, I'd prefer bullet points where possible...",
+      placeholder: "e.g., Please use simple language, avoid technical terms. I'd like a friendly and easy-to-read result...",
       ideasTitle: "✨ Ideas for extra notes:",
       ideas: [
         "Things to avoid or include",
