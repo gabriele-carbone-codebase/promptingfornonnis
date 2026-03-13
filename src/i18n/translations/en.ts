@@ -80,7 +80,7 @@ export const en = {
       title: "What result are you expecting?",
       optional: "Optional",
       subtitle: "Describe your ideal output: tone, length, level of detail",
-      placeholder: "e.g., A formal but friendly email, about 3 paragraphs long, that clearly explains my request and suggests specific dates...",
+      placeholder: "e.g., A warm and friendly message, about 3-4 sentences long, that sounds natural and personal...",
       tipsTitle: "💡 Tips for better results:",
       tips: [
         { label: "Tone:", text: "Formal, casual, friendly, professional?" },
@@ -117,7 +117,7 @@ export const en = {
       title: "Any extra details or notes?",
       optional: "Optional",
       subtitle: "Add anything else the AI should know",
-      placeholder: "e.g., Please avoid using jargon, I'm writing for a general audience. Also, I'd prefer bullet points where possible...",
+      placeholder: "e.g., Please use simple language, avoid technical terms. I'd like a friendly and easy-to-read result...",
       ideasTitle: "✨ Ideas for extra notes:",
       ideas: [
         "Things to avoid or include",
