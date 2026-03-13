@@ -117,7 +117,7 @@ export const it = {
       title: "Altre informazioni o note?",
       optional: "Facoltativo",
       subtitle: "Aggiungi qualsiasi altra cosa che l'IA dovrebbe sapere",
-      placeholder: "es., Per favore usa un linguaggio semplice, evita termini tecnici. Vorrei un risultato amichevole e facile da leggere...",
+      placeholder: "es., Mio nipote adora i dinosauri e compie 7 anni. Vorrei che il messaggio fosse affettuoso e divertente...",
       ideasTitle: "✨ Idee per note aggiuntive:",
       ideas: [
         "Cose da evitare o includere",
