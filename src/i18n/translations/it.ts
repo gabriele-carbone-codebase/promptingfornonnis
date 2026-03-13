@@ -72,9 +72,9 @@ export const it = {
     stepGoal: {
       title: "Cosa vuoi che faccia il chatbot?",
       subtitle: "Descrivi l'attività principale per cui hai bisogno di aiuto",
-      placeholder: "es., Scrivi un'email professionale al mio capo per chiedere un giorno di ferie la prossima settimana...",
+      placeholder: "es., Aiutami a scrivere un messaggio di auguri per il compleanno di mio nipote...",
       inspiration: "Hai bisogno di ispirazione? Prova uno di questi:",
-      examples: ["Scrivi un'email", "Riassumi un testo", "Crea una poesia", "Pianifica la settimana", "Spiega un concetto", "Genera idee", "Scrivi codice", "Traduci un testo"],
+      examples: ["Scrivi una lettera", "Riassumi un testo", "Crea una poesia", "Pianifica la settimana", "Spiega un concetto", "Genera idee", "Pianifica un viaggio", "Traduci un testo"],
     },
     stepResult: {
       title: "Che risultato ti aspetti?",
