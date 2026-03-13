@@ -80,7 +80,7 @@ export const en = {
       title: "What result are you expecting?",
       optional: "Optional",
       subtitle: "Describe your ideal output: tone, length, level of detail",
-      placeholder: "e.g., A formal but friendly email, about 3 paragraphs long, that clearly explains my request and suggests specific dates...",
+      placeholder: "e.g., A warm and friendly message, about 3-4 sentences long, that sounds natural and personal...",
       tipsTitle: "💡 Tips for better results:",
       tips: [
         { label: "Tone:", text: "Formal, casual, friendly, professional?" },
