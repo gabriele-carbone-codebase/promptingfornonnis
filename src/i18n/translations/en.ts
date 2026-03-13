@@ -117,7 +117,7 @@ export const en = {
       title: "Any extra details or notes?",
       optional: "Optional",
       subtitle: "Add anything else the AI should know",
-      placeholder: "e.g., Please use simple language, avoid technical terms. I'd like a friendly and easy-to-read result...",
+      placeholder: "e.g., My grandchild loves dinosaurs and is turning 7. I'd like the message to feel warm and fun...",
       ideasTitle: "✨ Ideas for extra notes:",
       ideas: [
         "Things to avoid or include",
